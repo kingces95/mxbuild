@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project 
+  ToolsVersion="12.0" 
+  DefaultTargets="Build" 
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+>
+  <Import Project="$(MxbuildDir)root.props"/>
+
+  <!--BuildVersion-->
+  <PropertyGroup>
+    <BuildMajorVersion>2</BuildMajorVersion>
+    <BuildMinorVersion>3</BuildMinorVersion>
+    <BuildPatchVersion>0</BuildPatchVersion>
+    <BuildVersion>$(BuildMajorVersion).$(BuildMinorVersion).$(BuildPatchVersion)</BuildVersion>
+  </PropertyGroup>
+
+  <!--shim-->
+  <PropertyGroup>
+    <ShimReference>$(MSBuildThisFileDirectory)src\</ShimReference>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(BuildTarget)'=='build' OR '$(BuildTarget)'=='rebuild'">
+    <ShimInitialProject>$(IdProj)</ShimInitialProject>
+    <ShimFinalProject>$(PublishProj)</ShimFinalProject>
+  </PropertyGroup>
+
+</Project>

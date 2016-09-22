@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "mxbuild", "mxbuild.shproj", "{7DC1069B-AC9A-4EF9-94C5-4DA4473016D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mxbuild.Tasks", "src\mxbuild.tasks\Mxbuild.Tasks.csproj", "{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}"
+EndProject
+Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		mxbuild.projitems*{7dc1069b-ac9a-4ef9-94c5-4da4473016d1}*SharedItemsImports = 13
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|[None] = Debug|[None]
+		Debug|Desktop = Debug|Desktop
+		Release|[None] = Release|[None]
+		Release|Desktop = Release|Desktop
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}.Debug|[None].ActiveCfg = Debug|[None]
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}.Debug|[None].Build.0 = Debug|[None]
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}.Debug|Desktop.ActiveCfg = Debug|Desktop
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}.Debug|Desktop.Build.0 = Debug|Desktop
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}.Release|[None].ActiveCfg = Release|[None]
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}.Release|[None].Build.0 = Release|[None]
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}.Release|Desktop.ActiveCfg = Release|Desktop
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}.Release|Desktop.Build.0 = Release|Desktop
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
