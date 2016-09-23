@@ -64,6 +64,13 @@ namespace Xamarin.Forms.Build {
 
         protected override void Run() {
             var outputUir = new Uri(OutputPath);
+            //Debugger.Break();
+
+            if (Dependencies == null)
+                Dependencies = new ITaskItem[0];
+
+            if (References == null)
+                References = new ITaskItem[0];
 
             var package = new XElement(X.Package,
                 new XElement(X.Metadata,

@@ -43,7 +43,9 @@
   
     Desktop
   -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Desktop' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Desktop' ">
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Desktop' " />
   <!--
   
@@ -85,4 +87,12 @@
     Targets
   -->
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), .targets))\.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -14,6 +14,15 @@
     <BuildVersion>$(BuildMajorVersion).$(BuildMinorVersion).$(BuildPatchVersion)</BuildVersion>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <NuspecAuthors>kingces95</NuspecAuthors>
+    <NuspecOwners>$(NuspecAuthors)</NuspecOwners>
+    <NuspecRequireLicenseAcceptance>false</NuspecRequireLicenseAcceptance>
+    <NuspecCopyright>Copyright 2016</NuspecCopyright>
+    <NuspecLicenseUrl>https://opensource.org/licenses/MIT</NuspecLicenseUrl>
+    <NuspecIconUrl>http://findicons.com/files/icons/2711/free_icons_for_windows8_metro/64/crown.png</NuspecIconUrl>
+  </PropertyGroup>
+  
   <!--shim-->
   <PropertyGroup>
     <ShimInclude>$(ShimDir)**\*.csproj</ShimInclude>
