@@ -23,7 +23,7 @@
     <MSBuild
       Projects="$(ProjFile)"
       Targets="MakeLogDir"
-      Properties="ShimName=Unpack;BuildTarget=Build;BuildLogDir=$(UnpackLogDir)"
+      Properties="BuildName=Unpack;BuildTarget=Build;BuildLogDir=$(UnpackLogDir)"
     >
       <Output ItemName="UnpackBuildLogs" TaskParameter="TargetOutputs" />
     </MSBuild>

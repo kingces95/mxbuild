@@ -25,7 +25,8 @@
 
   <!--shim state-->
   <PropertyGroup>
-    <ShimStateLoggingId>logging</ShimStateLoggingId>
+    <ShimInitialFinalTargetId>initialFinal</ShimInitialFinalTargetId>
+    <ShimLoggingTargetId>logging</ShimLoggingTargetId>
   </PropertyGroup>
 
   <!--shim command line-->

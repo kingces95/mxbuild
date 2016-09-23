@@ -16,7 +16,6 @@
 
   <!--shim-->
   <PropertyGroup>
-    <ShimName>Core</ShimName>
     <ShimInclude>$(ShimDir)**\*.csproj</ShimInclude>
   </PropertyGroup>
   <PropertyGroup Condition="'$(BuildTarget)'=='build' OR '$(BuildTarget)'=='rebuild'">

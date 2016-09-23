@@ -5,7 +5,6 @@
 
   <!--DumpProjects-->
   <Target Name="DumpProjects">
-    <Message Importance="$(ShimVerbosity)" Text="ShimName: $(ShimName)" />
     <Message Importance="$(ShimVerbosity)" Text="ShimDir: $(ShimDir)" />
     <Message Importance="$(ShimVerbosity)" Text="ShimInclude: $(ShimInclude)" />
     <Message Importance="$(ShimVerbosity)" Text="ShimExclude: $(ShimExclude)" />
@@ -15,18 +14,59 @@
     <Message Importance="$(ShimVerbosity)" Text="  %(ShimReference.FullPath)" Condition="'@(ShimReference)'!=''" />
   </Target>
 
-  <!--InitializeShim-->
-  <Target 
-    Name="InitializeShim"
+  <!--ShimInit-->
+  <Target
+    Name="ShimInit"
     BeforeTargets="Proxy"
-    Condition="'$(ShimState)'==''"
+    Condition="'$(ShimTarget)'==''"
   >
+    <!--inject BuildTarget-->
+    <MSBuild
+      Projects="$(ProjFile)"
+      Targets="$(BuildTarget)"
+      Properties="ShimTarget=$(ShimInitialFinalTargetId);BuildTarget=$(BuildTarget)"
+    />
+    
+  </Target>
+
+  <!--ShimInitialFinal-->
+  <Target
+    Name="ShimInitialFinal"
+    BeforeTargets="Proxy"
+    Condition="'$(ShimTarget)'=='$(ShimInitialFinalTargetId)'"
+  >
+    <!--initial target-->
+    <MSBuild
+      Projects="$(ShimInitialProject)"
+      Targets="$(ShimInitialTarget)"
+    />
+
+    <CallTarget Targets="ShimExec" />
+    
+    <!--final target-->
+    <MSBuild
+      Projects="$(ShimFinalProject)"
+      Targets="$(ShimFinalTarget)"
+    />
+
+  </Target>
+
+  <!--ShimExec-->
+  <Target 
+    Name="ShimExec"
+    Outputs="%(Configuration.Identity)"
+  >
+
+    <PropertyGroup>
+      <CurrentConfiguration>%(Configuration.Identity)</CurrentConfiguration>
+    </PropertyGroup>
+
     <PropertyGroup>
       <EscapedProperties>$(Properties.Replace(";","$(Sc)"))</EscapedProperties>
       <EscapedShimProperties>$(ShimProperties.Replace(";","$(Sc)"))</EscapedShimProperties>
       <EscapedShimmedProperties>$(ShimmedProperties.Replace(";","$(Sc)"))</EscapedShimmedProperties>
       <EscapedPlatform>$(Platform.Replace(";","$(Sc)"))</EscapedPlatform>
-      <EscapedConfiguration>$(Configuration.Replace(";","$(Sc)"))</EscapedConfiguration>
+      <EscapedConfiguration>$(CurrentConfiguration.Replace(";","$(Sc)"))</EscapedConfiguration>
     </PropertyGroup>
     <ItemGroup>
       <BuildCommand Include="msbuild.exe" />
@@ -35,7 +75,7 @@
 
       <!--global shim properties-->
       <BuildCommand Include='/p:BuildTarget="$(BuildTarget)"' />
-      <BuildCommand Include='/p:ShimState="$(ShimStateLoggingId)"' />
+      <BuildCommand Include='/p:ShimTarget="$(ShimLoggingTargetId)"' />
       <BuildCommand Include='/p:ShimDir=$(ShimDir)' />
       <BuildCommand Include='/p:Platform="$(EscapedPlatform)"' />
       <BuildCommand Include='/p:Configuration="$(EscapedConfiguration)"' />
@@ -50,7 +90,7 @@
     <MSBuild
       Projects="$(ProjFile)"
       Targets="MakeLogDir"
-      Properties="BuildName=$(Configuration);BuildTarget=$(BuildTarget)"
+      Properties="BuildName=$(CurrentConfiguration);BuildTarget=$(BuildTarget)"
     >
       <!--BuildCommand += MakeLogDir-->
       <Output ItemName="BuildCommand" TaskParameter="TargetOutputs" />
@@ -72,15 +112,8 @@
   <Target 
     Name="Shim"
     BeforeTargets="Proxy"
-    Condition="'$(ShimState)'=='$(ShimStateLoggingId)'"
+    Condition="'$(ShimTarget)'=='$(ShimLoggingTargetId)'"
   >
-
-    <!--initial target-->
-    <MSBuild
-      Projects="$(ShimInitialProject)"
-      Targets="$(ShimInitialTarget)"
-    />
-
     <!--dispatch build target-->
     <MSBuild
       Projects="@(ShimProjectFiles)"
@@ -89,12 +122,6 @@
       BuildInParallel="true"
       Properties="BuildTarget=$(BuildTarget);Properties=$(ShimmedProperties)"
       RemoveProperties=""
-    />
-
-    <!--final target-->
-    <MSBuild
-      Projects="$(ShimFinalProject)"
-      Targets="$(ShimFinalTarget)"
     />
   </Target>
 

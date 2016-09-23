@@ -13,6 +13,7 @@
     <PropertyGroup>
       <BuildNumberDir>$(BuildByNumberDir)$(BuildNumber)\</BuildNumberDir>
       <BuildRevisionDir>$(BuildByRevisionDir)$(EnlistmentRevision)\</BuildRevisionDir>
+      <BuildRevisionNumberDir>$(BuildRevisionDir)$(BuildNumber)\</BuildRevisionNumberDir>
       <BuildVersionDir>$(BuildByVersionDir)$(BuildVersion)\</BuildVersionDir>
       <AssemblyVersionDir>$(BuildVersionDir)$(BuildNumber)\</AssemblyVersionDir>
     </PropertyGroup>
@@ -70,14 +71,15 @@
     Condition="'$(IsEnlistmentClean)'=='true'"
   >
     <MakeDir Directories="$(BuildByRevisionDir)" />
+    <MakeDir Directories="$(BuildRevisionDir)" />
    
     <Error
-      Condition="Exists($(BuildRevisionDir))"
-      Text="Publication directory '$(BuildRevisionDir)' already exists."
+      Condition="Exists($(BuildRevisionNumberDir))"
+      Text="Publication directory '$(BuildRevisionNumberDir)' already exists."
     />
-
-    <Message Importance="high" Text="$(BuildRevisionDir) -> $(BuildNumberDir)" />
-    <Exec Command="mklink /J $(BuildRevisionDir) $(BuildNumberDir) >NUL" />
+    
+    <Message Importance="high" Text="$(BuildRevisionNumberDir) -> $(BuildNumberDir)" />
+    <Exec Command="mklink /J $(BuildRevisionNumberDir) $(BuildNumberDir) >NUL" />
   </Target>
 
   <!--_PublishByVersionNumber-->
