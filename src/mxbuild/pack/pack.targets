@@ -7,9 +7,12 @@
   <Import Project="$(MxbuildDir)empty.targets" />
 
   <PropertyGroup>
+    <!--<BuildDependsOn>
+      _UnpackBuild;
+      $(BuildDependsOn)
+    </BuildDependsOn>-->
     <BuildDependsOn>
       _PackCreate;
-      _UnpackBuild;
       $(BuildDependsOn)
     </BuildDependsOn>
   </PropertyGroup>
@@ -180,6 +183,7 @@
     Inputs="@(TargetResult)"
     Outputs="$(NuspecPath)"
   >
+    <Message Importance="$(PackVerbosity)" Text="NuspecVersion: $(NuspecVersion)" />
     <Message Importance="$(PackVerbosity)" Text="OutputPath: $(NuspecPath)" />
     <Message Importance="$(PackVerbosity)" Text="NuspecReferences:" />
     <Message Importance="$(PackVerbosity)" Text="  %(TargetResult.Identity)" />

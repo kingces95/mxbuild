@@ -31,6 +31,7 @@
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\empty.targets" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\gen\gen.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\gen\gen.targets" />
+    <None Include="$(MSBuildThisFileDirectory)src\mxbuild\id\id.post.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\id\id.git.targets" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\id\id.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\id\id.proj" />

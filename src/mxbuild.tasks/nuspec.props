@@ -1,6 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project 
+  ToolsVersion="12.0" 
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+  InitialTargets="NuspecProps"
+>
 
+  <Target Name="NuspecProps">
+    <PropertyGroup>
+      <NuspecVersion>$(BuildVersion)-bn$(BuildNumber)</NuspecVersion>
+    </PropertyGroup>
+  </Target>
+  
   <!--
 
     Nuspec Dependencies
@@ -18,8 +28,7 @@
     Nuspec Properties
   -->
   <PropertyGroup>
-    <NuspecVersion>$(BuildVersion)-alpha</NuspecVersion>
-    <NuspecId>Mxbuild</NuspecId>
+    <NuspecId>Mxbuild.Tasks</NuspecId>
     <NuspecTags>msbuild mxbuild</NuspecTags>
     <NuspecProjectUrl>https://github.com/kingces95/mxbuild</NuspecProjectUrl>
     <NuspecDescription>General purpose msbuild command line build environment.</NuspecDescription>

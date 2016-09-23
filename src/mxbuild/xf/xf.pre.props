@@ -935,7 +935,7 @@
     </MobilePlatformIds>
     <AllPlatformIds>$(MobilePlatformIds)</AllPlatformIds>
     <AllPlatformIds Condition="'$(IsMobileLibraryProject)'=='true'">$(PackPlatformId)</AllPlatformIds>
-    <AllPlatformIds Condition="'$(IsDesktopLibraryProject)'=='true'">$(DesktopLibraryPlatformId)</AllPlatformIds>
+    <AllPlatformIds Condition="'$(IsDesktopLibraryProject)'=='true'">$(PackPlatformId)</AllPlatformIds>
   </PropertyGroup>
   <Choose>
     <When Condition="'$(Plat)'=='$(AllPlatformId)'">

@@ -3,4 +3,4 @@ archiveHint lib/Mxbuild.Tasks.pdb
 oid sha256:83668bcc323cbac1905c4ebb35dc3940a5f47afe2d06dcba9bfb713d7a878e0d
 size 77312
 type archive
-url http://nuget.org/api/v2/package/Mxbuild.Tasks/0.1.0
+url http://nuget.org/api/v2/package/Mxbuild.Tasks/0.1.0-alpha

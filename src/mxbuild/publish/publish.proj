@@ -11,6 +11,6 @@
     <ProjectGuid>{444D601D-FB88-48C4-A281-0156ED6EDDE0}</ProjectGuid>
   </PropertyGroup>
 
-  <Import Project="$(MxbuildDir)common.targets" />
+  <Import Project="$(ExtIdDir)id.post.props" />
   <Import Project="publish.targets" />
 </Project>

@@ -14,4 +14,8 @@
     <Compile Include="$(SrcDir)BuildInfo.cs" />
   </ItemGroup>
 
+  <PropertyGroup>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  
 </Project>
