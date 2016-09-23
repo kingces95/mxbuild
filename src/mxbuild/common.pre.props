@@ -54,9 +54,11 @@
 
   <!--well known paths-->
   <PropertyGroup>
+    <DlsDir>$(RootDir)dls\</DlsDir>
     <SrcDir>$(RootDir)src\</SrcDir>
     <RefDir>$(SrcDir)ref\</RefDir>
     <ToolsDir>$(DlsDir)tools\</ToolsDir>
+    <PkgDir>$(DlsDir)packages\</PkgDir>
   </PropertyGroup>
 
   <!--build root paths-->
