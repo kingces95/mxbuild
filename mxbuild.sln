@@ -7,6 +7,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "mxbuild", "mxbuild.shproj",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mxbuild.Tasks", "src\mxbuild.tasks\Mxbuild.Tasks.csproj", "{8E9C4286-1AFB-48A6-AB17-180E14F47A9E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F5C9C67E-E461-495E-A348-32DC094DFC69}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		mxbuild.projitems*{7dc1069b-ac9a-4ef9-94c5-4da4473016d1}*SharedItemsImports = 13
@@ -29,5 +31,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{8E9C4286-1AFB-48A6-AB17-180E14F47A9E} = {F5C9C67E-E461-495E-A348-32DC094DFC69}
 	EndGlobalSection
 EndGlobal
