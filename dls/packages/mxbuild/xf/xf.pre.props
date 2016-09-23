@@ -128,7 +128,8 @@
         <IsDesktopLibraryProject>true</IsDesktopLibraryProject>
         <MetaProjectName>desktop</MetaProjectName>
         <SupportedPlatforms>
-          desktop
+          desktop;
+          pack;
         </SupportedPlatforms>
       </PropertyGroup>
     </When>

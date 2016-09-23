@@ -90,7 +90,7 @@
     <MSBuild
       Projects="$(ProjFile)"
       Targets="MakeLogDir"
-      Properties="BuildName=$(CurrentConfiguration);BuildTarget=$(BuildTarget)"
+      Properties="Configuration=$(CurrentConfiguration);BuildName=$(CurrentConfiguration);BuildTarget=$(BuildTarget)"
     >
       <!--BuildCommand += MakeLogDir-->
       <Output ItemName="BuildCommand" TaskParameter="TargetOutputs" />
