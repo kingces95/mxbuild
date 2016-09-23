@@ -76,7 +76,7 @@ bld=pushd %BuildDir%
 dls=pushd %DlsDir%
 ext=pushd %MxbuildDir%
 drp=pushd %DropDir%
-packages=pushd %PkgDir%
+pkg=pushd %PkgDir%
 tools=pushd %ToolsDir%
 
 ;= carouselView

@@ -58,7 +58,7 @@
     <SrcDir>$(RootDir)src\</SrcDir>
     <RefDir>$(SrcDir)ref\</RefDir>
     <ToolsDir>$(DlsDir)tools\</ToolsDir>
-    <PkgDir>$(DlsDir)packages\</PkgDir>
+    <PkgDir>$(DlsDir)pkg\</PkgDir>
   </PropertyGroup>
 
   <!--build root paths-->

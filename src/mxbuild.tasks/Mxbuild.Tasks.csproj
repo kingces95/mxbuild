@@ -76,6 +76,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="nuspec.props" />
+    <None Include="tasks.props">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <!--
 

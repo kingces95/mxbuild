@@ -18,6 +18,9 @@
     <None Include="$(MSBuildThisFileDirectory)mxbuild.sln" />
     <None Include="$(MSBuildThisFileDirectory)README.md" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\Mxbuild.Tasks.csproj" />
+    <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\tasks.props">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\clean\clean.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\clean\clean.targets" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\common.pre.props" />
@@ -85,8 +88,5 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)src\mxbuild\shell\doskey.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)dls\packages\" />
   </ItemGroup>
 </Project>

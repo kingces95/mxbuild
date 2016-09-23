@@ -4,6 +4,7 @@
     Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
     Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"
   />
+  <Import Project="$(PkgDir)Mxbuild.Tasks.0.1.0\lib\tasks.props"/>
   <Import Project="$(MxbuildDir)common.props"/>
   <Import Project="$(ExtNodeDir)node.props"/>
   <Import Project="$(ExtMetaDir)meta.props"/>
