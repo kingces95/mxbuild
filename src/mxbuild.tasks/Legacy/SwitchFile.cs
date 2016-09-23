@@ -8,22 +8,19 @@ using System.IO;
 using System.Xml.Linq;
 using System.Diagnostics;
 
-namespace Xamarin.Forms.Build
-{
-	public sealed class SwitchFile : AbstractTask
-	{
-		public ITaskItem[] Items { get; set; }
-		public string File { get; set; }
+namespace Xamarin.Forms.Build {
+    public sealed class SwitchFile : AbstractTask {
+        public ITaskItem[] Items { get; set; }
+        public string File { get; set; }
 
-		protected override void Run()
-		{
-			var xml = new XElement("Project",
-				new XElement("Choose",
-					new XElement("When")
-				)
-			);
+        protected override void Run() {
+            var xml = new XElement("Project",
+                new XElement("Choose",
+                    new XElement("When")
+                )
+            );
 
-			xml.Save(File);
-		}
-	}
+            xml.Save(File);
+        }
+    }
 }

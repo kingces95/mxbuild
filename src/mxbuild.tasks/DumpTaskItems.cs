@@ -8,46 +8,41 @@ using System.IO;
 using System.Xml.Linq;
 using System.Diagnostics;
 
-namespace Xamarin.Forms.Build
-{
-	public sealed class DumpTaskItems : AbstractTask
-	{
-		static MessageImportance DefaultMessageImportance = MessageImportance.High;
-		
-		public string Header { get; set; }
-		public ITaskItem[] Items { get; set; }
-		public bool ExcludeDefaultMetadata { get; set; }
-		public bool ExcludeEmptyValues { get; set; }
+namespace Xamarin.Forms.Build {
+    public sealed class DumpTaskItems : AbstractTask {
+        static MessageImportance DefaultMessageImportance = MessageImportance.High;
 
-		protected override void Run()
-		{
-			Log.LogMessage(DefaultMessageImportance, Header);
+        public string Header { get; set; }
+        public ITaskItem[] Items { get; set; }
+        public bool ExcludeDefaultMetadata { get; set; }
+        public bool ExcludeEmptyValues { get; set; }
 
-			var indent = "";
-			if (Header != null)
-				indent = "    ";
+        protected override void Run() {
+            Log.LogMessage(DefaultMessageImportance, Header);
 
-			if (Items == null)
-				return;
+            var indent = "";
+            if (Header != null)
+                indent = "    ";
 
-			var sc = StringComparer.InvariantCultureIgnoreCase;
+            if (Items == null)
+                return;
 
-			var items = Items;
-			foreach (var item in items.Select(o => new MyTaskItem(o)))
-			{
-				Log.LogMessage(DefaultMessageImportance, $"{indent}{item}");
+            var sc = StringComparer.InvariantCultureIgnoreCase;
 
-				foreach (var metadata in item.Metadata)
-				{
-					if (ExcludeDefaultMetadata && metadata.IsDefault)
-						continue;
+            var items = Items;
+            foreach (var item in items.Select(o => new MyTaskItem(o))) {
+                Log.LogMessage(DefaultMessageImportance, $"{indent}{item}");
 
-					if (ExcludeEmptyValues && metadata.IsNullOrEmpty)
-						continue;
+                foreach (var metadata in item.Metadata) {
+                    if (ExcludeDefaultMetadata && metadata.IsDefault)
+                        continue;
 
-					Log.LogMessage(DefaultMessageImportance, $"{indent}{indent}{metadata}");
-				}
-			}
-		}
-	}
+                    if (ExcludeEmptyValues && metadata.IsNullOrEmpty)
+                        continue;
+
+                    Log.LogMessage(DefaultMessageImportance, $"{indent}{indent}{metadata}");
+                }
+            }
+        }
+    }
 }

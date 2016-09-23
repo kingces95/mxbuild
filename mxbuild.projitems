@@ -17,6 +17,7 @@
     <None Include="$(MSBuildThisFileDirectory)LICENSE" />
     <None Include="$(MSBuildThisFileDirectory)mxbuild.sln" />
     <None Include="$(MSBuildThisFileDirectory)README.md" />
+    <None Include="$(MSBuildThisFileDirectory)src\.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\Mxbuild.Tasks.csproj" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\tasks.props">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -70,6 +71,8 @@
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\xf\xf.targets" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)src\BuildInfo.t.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)src\BuildInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\CreateNuspec.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\DumpTaskItems.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\Legacy\GenerateAssemblyInfo.cs" />
