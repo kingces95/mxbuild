@@ -61,7 +61,7 @@
     <None Include="$(MSBuildThisFileDirectory)dls\packages\mxbuild\xf\xf.props" />
     <None Include="$(MSBuildThisFileDirectory)dls\packages\mxbuild\xf\xf.targets" />
     <None Include="$(MSBuildThisFileDirectory)env.lnk" />
-    <None Include="$(MSBuildThisFileDirectory)LICENSE.md" />
+    <None Include="$(MSBuildThisFileDirectory)LICENSE" />
     <None Include="$(MSBuildThisFileDirectory)mxbuild.sln" />
     <None Include="$(MSBuildThisFileDirectory)README.md" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\Mxbuild.Tasks.csproj" />
