@@ -26,8 +26,10 @@
   <!--shim-->
   <PropertyGroup>
     <ShimInclude>$(ShimDir)**\*.csproj</ShimInclude>
+    <IsBuildTargetBuild Condition="'$(BuildTarget)'=='build' OR '$(BuildTarget)'=='rebuild'">true</IsBuildTargetBuild>
+    <IsBuildingFromRoot Condition="'$(StartupDir)'=='$(RootDir)'">true</IsBuildingFromRoot>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(BuildTarget)'=='build' OR '$(BuildTarget)'=='rebuild'">
+  <PropertyGroup Condition="'$(IsBuildTargetBuild)'=='true' AND '$(IsBuildingFromRoot)'=='true'">
     <ShimInitialProject>$(IdProj)</ShimInitialProject>
     <ShimFinalProject>$(PublishProj)</ShimFinalProject>
   </PropertyGroup>

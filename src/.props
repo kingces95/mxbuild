@@ -7,11 +7,12 @@
 
   <!--BuildInfo-->
   <ItemGroup>
-    <Template Include="$(SrcDir)BuildInfo.t.cs">
+    <Template Include="$(SrcDir)BuildInfo.tcs">
       <DependentUpon>BuildInfo.cs</DependentUpon>
       <SubstituteExpandedResult>true</SubstituteExpandedResult>
     </Template>
     <Compile Include="$(SrcDir)BuildInfo.cs" />
+    <Compile Include="$(SrcDir)AssemblyVersion.cs" />
   </ItemGroup>
 
   <PropertyGroup>

@@ -89,7 +89,7 @@ after=pushd %tstDir%nugetTest\after
 ;= tools
 diff=p4merge -C utf8 $1 $2
 bc="C:\Program Files\Beyond Compare 4\BCompare.exe" $1 $2
-ts=touch %SrcDir%*.sln
+ts=touch %RootDir%*.sln
 
 ;= killusual
 killusual=taskkill /f /im adb.exe /im msbuild.exe /im nunit-agent.exe

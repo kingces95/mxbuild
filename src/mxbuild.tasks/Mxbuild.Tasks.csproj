@@ -15,16 +15,6 @@
   </PropertyGroup>
   <!--
   
-    AssemblyVersion
-  -->
-  <ItemGroup>
-    <Template Include="Properties\AssemblyVersion.t.cs">
-      <DependentUpon>AssemblyVersion.cs</DependentUpon>
-    </Template>
-    <Compile Include="Properties\AssemblyVersion.cs" />
-  </ItemGroup>
-  <!--
-  
     None
   -->
   <PropertyGroup Condition=" '$(Platform)' == '[None]' " />

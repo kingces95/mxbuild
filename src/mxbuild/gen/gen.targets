@@ -23,7 +23,7 @@
 
     <!--get path to expansion-->
     <PropertyGroup>
-      <DefaultExpansionPath>$(TemplatePath.Replace('.t.cs','.cs'))</DefaultExpansionPath>
+      <DefaultExpansionPath>$(TemplatePath.Replace('$(TemplateExtension)','.cs'))</DefaultExpansionPath>
       <ExpansionIdentity>@(Compile->WithMetadataValue('FullPath', '$(DefaultExpansionPath)')->'%(Identity)')</ExpansionIdentity>
       <ExpansionText>$([System.IO.File]::ReadAllText($(ExpansionIdentity)))</ExpansionText>
       <ExpansionFileName>$([System.IO.Path]::GetFileName($(DefaultExpansionPath)))</ExpansionFileName>

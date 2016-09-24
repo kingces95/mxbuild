@@ -42,17 +42,11 @@
       <TargetResult>$(TargetResult)EnlistmentUrl=$(EnlistmentUrl);</TargetResult>
     </PropertyGroup>
 
-    <!--if dirty, propagate default values for $(BuildNumber), $(EnlistmentRevision), $(EnlistmentUrl)-->
+    <!--if dirty, propagate nothing and issue warning-->
     <Warning
       Condition="'$(IsEnlistmentClean)'!='true'"
       Text="Build identity could not be established because enslitment contains modified, new, or untracked files. See: @(EnlistmentStatusFile)"
     />
-    <PropertyGroup Condition="'$(IsEnlistmentClean)'!='true'">
-      <TargetResult>$(TargetResult)BuildNumber=$(InvalidBuildNumber);</TargetResult>
-      <TargetResult>$(TargetResult)EnlistmentRevision=$(InvalidEnlistmentRevision);</TargetResult>
-      <TargetResult>$(TargetResult)EnlistmentUrl=$(InvalidEnlistmentUrl);</TargetResult>
-    </PropertyGroup>
-
   </Target>
 
   <!--_GetBuildNumber-->

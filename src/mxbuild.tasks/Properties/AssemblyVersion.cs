@@ -1,1 +1,0 @@
-[assembly: System.Reflection.AssemblyVersion("0.1.0." + BuildInfo.Number)]

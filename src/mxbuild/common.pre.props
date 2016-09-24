@@ -79,11 +79,6 @@
 
   <!--build info-->
   <PropertyGroup>
-    <InvalidEnlistmentRevision>dirty</InvalidEnlistmentRevision>
-    <InvalidEnlistmentUrl/>
-    <InvalidBuildNumber>0</InvalidBuildNumber>
-  </PropertyGroup>
-  <PropertyGroup>
     <EnlistmentStatusFile>$(BuildBinDir)BuildInfo.Enlistment.Status.txt</EnlistmentStatusFile>
     <BuildNumberFile>$(BuildBinDir)BuildInfo.Build.Number.txt</BuildNumberFile>
     <EnlistmentRevisionFile>$(BuildBinDir)BuildInfo.Enlistment.Revision.txt</EnlistmentRevisionFile>

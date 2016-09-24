@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project 
   ToolsVersion="12.0" 
-  DefaultTargets="Build" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
-  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), .pre.props))\.pre.props" />
+  <!--
+    https://blogs.msdn.microsoft.com/visualstudioalm/2016/05/26/versioning-nuget-packages-cd-3/
+  -->
+  <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildStartupDirectory), .pre.props))\.pre.props" />
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(StartupDir), .props))\.props" />
 
   <PropertyGroup>
