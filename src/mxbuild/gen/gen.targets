@@ -70,44 +70,12 @@
     <Message Text="    %(Pattern.Name) -> %(Replacement)" Condition="'%(Replacement)'!=''" Importance="$(GenVerbosity)" />
     <Message Text="    %(Pattern.Name) -> [null]" Condition="'%(Replacement)'==''" Importance="$(GenVerbosity)" />
 
-    <!--test if expansion is stale-->
-    <PropertyGroup>
-      <IsExpansionStale Condition="
-        '@(Pattern->'%(Replacement)', '')'!='' AND
-        '$(FreshExpansionText)'!='$(ExpansionText)'
-      ">true</IsExpansionStale>
-      
-      <SubstituteExpandedResult Condition="
-        '$(IsExpansionStale)'=='true'
-      ">%(Template.SubstituteExpandedResult)</SubstituteExpandedResult>
-      
-      <OverwriteDefaultExpansion Condition="
-        '$(IsExpansionStale)'=='true' AND '$(SubstituteExpandedResult)'!='true'
-      ">true</OverwriteDefaultExpansion>
-    </PropertyGroup>
-    <Message Text="  IsExpansionStale: $(IsExpansionStale)" Condition="'$(IsExpansionStale)'=='true'" Importance="$(GenVerbosity)" />
-    <Message Text="    SubstituteExpandedResult: $(SubstituteExpandedResult)" Condition="'$(SubstituteExpandedResult)'!=''" Importance="$(GenVerbosity)" />
-    <Message Text="    OverwriteDefaultExpansion: $(OverwriteDefaultExpansion)" Condition="'$(OverwriteDefaultExpansion)'!=''" Importance="$(GenVerbosity)" />
-
-    <!--overwrite default expansion-->
-    <Warning 
-      Text="Expansion of template '$(TemplatePath)' is stale. Refreshing default expansion '$(DefaultExpansionPath)'."
-      Condition="'$(OverwriteDefaultExpansion)'=='true'"
-    />
-    <WriteTextToFile
-      File="$(DefaultExpansionPath)"
-      Text="$(FreshExpansionText)"
-      Overwrite="true"
-      Condition="'$(OverwriteDefaultExpansion)'=='true'"
-    />
-
     <!--substitute expanded result-->
     <Message
-      Text="  Submsituting: $(ExpansionIdentity) -> $(FreshExpansionPath)" 
-      Condition="'$(SubstituteExpandedResult)'=='true'"
+      Text="  Subsituting: $(ExpansionIdentity) -> $(FreshExpansionPath)" 
       Importance="$(GenVerbosity)" 
     />
-    <ItemGroup Condition="'$(SubstituteExpandedResult)'=='true'">
+    <ItemGroup>
       <Compile Remove="$(ExpansionIdentity)"/>
       <Compile Include="$(FreshExpansionPath)"/>
     </ItemGroup>
