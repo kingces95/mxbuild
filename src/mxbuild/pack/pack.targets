@@ -176,7 +176,7 @@
   >
     <Message Importance="high" Text="$(MSBuildProjectName) -> $(NuspecPath)" />
   </Target>
-  
+
   <!--_PackCreateNuspecIfNecessary-->
   <Target
     Name="_PackCreateNuspecIfNecessary"

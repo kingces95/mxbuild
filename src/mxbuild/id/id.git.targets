@@ -3,27 +3,51 @@
   ToolsVersion="12.0" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-  <Target Name="_SaveFreshEnlistmentStatus" >
-    <MakeDir Directories="@(FreshEnlistmentStatusFile->'%(RootDir)%(Directory)')" />
+  <Target Name="_GetEnlistmentStatus" >
     <Exec
-      Command="git status --porcelain > @(FreshEnlistmentStatusFile)"
+      Command="git status --porcelain"
       WorkingDirectory="$(RootDir)"
+      ConsoleToMSBuild="true"
+      StandardOutputImportance="normal"
+    >
+      <Output TaskParameter="ConsoleOutput" PropertyName="EnlistmentStatus" />
+    </Exec>
+    <MakeDir Directories="@(EnlistmentStatusFile->'%(RootDir)%(Directory)')" />
+    <WriteLinesToFile
+      File="@(EnlistmentStatusFile)"
+      Lines="$(EnlistmentStatus)"
     />
   </Target>
 
-  <Target Name="_SaveFreshEnlistmentRevision" >
-    <MakeDir Directories="@(FreshEnlistmentRevisionFile->'%(RootDir)%(Directory)')" />
+  <Target Name="_GetEnlistmentRevision" >
     <Exec
-      Command="git rev-list -n 1 head > @(FreshEnlistmentRevisionFile)"
+      Command="git rev-list -n 1 head"
       WorkingDirectory="$(RootDir)"
+      ConsoleToMSBuild="true"
+      StandardOutputImportance="normal"
+    >
+      <Output TaskParameter="ConsoleOutput" PropertyName="EnlistmentRevision" />
+    </Exec>
+    <MakeDir Directories="@(EnlistmentRevisionFile->'%(RootDir)%(Directory)')" />
+    <WriteLinesToFile
+      File="@(EnlistmentRevisionFile)"
+      Lines="$(EnlistmentRevision)"
     />
   </Target>
 
-  <Target Name="_SaveFreshEnlistmentUrl" >
-    <MakeDir Directories="@(FreshEnlistmentUrlFile->'%(RootDir)%(Directory)')" />
+  <Target Name="_GetEnlistmentUrl" >
     <Exec
-      Command="for /F $(Quot)tokens=*$(Quot) %%i in ('git remote') do git remote get-url %%i > @(FreshEnlistmentUrlFile)"
+      Command="for /F $(Quot)tokens=*$(Quot) %%i in ('git remote') do git remote get-url %%i"
       WorkingDirectory="$(RootDir)"
+      ConsoleToMSBuild="true"
+      StandardOutputImportance="normal"
+    >
+      <Output TaskParameter="ConsoleOutput" PropertyName="EnlistmentUrl" />
+    </Exec>
+    <MakeDir Directories="@(EnlistmentUrlFile->'%(RootDir)%(Directory)')" />
+    <WriteLinesToFile
+      File="@(EnlistmentUrlFile)"
+      Lines="$(EnlistmentUrl)"
     />
   </Target>
 </Project>

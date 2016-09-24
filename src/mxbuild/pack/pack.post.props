@@ -2,31 +2,14 @@
 <Project 
   ToolsVersion="12.0" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
-  InitialTargets="PackPostProps"
 >
 
-  <Target Name="PackPostProps">
-    <PropertyGroup>
-      <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
-    </PropertyGroup>
-  </Target>
-  
   <!--package-->
   <PropertyGroup>
-    <PackDir>$(OutDirAbsolute)</PackDir>
-    <NuspecPath>$(PackDir)$(MSBuildProjectName)$(NuspecPackageExt)</NuspecPath>
-    <PackVerbosity>$(Verbosity)</PackVerbosity>
-  </PropertyGroup>
-
-  <!--unpackage-->
-  <PropertyGroup>
-    <UnpackSubDir>unpack\</UnpackSubDir>
-    <UnpackDir>$(OutDirAbsolute)$(UnpackSubDir)</UnpackDir>
-    <UnpackLogDir>$(UnpackDir)</UnpackLogDir>
     
-    <UnpackBeforeDir>$(UnpackDir)before\</UnpackBeforeDir>
-    <UnpackAfterDir>$(UnpackDir)after\</UnpackAfterDir>
-    <UnpackBuildDir>$(IntermediateOutputPathAbsolute)$(UnpackSubDir)</UnpackBuildDir>
+    <!--$(NuspecId) is declared in nuspec.props which resides next to the .csproj file-->
+    <NuspecVersion>$(BuildVersion)-bld-$(BuildNumber)</NuspecVersion>
+    <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
   </PropertyGroup>
 
 </Project>

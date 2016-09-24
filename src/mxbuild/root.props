@@ -9,6 +9,7 @@
   <Import Project="$(ExtMetaDir)meta.props"/>
   <Import Project="$(ExtPartDir)part.props"/>
   <Import Project="$(MxbuildDir)common.props"/>
+  <Import Project="$(ExtPackDir)pack.props"/>
   <Import Project="$(ExtNugetDir)nuget.props"/>
   <Import Project="$(ExtXfDir)xf.props"/>
 </Project>

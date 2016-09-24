@@ -31,7 +31,6 @@
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\empty.targets" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\gen\gen.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\gen\gen.targets" />
-    <None Include="$(MSBuildThisFileDirectory)src\mxbuild\id\id.post.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\id\id.git.targets" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\id\id.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\id\id.proj" />
@@ -47,7 +46,7 @@
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\nuget\nuget.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\nuget\nuget.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\nuget\nuget.targets" />
-    <None Include="$(MSBuildThisFileDirectory)src\mxbuild\pack\pack.post.props" />
+    <None Include="$(MSBuildThisFileDirectory)src\mxbuild\pack\pack.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\pack\pack.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\pack\pack.targets" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\part\part.pre.props" />

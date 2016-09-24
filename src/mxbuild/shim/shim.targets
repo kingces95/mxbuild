@@ -29,32 +29,29 @@
     
   </Target>
 
-  <!--ShimInitialFinal-->
+  <!--ShimInitial-->
   <Target
-    Name="ShimInitialFinal"
-    BeforeTargets="Proxy"
-    Condition="'$(ShimTarget)'=='$(ShimInitialFinalTargetId)'"
+    Name="ShimInitial"
+    BeforeTargets="Shim"
   >
-    <!--initial target-->
     <MSBuild
       Projects="$(ShimInitialProject)"
       Targets="$(ShimInitialTarget)"
-    />
+    >
+      <Output PropertyName="InitProperties" TaskParameter="TargetOutputs"/>
+    </MSBuild>
 
-    <CallTarget Targets="ShimExec" />
-    
-    <!--final target-->
-    <MSBuild
-      Projects="$(ShimFinalProject)"
-      Targets="$(ShimFinalTarget)"
-    />
-
+    <ItemGroup>
+      <ShimProperties Include="$(InitProperties);$(ShimProperties)" />
+    </ItemGroup>
   </Target>
 
-  <!--ShimExec-->
+  <!--Shim-->
   <Target 
-    Name="ShimExec"
+    Name="Shim"
+    BeforeTargets="Proxy"
     Outputs="%(Configuration.Identity)"
+    Condition="'$(ShimTarget)'=='$(ShimInitialFinalTargetId)'"
   >
 
     <PropertyGroup>
@@ -62,16 +59,14 @@
     </PropertyGroup>
 
     <PropertyGroup>
-      <EscapedProperties>$(Properties.Replace(";","$(Sc)"))</EscapedProperties>
       <EscapedShimProperties>$(ShimProperties.Replace(";","$(Sc)"))</EscapedShimProperties>
-      <EscapedShimmedProperties>$(ShimmedProperties.Replace(";","$(Sc)"))</EscapedShimmedProperties>
       <EscapedPlatform>$(Platform.Replace(";","$(Sc)"))</EscapedPlatform>
       <EscapedConfiguration>$(CurrentConfiguration.Replace(";","$(Sc)"))</EscapedConfiguration>
     </PropertyGroup>
     <ItemGroup>
       <BuildCommand Include="msbuild.exe" />
       <BuildCommand Include="$(ProjFile)" />
-      <BuildCommand Include="/t:Shim" />
+      <BuildCommand Include="/t:Dispatch" />
 
       <!--global shim properties-->
       <BuildCommand Include='/p:BuildTarget="$(BuildTarget)"' />
@@ -79,9 +74,7 @@
       <BuildCommand Include='/p:ShimDir=$(ShimDir)' />
       <BuildCommand Include='/p:Platform="$(EscapedPlatform)"' />
       <BuildCommand Include='/p:Configuration="$(EscapedConfiguration)"' />
-      <BuildCommand Include='/p:Properties="$(EscapedProperties)"' Condition="'$(Properties)'!=''" />
-      <BuildCommand Include='/p:ShimProperties="$(EscapedShimProperties)"' Condition="'$(ShimProperties)'!=''" />
-      <BuildCommand Include='/p:ShimmedProperties="$(EscapedShimmedProperties)"' Condition="'$(ShimmedProperties)'!=''" />
+      <BuildCommand Include="@(ShimProperties->'/p:%(Identity)')" />
 
       <!--misc-->
       <BuildCommand Include="/nodeReuse:false" />
@@ -108,9 +101,9 @@
     />
   </Target>
 
-  <!--Shim-->
+  <!--Dispatch-->
   <Target 
-    Name="Shim"
+    Name="Dispatch"
     BeforeTargets="Proxy"
     Condition="'$(ShimTarget)'=='$(ShimLoggingTargetId)'"
   >
@@ -120,8 +113,19 @@
       Targets="$(BuildTarget)"
       ContinueOnError="true"
       BuildInParallel="true"
-      Properties="BuildTarget=$(BuildTarget);Properties=$(ShimmedProperties)"
       RemoveProperties=""
+    />
+  </Target>
+
+  <!--ShimFinal-->
+  <Target
+    Name="ShimFinal"
+    AfterTargets="Shim"
+  >
+    <MSBuild
+      Projects="$(ShimFinalProject)"
+      Targets="$(ShimFinalTarget)"
+      Properties="$(InitProperties)"
     />
   </Target>
 

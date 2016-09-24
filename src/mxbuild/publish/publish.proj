@@ -11,6 +11,13 @@
     <ProjectGuid>{444D601D-FB88-48C4-A281-0156ED6EDDE0}</ProjectGuid>
   </PropertyGroup>
 
-  <Import Project="$(ExtIdDir)id.post.props" />
+  <PropertyGroup>
+    <BuildNumberDir>$(BuildByNumberDir)$(BuildNumber)\</BuildNumberDir>
+    <BuildRevisionDir>$(BuildByRevisionDir)$(EnlistmentRevision)\</BuildRevisionDir>
+    <BuildRevisionNumberDir>$(BuildRevisionDir)$(BuildNumber)\</BuildRevisionNumberDir>
+    <BuildVersionDir>$(BuildByVersionDir)$(BuildVersion)\</BuildVersionDir>
+    <AssemblyVersionDir>$(BuildVersionDir)$(BuildNumber)\</AssemblyVersionDir>
+  </PropertyGroup>
+  
   <Import Project="publish.targets" />
 </Project>
