@@ -6,14 +6,6 @@
 >
   <Import Project="$(MxbuildDir)root.props"/>
 
-  <!--BuildVersion-->
-  <PropertyGroup>
-    <BuildMajorVersion>0</BuildMajorVersion>
-    <BuildMinorVersion>1</BuildMinorVersion>
-    <BuildPatchVersion>0</BuildPatchVersion>
-    <BuildVersion>$(BuildMajorVersion).$(BuildMinorVersion).$(BuildPatchVersion)</BuildVersion>
-  </PropertyGroup>
-
   <PropertyGroup>
     <NuspecAuthors>kingces95</NuspecAuthors>
     <NuspecOwners>$(NuspecAuthors)</NuspecOwners>

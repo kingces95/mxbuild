@@ -9,8 +9,6 @@
   <!--build drop paths-->
   <PropertyGroup>
     <DropDir>$(RootDir)drp\</DropDir>
-    <BuildByNumberDir>$(DropDir)number\</BuildByNumberDir>
-    <BuildByNumberDefaultDir>$(BuildByNumberDir)10000\</BuildByNumberDefaultDir>
     <BuildByRevisionDir>$(DropDir)revision\</BuildByRevisionDir>
     <BuildByVersionDir>$(DropDir)version\</BuildByVersionDir>
   </PropertyGroup>

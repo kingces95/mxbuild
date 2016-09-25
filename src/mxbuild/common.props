@@ -14,7 +14,7 @@
 
   <!--build-->
   <PropertyGroup Condition="!$(Configuration.Contains(';'))">
-
+    
     <!--buildConfigurationDir-->
     <BuildConfigurationDir>$(Configuration)\</BuildConfigurationDir>
     <BuildBinConfigDir>$(BuildBinDir)$(BuildConfigurationDir)</BuildBinConfigDir>

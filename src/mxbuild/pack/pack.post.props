@@ -8,7 +8,6 @@
   <PropertyGroup>
     
     <!--$(NuspecId) is declared in nuspec.props which resides next to the .csproj file-->
-    <NuspecVersion>$(BuildVersion)-bld-$(BuildNumber)</NuspecVersion>
     <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
   </PropertyGroup>
 

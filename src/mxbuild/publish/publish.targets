@@ -11,9 +11,8 @@
   <Target Name="Publish"
     DependsOnTargets="
       _PublishFailIfDirty;
-      _PublishByBuildNumber;
-      _PublishByRevisionNumber;
       _PublishByVersionNumber;
+      _PublishByRevisionNumber;
     "
   />
 
@@ -25,58 +24,39 @@
     />
   </Target>
 
-  <!--_PublishByBuildNumber-->
-  <Target 
-    Name="_PublishByBuildNumber"
-    DependsOnTargets="_PublishFailIfDirty"
-  >  
-    <Error
-      Condition="Exists($(BuildNumberDir))"
-      Text="Publication directory '$(BuildNumberDir)' already exists."
+  <!--_PublishByVersionNumber-->
+  <Target
+    Name="_PublishByVersionNumber"
+    DependsOnTargets="_PublishByRevisionNumber"
+    Condition="'$(IsEnlistmentClean)'=='true' AND '$(BuildVersion)'!=''"
+  >
+    <Warning
+      Condition="Exists($(BuildVersionDir))"
+      Text="Publication directory '$(BuildVersionDir)' already exists. Removing exising directory."
     />
-    
-    <!--copy build-->
-    <Message Importance="high" Text="$(BuildBinDir) -> $(BuildNumberDir)" />
-    <ItemGroup>
-      <_BuildFiles Include="$(BuildBinDir)**" />
-    </ItemGroup>
-    <MakeDir Directories="$(BuildNumberDir)" />
-    <Copy SourceFiles="@(_BuildFiles)" DestinationFolder="$(BuildNumberDir)%(RecursiveDir)" />
+    <RemoveDir Condition="Exists($(BuildVersionDir))" Directories="$(BuildVersionDir)" />
+
+    <Message Importance="high" Text="$(BuildVersionDir) -> $(BuildRevisionDir)" />
+    <Exec Command="mklink /J $(BuildVersionDir) $(BuildRevisionDir) >NUL" />
   </Target>
 
   <!--_PublishByRevisionNumber-->
   <Target
     Name="_PublishByRevisionNumber"
-    DependsOnTargets="_PublishByBuildNumber"
     Condition="'$(IsEnlistmentClean)'=='true'"
   >
+    <Warning
+      Condition="Exists($(BuildRevisionDir))"
+      Text="Publication directory '$(BuildRevisionDir)' already exists. Removing existing directory."
+    />
+    <RemoveDir Condition="Exists($(BuildRevisionDir))" Directories="$(BuildRevisionDir)" />
+
+    <Message Importance="high" Text="$(BuildBinDir) -> $(BuildRevisionDir)" />
     <MakeDir Directories="$(BuildByRevisionDir)" />
-    <MakeDir Directories="$(BuildRevisionDir)" />
-   
-    <Error
-      Condition="Exists($(BuildRevisionNumberDir))"
-      Text="Publication directory '$(BuildRevisionNumberDir)' already exists."
-    />
-    
-    <Message Importance="high" Text="$(BuildRevisionNumberDir) -> $(BuildNumberDir)" />
-    <Exec Command="mklink /J $(BuildRevisionNumberDir) $(BuildNumberDir) >NUL" />
-  </Target>
-
-  <!--_PublishByVersionNumber-->
-  <Target
-    Name="_PublishByVersionNumber"
-    DependsOnTargets="_PublishByBuildNumber"
-    Condition="'$(IsEnlistmentClean)'=='true' AND '$(BuildVersion)'!=''"
-  >
-    <MakeDir Directories="$(BuildByVersionDir)" />
+    <ItemGroup>
+      <_BuildFiles Include="$(BuildBinDir)**" />
+    </ItemGroup>
     <MakeDir Directories="$(BuildVersionDir)" />
-
-    <Error
-      Condition="Exists($(AssemblyVersionDir))"
-      Text="Publication directory '$(AssemblyVersionDir)' already exists."
-    />
-
-    <Message Importance="high" Text="$(AssemblyVersionDir) -> $(BuildNumberDir)" />
-    <Exec Command="mklink /J $(AssemblyVersionDir) $(BuildNumberDir) >NUL" />
+    <Copy SourceFiles="@(_BuildFiles)" DestinationFolder="$(BuildRevisionDir)%(RecursiveDir)" />
   </Target>
 </Project>

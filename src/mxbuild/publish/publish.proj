@@ -12,11 +12,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <BuildNumberDir>$(BuildByNumberDir)$(BuildNumber)\</BuildNumberDir>
     <BuildRevisionDir>$(BuildByRevisionDir)$(EnlistmentRevision)\</BuildRevisionDir>
-    <BuildRevisionNumberDir>$(BuildRevisionDir)$(BuildNumber)\</BuildRevisionNumberDir>
-    <BuildVersionDir>$(BuildByVersionDir)$(BuildVersion)\</BuildVersionDir>
-    <AssemblyVersionDir>$(BuildVersionDir)$(BuildNumber)\</AssemblyVersionDir>
+    <BuildVersionDir>$(BuildByVersionDir)$(EnlistmentBranch)\$(BuildVersion)\</BuildVersionDir>
   </PropertyGroup>
   
   <Import Project="publish.targets" />

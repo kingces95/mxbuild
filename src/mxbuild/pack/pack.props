@@ -3,6 +3,10 @@
   ToolsVersion="12.0" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
+  <!--version-->
+  <PropertyGroup>
+    <NuspecVersion>$(BuildVersion)</NuspecVersion>
+  </PropertyGroup>
 
   <!--package-->
   <PropertyGroup>
