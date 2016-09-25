@@ -1,5 +1,4 @@
 pushd %~dp0
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))" && SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 choco install git-lfx
 git-lfx files
 echo Pre nuget restore
