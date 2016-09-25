@@ -55,6 +55,10 @@ dryRun=msbuild %shimProj% /v:m /t:dryRun /p:Configuration="debug;release" /p:Shi
 dryRun-debug=msbuild %shimProj% /v:m /t:dryRun /p:Configuration="debug" /p:ShimProperties="$*"
 dryRun-release=msbuild %shimProj% /v:m /t:dryRun /p:Configuration="release" /p:ShimProperties="$*"
 
+rebuild=msbuild %shimProj% /v:m /t:rebuild /p:Configuration="debug;release" /p:ShimProperties="$*"
+rebuild-debug=msbuild %shimProj% /v:m /t:rebuild /p:Configuration="debug" /p:ShimProperties="$*"
+rebuild-release=msbuild %shimProj% /v:m /t:rebuild /p:Configuration="release" /p:ShimProperties="$*"
+
 build=msbuild %shimProj% /v:m /t:build /p:Configuration="debug;release" /p:ShimProperties="$*"
 build-debug=msbuild %shimProj% /v:m /t:build /p:Configuration="debug" /p:ShimProperties="$*"
 build-release=msbuild %shimProj% /v:m /t:build /p:Configuration="release" /p:ShimProperties="$*"
