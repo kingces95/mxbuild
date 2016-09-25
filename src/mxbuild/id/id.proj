@@ -13,6 +13,20 @@
     <ProjectGuid>{444D601D-FB88-48C4-A281-0156ED6EDDE0}</ProjectGuid>
   </PropertyGroup>
 
+  <!--build info-->
+  <PropertyGroup>
+    <BuildNumberFile>$(BuildBinDir)BuildInfo.Build.Number.txt</BuildNumberFile>
+    <EnlistmentRevisionFile>$(BuildBinDir)BuildInfo.Enlistment.Revision.txt</EnlistmentRevisionFile>
+    <EnlistmentUrlFile>$(BuildBinDir)BuildInfo.Enlistment.Url.txt</EnlistmentUrlFile>
+    <EnlistmentBranchFile>$(BuildBinDir)BuildInfo.Enlistment.Branch.txt</EnlistmentBranchFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <BuildNumberFile Include="$(BuildNumberFile)" />
+    <EnlistmentRevisionFile Include="$(EnlistmentRevisionFile)" />
+    <EnlistmentUrlFile Include="$(EnlistmentUrlFile)" />
+    <EnlistmentBranchFile Include="$(EnlistmentBranchFile)" />
+  </ItemGroup>
+
   <Import Project="$(MxbuildDir)common.targets" />
   <Import Project="id.git.targets"/>
   <Import Project="id.targets" />

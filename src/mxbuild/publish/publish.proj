@@ -11,10 +11,25 @@
     <ProjectGuid>{444D601D-FB88-48C4-A281-0156ED6EDDE0}</ProjectGuid>
   </PropertyGroup>
 
+  <!--build drop paths-->
   <PropertyGroup>
+    <DropDir>$(RootDir)drp\</DropDir>
+    
+    <BuildByRevisionDir>$(DropDir)revision\</BuildByRevisionDir>
     <BuildRevisionDir>$(BuildByRevisionDir)$(EnlistmentRevision)\</BuildRevisionDir>
-    <BuildVersionDir>$(BuildByVersionDir)$(EnlistmentBranch)\$(BuildVersion)\</BuildVersionDir>
+
+    <BuildByVersionDir>$(DropDir)$(EnlistmentBranch)\version\</BuildByVersionDir>
+    <BuildVersionDir>$(BuildByVersionDir)$(BuildVersion)\</BuildVersionDir>
   </PropertyGroup>
-  
+
+  <!--build info-->
+  <PropertyGroup>
+    <EnlistmentStatusFile>$(BuildBinDir)BuildInfo.Enlistment.Status.txt</EnlistmentStatusFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <EnlistmentStatusFile Include="$(EnlistmentStatusFile)" />
+  </ItemGroup>
+
+  <Import Project="publish.git.targets"/>
   <Import Project="publish.targets" />
 </Project>

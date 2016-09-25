@@ -24,7 +24,6 @@
   <Target
     Name="RefreshEnlistmentInfo"
     DependsOnTargets="
-      _GetEnlistmentStatus;
       _GetBuildVersion;
       _GetBuildNumber;
       _GetEnlistmentRevision;
@@ -32,14 +31,8 @@
       _GetEnlistmentBranch;
     ">
 
-    <!--propagate $(IsEnlistmentClean)-->
+    <!--propagate $(BuildNumber), $(EnlistmentRevision), $(EnlistmentUrl)-->
     <PropertyGroup>
-      <IsEnlistmentClean Condition="'$(EnlistmentStatus)'=='EnlistmentStatus'">true</IsEnlistmentClean>
-      <TargetResult>$(TargetResult)IsEnlistmentClean=$(IsEnlistmentClean);</TargetResult>
-    </PropertyGroup>
-
-    <!--if clean, propagate $(BuildNumber), $(EnlistmentRevision), $(EnlistmentUrl)-->
-    <PropertyGroup Condition="'$(IsEnlistmentClean)'=='true'">
       <TargetResult>$(TargetResult)BuildMajorVersion=$(BuildMajorVersion);</TargetResult>
       <TargetResult>$(TargetResult)BuildMinorVersion=$(BuildMinorVersion);</TargetResult>
       <TargetResult>$(TargetResult)BuildNumber=$(BuildNumber);</TargetResult>
@@ -47,12 +40,6 @@
       <TargetResult>$(TargetResult)EnlistmentUrl=$(EnlistmentUrl);</TargetResult>
       <TargetResult>$(TargetResult)EnlistmentBranch=$(EnlistmentBranch);</TargetResult>
     </PropertyGroup>
-
-    <!--if dirty, propagate nothing and issue warning-->
-    <Warning
-      Condition="'$(IsEnlistmentClean)'!='true'"
-      Text="Build identity could not be established because enslitment contains modified, new, or untracked files. See: @(EnlistmentStatusFile)"
-    />
   </Target>
 
   <Target Name="_GetBuildVersion">

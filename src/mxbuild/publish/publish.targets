@@ -17,7 +17,14 @@
   />
 
   <!--_PublishFailIfDirty-->
-  <Target Name="_PublishFailIfDirty">
+  <Target 
+    Name="_PublishFailIfDirty"
+    DependsOnTargets="_GetEnlistmentStatus"
+  >
+    <PropertyGroup>
+      <IsEnlistmentClean Condition="'$(EnlistmentStatus)'==''">true</IsEnlistmentClean>
+    </PropertyGroup>
+
     <Error 
       Condition="'$(IsEnlistmentClean)'!='true'" 
       Text="Publish aborted; Repository dirty at time of build. Set IsEnlistmentClean=true to override. See: @(EnlistmentStatusFile)" 
@@ -37,6 +44,7 @@
     <RemoveDir Condition="Exists($(BuildVersionDir))" Directories="$(BuildVersionDir)" />
 
     <Message Importance="high" Text="$(BuildVersionDir) -> $(BuildRevisionDir)" />
+    <MakeDir Directories="$(BuildByVersionDir)" />
     <Exec Command="mklink /J $(BuildVersionDir) $(BuildRevisionDir) >NUL" />
   </Target>
 
@@ -52,11 +60,10 @@
     <RemoveDir Condition="Exists($(BuildRevisionDir))" Directories="$(BuildRevisionDir)" />
 
     <Message Importance="high" Text="$(BuildBinDir) -> $(BuildRevisionDir)" />
-    <MakeDir Directories="$(BuildByRevisionDir)" />
     <ItemGroup>
       <_BuildFiles Include="$(BuildBinDir)**" />
     </ItemGroup>
-    <MakeDir Directories="$(BuildVersionDir)" />
+    <MakeDir Directories="$(BuildByRevisionDir)" />
     <Copy SourceFiles="@(_BuildFiles)" DestinationFolder="$(BuildRevisionDir)%(RecursiveDir)" />
   </Target>
 </Project>

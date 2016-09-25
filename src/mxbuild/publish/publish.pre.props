@@ -5,12 +5,5 @@
     <ExtPublishDir>$(MSBuildThisFileDirectory)</ExtPublishDir>
     <PublishProj>$(ExtPublishDir)publish.proj</PublishProj>
   </PropertyGroup>
-  
-  <!--build drop paths-->
-  <PropertyGroup>
-    <DropDir>$(RootDir)drp\</DropDir>
-    <BuildByRevisionDir>$(DropDir)revision\</BuildByRevisionDir>
-    <BuildByVersionDir>$(DropDir)version\</BuildByVersionDir>
-  </PropertyGroup>
 
 </Project>

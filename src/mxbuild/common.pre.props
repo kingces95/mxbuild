@@ -76,20 +76,4 @@
     <BuildTempSubDir>obj\</BuildTempSubDir>
     <BuildTempDir>$(BuildBinDir.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</BuildTempDir>
   </PropertyGroup>
-
-  <!--build info-->
-  <PropertyGroup>
-    <EnlistmentStatusFile>$(BuildBinDir)BuildInfo.Enlistment.Status.txt</EnlistmentStatusFile>
-    <BuildNumberFile>$(BuildBinDir)BuildInfo.Build.Number.txt</BuildNumberFile>
-    <EnlistmentRevisionFile>$(BuildBinDir)BuildInfo.Enlistment.Revision.txt</EnlistmentRevisionFile>
-    <EnlistmentUrlFile>$(BuildBinDir)BuildInfo.Enlistment.Url.txt</EnlistmentUrlFile>
-    <EnlistmentBranchFile>$(BuildBinDir)BuildInfo.Enlistment.Branch.txt</EnlistmentBranchFile>
-  </PropertyGroup>
-  <ItemGroup>
-    <EnlistmentStatusFile Include="$(EnlistmentStatusFile)" />
-    <BuildNumberFile Include="$(BuildNumberFile)" />
-    <EnlistmentRevisionFile Include="$(EnlistmentRevisionFile)" />
-    <EnlistmentUrlFile Include="$(EnlistmentUrlFile)" />
-    <EnlistmentBranchFile Include="$(EnlistmentBranchFile)" />
-  </ItemGroup>
 </Project>
