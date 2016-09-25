@@ -1,5 +1,5 @@
 echo Pre nuget restore
-nuget restore -Source https://chocolatey.org/api/v2
+call nuget restore -Source https://chocolatey.org/api/v2
 echo Post nuget restore
 pushd %~dp0
 packages\git-lfx.0.1.0\tools\git-lfx checkout
