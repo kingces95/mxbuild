@@ -72,6 +72,9 @@ namespace Xamarin.Forms.Build {
             if (References == null)
                 References = new ITaskItem[0];
 
+            if (ReleaseNotes == null)
+                ReleaseNotes = string.Empty;
+
             var package = new XElement(X.Package,
                 new XElement(X.Metadata,
                     new XElement(X.Id, Id),

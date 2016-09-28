@@ -65,9 +65,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="nuspec.props">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="nuspec.props" />
     <None Include="tasks.props">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

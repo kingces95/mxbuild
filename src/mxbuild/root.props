@@ -4,7 +4,10 @@
     Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
     Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"
   />
-  <Import Project="$(PkgDir)Mxbuild.Tasks.0.1.15\lib\dotnet\tasks.props"/>
+  <PropertyGroup>
+    <MxbuildTaskDir Condition="'$(MxbuildTaskDir)'==''">$(PkgDir)Mxbuild.Tasks.0.1.15\lib\dotnet\</MxbuildTaskDir>
+  </PropertyGroup>
+  <Import Project="$(MxbuildTaskDir)tasks.props"/>
   <Import Project="$(ExtNodeDir)node.props"/>
   <Import Project="$(ExtMetaDir)meta.props"/>
   <Import Project="$(ExtPartDir)part.props"/>

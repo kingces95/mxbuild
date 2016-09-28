@@ -21,6 +21,7 @@
     <None Include="$(MSBuildThisFileDirectory)mxbuild.sln" />
     <None Include="$(MSBuildThisFileDirectory)README.md" />
     <None Include="$(MSBuildThisFileDirectory)src\.props" />
+    <None Include="$(MSBuildThisFileDirectory)src\msbuild.debug\Mxbuild.Debug.csproj" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.nuspec" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\Mxbuild.Tasks.csproj" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\tasks.props">
@@ -44,6 +45,7 @@
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\meta\meta.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\meta\meta.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\meta\meta.targets" />
+    <None Include="$(MSBuildThisFileDirectory)src\mxbuild\Mxbuild.csproj" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\node\node.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\node\node.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\node\node.targets" />
