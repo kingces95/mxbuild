@@ -1,9 +1,7 @@
 @echo off
 
 :: visual studio environment
-pushd %~dp0
-call vcvarsallShim.bat
-popd
+call %~dp0vcvarsallShim.bat
 
 :: check for git
 call where git.exe  > nul 2>&1
@@ -14,9 +12,6 @@ if "%iosServerAddress%"=="" (echo Please set 'iosServerAddress' to enable buildi
 if "%iosServerPassword%"=="" (echo Please set 'iosServerPassword' to enable building iOS apps.)
 if "%iosServerUser%"=="" (echo Please set 'iosServerUser' to enable building iOS apps.)
 
-:: prompt
-prompt $p $g
-
 :: variables
 set platform=
 
@@ -26,7 +21,7 @@ set msbuildVar=%msbuildVar%BuildDir;BuildBinDir;BuildTempDir;
 set msbuildVar=%msbuildVar%DlsDir;MxbuildDir;DropDir;ToolsDir;
 set msbuildVar=%msbuildVar%PkgDir;
 set msbuildVar=%msbuildVar%ShimProj;PublishProj;IdProj;
-msbuild %~dp0/shell.proj /nologo /v:m /p:property=^"%msbuildVar%^" > init.bat
+msbuild %~dp0shell.proj /nologo /v:m /p:property=^"%msbuildVar%^" > init.bat
 call init.bat
 erase init.bat
 
@@ -44,6 +39,12 @@ set path=%path%;%packagesDir%NUnit.Runners.2.6.4\tools\
 set doskey=%~dp0doskey.txt
 doskey /macrofile=%doskey%
 color 1f
+
+:: prompt
+prompt $p $g
+
+:: title
+title %rootDir%
 
 :: use unicode
 REM chcp 65001 >NUL
