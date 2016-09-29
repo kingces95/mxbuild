@@ -5,7 +5,7 @@
     Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"
   />
   <PropertyGroup>
-    <MxbuildTaskDir Condition="'$(MxbuildTaskDir)'==''">$(PkgDir)Mxbuild.Tasks.0.1.15\lib\dotnet\</MxbuildTaskDir>
+    <MxbuildTaskDir Condition="'$(MxbuildTaskDir)'==''">$(PkgDir)Mxbuild.Tasks.0.1.20\lib\desktop\</MxbuildTaskDir>
   </PropertyGroup>
   <Import Project="$(MxbuildTaskDir)tasks.props"/>
   <Import Project="$(ExtNodeDir)node.props"/>
