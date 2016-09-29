@@ -1,4 +1,0 @@
-;= mxbuild
-mx=pushd %SrcDir%mxbuild
-mxd=pushd %SrcDir%mxbuild.debug
-mxt=pushd %SrcDir%mxbuild.tasks
