@@ -38,6 +38,7 @@ set path=%path%;%packagesDir%NUnit.Runners.2.6.4\tools\
 :: alises
 set doskey=%~dp0doskey.txt
 doskey /macrofile=%doskey%
+if exist %rootDir%doskey.txt doskey /macrofile=%rootDir%doskey.txt
 color 1f
 
 :: prompt
