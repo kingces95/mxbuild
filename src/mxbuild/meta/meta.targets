@@ -27,7 +27,7 @@
           if isense is not working then run the following for all dependencies and the 
           project itself and fix any errors:
           
-            msbuild /v:m /t:compile /p:isinvs=true /p:platform=[platform] [/p:verbosity=high]
+            msbuild /v:m /t:compile /p:IsInVs=true /p:platform=[platform] [/p:verbosity=high]
       -->
       <MetaBuildTarget>GetTargetPath</MetaBuildTarget>
     </PropertyGroup>

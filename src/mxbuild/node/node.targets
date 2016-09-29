@@ -64,13 +64,13 @@
       BuildInParallel="true"
       RemoveProperties="$(FrameProperties)"
     >
-      <Output ItemName="TargetResult" TaskParameter="TargetOutputs" />
+      <Output ItemName="ResolvedReferenceResult" TaskParameter="TargetOutputs" />
     </MSBuild>
 
     <!--refresh MetaReferences-->
     <ItemGroup>
       <MetaReference Remove="@(MetaReference)"/>
-      <MetaReference Include="@(TargetResult)"/>
+      <MetaReference Include="@(ResolvedReferenceResult)"/>
     </ItemGroup>
 
     <!--output MetaReferences-->
@@ -84,6 +84,11 @@
       Condition="@(MetaReference->Count()) > 0"
       Importance="$(Verbosity)"
     />
+
+    <!--result-->
+    <ItemGroup>
+      <TargetResult Include="@(ResolvedReferenceResult)"/>
+    </ItemGroup>
   </Target>
 
   <!--_AugmentReferences-->
@@ -149,6 +154,7 @@
       <_Property Include="CommonTargetsPath" />
       <_Property Include="BuildingInsideVisualStudio" />
       <_Property Include="FrameProperties" />
+      <_Property Include="TargetFramework" />
     </ItemGroup>
     <ItemGroup Condition="'$(IsPrimitivePlatform)'=='true'">
       <_Property Include="OutDirAbsolute" />

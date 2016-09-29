@@ -183,6 +183,7 @@
     Inputs="@(TargetResult)"
     Outputs="$(NuspecPath)"
   >
+    <Message Importance="$(PackVerbosity)" Text="MxbuildTaskDir: $(MxbuildTaskDir)" />
     <Message Importance="$(PackVerbosity)" Text="NuspecVersion: $(NuspecVersion)" />
     <Message Importance="$(PackVerbosity)" Text="OutputPath: $(NuspecPath)" />
     <Message Importance="$(PackVerbosity)" Text="NuspecReferences:" />

@@ -27,14 +27,14 @@
   <PropertyGroup Condition=" '$(Plat)' == '$(PackPlatformId)' " />
   <Import Project="nuspec.props" Condition=" '$(Plat)' == '$(PackPlatformId)' " />
   <ItemGroup Condition="'$(Plat)' == '$(PackPlatformId)' ">
-    <SelfReference Include="$(DesktopLibraryPlatformId)" />
-  </ItemGroup>
+    <SelfReference Include="$(BuildContentPlatformId)" />
+  </ItemGroup>  
   <!--
   
-    Desktop
+    Nuget Build Content
   -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Desktop' " />
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Desktop' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Build' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Build' " />
   <!--
   
     References; Source
@@ -97,6 +97,14 @@
 
     Targets
   -->
+  <Target Name="build">
+    <Message Importance="high" Text="no build!" />
+    <Message Importance="high" Text="TargetProject: $(TargetProject)" />
+    <Message Importance="high" Text="Plat: $(Plat)" />
+    <Message Importance="high" Text="ContentPlatformId: $(ContentPlatformId)" />
+    <Message Importance="high" Text="DefineConstants: $(DefineConstants)" />
+    <Message Importance="high" Text="DefineConstants: $(DefineConstants)" />
+  </Target>
   <Import Project="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), .targets))\.targets" />
   <PropertyGroup>
     <PreBuildEvent>

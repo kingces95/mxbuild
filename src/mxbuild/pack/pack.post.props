@@ -11,4 +11,14 @@
     <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
   </PropertyGroup>
 
+  <!--pack-->
+  <PropertyGroup Condition="'$(TargetProject)' == '$(PackProjectId)'">
+    <TargetsFile>$(ExtPackDir)pack.targets</TargetsFile>
+  </PropertyGroup>
+
+  <!--build-->
+  <PropertyGroup Condition="'$(TargetProject)' == '$(ContentProjectId)'">
+    <TargetsFile>$(ExtPackDir)pack.build.targets</TargetsFile>
+  </PropertyGroup>
+
 </Project>

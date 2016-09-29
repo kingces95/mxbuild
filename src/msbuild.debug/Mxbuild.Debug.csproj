@@ -22,6 +22,8 @@
   
     Desktop
   -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Desktop' " />
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Desktop' " />
   <!--
 
     Targets

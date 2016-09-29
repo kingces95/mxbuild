@@ -22,7 +22,6 @@
     <None Include="$(MSBuildThisFileDirectory)README.md" />
     <None Include="$(MSBuildThisFileDirectory)src\.props" />
     <None Include="$(MSBuildThisFileDirectory)src\msbuild.debug\Mxbuild.Debug.csproj" />
-    <None Include="$(MSBuildThisFileDirectory)src\mxbuild.nuspec" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\Mxbuild.Tasks.csproj" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\tasks.props">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -53,6 +52,10 @@
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\nuget\nuget.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\nuget\nuget.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\nuget\nuget.targets" />
+    <None Include="$(MSBuildThisFileDirectory)src\mxbuild\nuspec.props">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)src\mxbuild\pack\pack.build.targets" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\pack\pack.post.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\pack\pack.props" />
     <None Include="$(MSBuildThisFileDirectory)src\mxbuild\pack\pack.pre.props" />
@@ -98,6 +101,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)src\mxbuild.tasks\WriteLineToFile.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)doskey.txt" />
     <Content Include="$(MSBuildThisFileDirectory)src\mxbuild\shell\doskey.txt" />
   </ItemGroup>
 </Project>
