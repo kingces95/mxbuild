@@ -107,6 +107,7 @@ namespace Xamarin.Forms.Build {
                     new XElement(X.References,
                         from reference in References
                         let targetFramework = reference.GetMetadata(Meta.TargetFramework)
+                        where targetFramework != "build"
                         group reference by targetFramework into grp
                         select new XElement(X.Group,
                             string.IsNullOrEmpty(grp.Key) ? null : new XAttribute(X.TargetFramework, grp.Key),
@@ -121,13 +122,14 @@ namespace Xamarin.Forms.Build {
                 new XElement(X.Files,
                     from reference in References
                     let targetFramework = reference.GetMetadata(Meta.TargetFramework)
-                    let directory = Path.GetDirectoryName(reference.ItemSpec)
+                    let src = Path.GetDirectoryName(reference.ItemSpec)
+                    let target = targetFramework == "build" ? "build" : $"lib\\{targetFramework}"
                     select new XElement(X.File,
                         new XAttribute(X.Src, outputUir
-                            .MakeRelativeUri(new Uri(directory + "/**/*"))
+                            .MakeRelativeUri(new Uri(src + "/**/*"))
                             .NormalizeSlashes()
                         ),
-                        new XAttribute(X.Target, $"lib\\{targetFramework}")
+                        new XAttribute(X.Target, target)
                     )
                 )
             );
