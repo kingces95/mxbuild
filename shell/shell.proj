@@ -11,6 +11,8 @@
     <ItemGroup>
       <Property Include="$(Property)" />
     </ItemGroup>
+
+    <Message Text="$([MSBuild]::GetDirectoryNameOfFileAbove($(MSBuildThisFileDirectory), .pre.props))\.pre.props"/>
     
     <Message 
       Importance="high"

@@ -3,30 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mxbuild", "Mxbuild.csproj", "{C7E13E31-E333-4835-94B6-435D5B6F7817}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mxbuild", "Mxbuild\Mxbuild.shproj", "{82B2BE6D-B232-47E8-86D7-87BFFCA6A3C4}"
 EndProject
 Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|[None] = Debug|[None]
-		Debug|Build = Debug|Build
-		Debug|Pack = Debug|Pack
-		Release|[None] = Release|[None]
-		Release|Build = Release|Build
-		Release|Pack = Release|Pack
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Debug|[None].ActiveCfg = Debug|[None]
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Debug|[None].Build.0 = Debug|[None]
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Debug|Build.ActiveCfg = Debug|Build
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Debug|Build.Build.0 = Debug|Build
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Debug|Pack.ActiveCfg = Debug|Pack
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Debug|Pack.Build.0 = Debug|Pack
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Release|[None].ActiveCfg = Release|[None]
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Release|[None].Build.0 = Release|[None]
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Release|Build.ActiveCfg = Release|Build
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Release|Build.Build.0 = Release|Build
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Release|Pack.ActiveCfg = Release|Pack
-		{C7E13E31-E333-4835-94B6-435D5B6F7817}.Release|Pack.Build.0 = Release|Pack
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Mxbuild\Mxbuild.projitems*{82b2be6d-b232-47e8-86d7-87bffca6a3c4}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

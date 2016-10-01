@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package>
+  <metadata>
+    <id>mxbuild</id>
+    <version>0.2.0</version>
+    <description>CarouselView for Xamarin.Forms</description>
+    <releaseNotes />
+    <authors>kingces95@gmail.com</authors>
+    <owners>kingces95@gmail.com</owners>
+    <copyright>Copyright 2016</copyright>
+    <tags>msbuild mxbuild</tags>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <iconUrl>http://findicons.com/files/icons/2711/free_icons_for_windows8_metro/64/crown.png</iconUrl>
+    <projectUrl>https://github.com/kingces95/mxbuild</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies />
+    <references />
+  </metadata>
+  <files>
+    <file src="**\*" target="build" />
+  </files>
+</package>
