@@ -3,7 +3,6 @@
 
   <PropertyGroup Condition="'$(MetaPlatform)'!=''">
     <FrameId>$(FrameId)|$(MetaPlatform)</FrameId>
-    <OutSubDir>$(OutSubDir)$(MetaPlatform)\</OutSubDir>
   </PropertyGroup>
 
 </Project>

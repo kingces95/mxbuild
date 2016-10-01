@@ -39,6 +39,7 @@
   <Target
     Name="_ResolveMetaReferences"
     Outputs="%(Configuration.Identity)"
+    Condition="@(MetaReference->Count()) > 0"
   >
     <PropertyGroup>
       <MetaBuildTarget Condition="'$(MetaBuildTarget)'==''">$(BuildTarget)</MetaBuildTarget>
@@ -47,12 +48,10 @@
     <!--input MetaReferences-->
     <Message
       Text="$(ProjName) [$(FrameId)] references:"
-      Condition="@(MetaReference->Count()) > 0"
       Importance="$(Verbosity)"
     />
     <Message
       Text="  %(MetaReference.ReferenceSource): %(Identity) /t:$(MetaBuildTarget) /+p:%(AdditionalProperties)"
-      Condition="@(MetaReference->Count()) > 0"
       Importance="$(Verbosity)"
     />
 
@@ -64,31 +63,24 @@
       BuildInParallel="true"
       RemoveProperties="$(FrameProperties)"
     >
-      <Output ItemName="ResolvedReferenceResult" TaskParameter="TargetOutputs" />
+      <Output ItemName="TargetResult" TaskParameter="TargetOutputs" />
     </MSBuild>
 
     <!--refresh MetaReferences-->
     <ItemGroup>
       <MetaReference Remove="@(MetaReference)"/>
-      <MetaReference Include="@(ResolvedReferenceResult)"/>
+      <MetaReference Include="@(TargetResult)"/>
     </ItemGroup>
 
     <!--output MetaReferences-->
     <Message
       Text="$(ProjName) [$(FrameId)] resolutions:"
-      Condition="@(MetaReference->Count()) > 0"
       Importance="$(Verbosity)"
     />
     <Message
       Text="  %(ReferenceSource): %(MetaReference.Identity)"
-      Condition="@(MetaReference->Count()) > 0"
       Importance="$(Verbosity)"
     />
-
-    <!--result-->
-    <ItemGroup>
-      <TargetResult Include="@(ResolvedReferenceResult)"/>
-    </ItemGroup>
   </Target>
 
   <!--_AugmentReferences-->

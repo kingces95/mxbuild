@@ -25,6 +25,14 @@
     <NuspecTags>msbuild mxbuild</NuspecTags>
     <NuspecProjectUrl>https://github.com/kingces95/mxbuild</NuspecProjectUrl>
     <NuspecDescription>General purpose msbuild command line build environment.</NuspecDescription>
+    <NuspecAuthors>kingces95</NuspecAuthors>
+    <NuspecOwners>kingces95</NuspecOwners>
+    <NuspecCopyright>Copyright 2016</NuspecCopyright>
+    <NuspecTags>msbuild mxbuild</NuspecTags>
+    <NuspecLicenseUrl>https://opensource.org/licenses/MIT</NuspecLicenseUrl>
+    <NuspecIconUrl>http://findicons.com/files/icons/2711/free_icons_for_windows8_metro/64/crown.png</NuspecIconUrl>
+    <NuspecProjectUrl>https://github.com/kingces95/mxbuild</NuspecProjectUrl>
+    <NuspecRequireLicenseAcceptance>false</NuspecRequireLicenseAcceptance>
   </PropertyGroup>
 
   <!--

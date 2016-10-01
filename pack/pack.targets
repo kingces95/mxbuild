@@ -189,6 +189,11 @@
     <Message Importance="$(PackVerbosity)" Text="NuspecReferences:" />
     <Message Importance="$(PackVerbosity)" Text="  %(TargetResult.Identity)" />
 
+    <DumpTaskItems
+      Header="---"
+      Items="@(TargetResult)"
+    />
+
     <CreateNuspec
       Id="$(NuspecId)"
       Owners="$(NuspecOwners)"

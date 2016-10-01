@@ -20,7 +20,7 @@
     </Exec>
 
     <Exec
-      Command="git rev-list --count $(BuildVersonFileLastRevision)^^..HEAD"
+      Command="git rev-list --count $(BuildVersonFileLastRevision)^..HEAD"
       WorkingDirectory="$(RootDir)"
       ConsoleToMSBuild="true"
       StandardOutputImportance="normal"

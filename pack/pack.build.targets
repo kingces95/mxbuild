@@ -14,19 +14,21 @@
 
   <Target Name="_CopyBuildContent">
     <ItemGroup>
-      <BuildContent Include="$(ProjDir)**\*"/>
+      <BuildContent Include="$(ProjDir)$(BuildContentSubDir)**\*"/>
       <BuildContent Remove="$(ProjFile)"/>
       <BuildContent Remove="$(ProjDir)nuspec.props"/>
     </ItemGroup>
 
-    <Message Importance="high" Text="$(ProjName)\**\* -> $(OutDirAbsolute)" />
+    <Message Importance="high" Text="$(ProjName)\$(BuildContentSubDir)**\* -> $(OutDirAbsolute)" />
     <Copy
       SourceFiles="@(BuildContent)"
       DestinationFolder="$(OutDirAbsolute)%(RecursiveDir)"
       SkipUnchangedFiles="true"
     />
     <ItemGroup>
-      <TargetResult Include="$(OutDirAbsolute)**\*" />
+      <TargetResult Include="$(OutDirAbsolute)**\*" >
+        <OutDirAbsolute>$(OutDirAbsolute)</OutDirAbsolute>
+      </TargetResult>
     </ItemGroup>
   </Target>
 
