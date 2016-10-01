@@ -9,5 +9,64 @@
     <Import_RootNamespace>mxbuild</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory).gitignore" />
+    <None Include="$(MSBuildThisFileDirectory)clean\clean.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)clean\clean.targets" />
+    <None Include="$(MSBuildThisFileDirectory)common.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)common.props" />
+    <None Include="$(MSBuildThisFileDirectory)common.targets" />
+    <None Include="$(MSBuildThisFileDirectory)debug.targets" />
+    <None Include="$(MSBuildThisFileDirectory)empty.targets" />
+    <None Include="$(MSBuildThisFileDirectory)gen\gen.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)gen\gen.targets" />
+    <None Include="$(MSBuildThisFileDirectory)id\id.git.targets" />
+    <None Include="$(MSBuildThisFileDirectory)id\id.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)id\id.proj" />
+    <None Include="$(MSBuildThisFileDirectory)id\id.props" />
+    <None Include="$(MSBuildThisFileDirectory)id\id.targets" />
+    <None Include="$(MSBuildThisFileDirectory)meta\meta.post.props" />
+    <None Include="$(MSBuildThisFileDirectory)meta\meta.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)meta\meta.props" />
+    <None Include="$(MSBuildThisFileDirectory)meta\meta.targets" />
+    <None Include="$(MSBuildThisFileDirectory)node\node.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)node\node.props" />
+    <None Include="$(MSBuildThisFileDirectory)node\node.targets" />
+    <None Include="$(MSBuildThisFileDirectory)nuget\nuget.post.props" />
+    <None Include="$(MSBuildThisFileDirectory)nuget\nuget.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)nuget\nuget.props" />
+    <None Include="$(MSBuildThisFileDirectory)nuget\nuget.targets" />
+    <None Include="$(MSBuildThisFileDirectory)msbuild.nuspec" />
+    <None Include="$(MSBuildThisFileDirectory)nuspec.props" />
+    <None Include="$(MSBuildThisFileDirectory)pack\pack.build.targets" />
+    <None Include="$(MSBuildThisFileDirectory)pack\pack.post.props" />
+    <None Include="$(MSBuildThisFileDirectory)pack\pack.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)pack\pack.props" />
+    <None Include="$(MSBuildThisFileDirectory)pack\pack.targets" />
+    <None Include="$(MSBuildThisFileDirectory)part\part.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)part\part.props" />
+    <None Include="$(MSBuildThisFileDirectory)part\part.targets" />
+    <None Include="$(MSBuildThisFileDirectory)proxy.targets" />
+    <None Include="$(MSBuildThisFileDirectory)publish\publish.git.targets" />
+    <None Include="$(MSBuildThisFileDirectory)publish\publish.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)publish\publish.proj" />
+    <None Include="$(MSBuildThisFileDirectory)publish\publish.targets" />
+    <None Include="$(MSBuildThisFileDirectory)renames.props" />
+    <None Include="$(MSBuildThisFileDirectory)root.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)root.props" />
+    <None Include="$(MSBuildThisFileDirectory)root.targets" />
+    <None Include="$(MSBuildThisFileDirectory)shell\env.bat" />
+    <None Include="$(MSBuildThisFileDirectory)shell\shell.proj" />
+    <None Include="$(MSBuildThisFileDirectory)shell\vcvarsallShim.bat" />
+    <None Include="$(MSBuildThisFileDirectory)shim\shim.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)shim\shim.proj" />
+    <None Include="$(MSBuildThisFileDirectory)shim\shim.targets" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.post.props" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.props" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)pack\nuspec.t.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)shell\doskey.txt" />
   </ItemGroup>
 </Project>

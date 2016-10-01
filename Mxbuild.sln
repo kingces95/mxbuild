@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Mxbuild", "Mxbuild\Mxbuild.shproj", "{82B2BE6D-B232-47E8-86D7-87BFFCA6A3C4}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "mxbuild", "mxbuild.shproj", "{2FDD0418-FA09-4556-B6ED-10E07C1F6DB9}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Mxbuild\Mxbuild.projitems*{82b2be6d-b232-47e8-86d7-87bffca6a3c4}*SharedItemsImports = 13
+		mxbuild.projitems*{2fdd0418-fa09-4556-b6ed-10e07c1f6db9}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
