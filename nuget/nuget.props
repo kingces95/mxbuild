@@ -10,4 +10,13 @@
     </NugetReference>
   </ItemDefinitionGroup>
 
+  <!--nuget-->
+  <PropertyGroup>
+    <NugetPackagesDir>$([MSBuild]::MakeRelative($(ProjDir), $(PkgDir)))</NugetPackagesDir>
+    <NugetPackagesMetaDir>$(PkgDir)meta\</NugetPackagesMetaDir>
+    <NugetExeVersion>v3.4.4</NugetExeVersion>
+    <NugetExe>$(ToolsDir)Nuget.exe</NugetExe>
+    <NugetFeed>https://api.nuget.org/v3/index.json</NugetFeed>
+  </PropertyGroup>
+
 </Project>

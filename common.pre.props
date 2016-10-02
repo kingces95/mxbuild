@@ -59,7 +59,7 @@
     <RootDir Condition="'$(RootDir)'==''">$(MSBuildThisFileDirectory)</RootDir>
     <SrcDir>$(RootDir)src\</SrcDir>
     <DlsDir>$(RootDir)dls\</DlsDir>
-    <RefDir>$(SrcDir)ref\</RefDir>
+    <RefDir>$(RootDir)ref\</RefDir>
     <ToolsDir>$(DlsDir)tools\</ToolsDir>
     <PkgDir>$(DlsDir)packages\</PkgDir>
   </PropertyGroup>

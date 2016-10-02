@@ -3,15 +3,6 @@
   ToolsVersion="12.0" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
-
-  <!--nuget-->
-  <PropertyGroup>
-    <NugetExeVersion>v3.4.4</NugetExeVersion>
-    <NugetPackagesDir>$([MSBuild]::MakeRelative($(ProjDir), $(PkgDir)))</NugetPackagesDir>
-    <NugetPackagesMetaDir>$(PkgDir)meta\</NugetPackagesMetaDir>
-    <NugetExe>$(ToolsDir)Nuget.exe</NugetExe>
-  </PropertyGroup>
-
   <!--build-->
   <PropertyGroup Condition="!$(Configuration.Contains(';'))">
     
