@@ -53,12 +53,11 @@
       <!--ProjectReference -> MetaReference-->
       <MetaReference
         Condition="'@(ProjectReference)'!=''"
-        Include="@(ProjectReference->'$(ProjDir)%(Identity)')"
+        Include="@(ProjectReference)"
       >
         <ReferenceSource>ProjectReference</ReferenceSource>
         <Platform>$(LibraryPlatform)</Platform>
         <AdditionalProperties>$(ClearRecursiveFrame)Platform=$(LibraryPlatform)</AdditionalProperties>
-        <Name>%(Name)</Name>
         <IncludeInReferences>true</IncludeInReferences>
       </MetaReference>
       <ProjectReference Remove="@(ProjectReference)" />

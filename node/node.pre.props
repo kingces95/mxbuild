@@ -10,5 +10,14 @@
   <PropertyGroup>
     <ClearRecursiveFrame>$(ClearRecursiveFrame)</ClearRecursiveFrame>
   </PropertyGroup>
-  
+
+  <!--DependsOn-->
+  <PropertyGroup>
+    <DryRunDependsOn />
+    <ResolveMetaReferencesDependsOn>
+      _DumpFrame;
+      _ResolveMetaReferences;
+    </ResolveMetaReferencesDependsOn>
+  </PropertyGroup>
+
 </Project>

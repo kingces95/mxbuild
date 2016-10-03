@@ -3,9 +3,6 @@
   <Import Project="nuget.post.props" />
 
   <!--NugetRestore-->
-  <PropertyGroup>
-    <NugetRestoreDependsOn>_NugetRestore</NugetRestoreDependsOn>
-  </PropertyGroup>
   <Target
     Name="NugetRestore"
     DependsOnTargets="$(NugetRestoreDependsOn)"

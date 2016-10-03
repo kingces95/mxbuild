@@ -11,7 +11,8 @@
   <!--package-->
   <PropertyGroup>
     <PackDir>$(OutDirAbsolute)</PackDir>
-    <NuspecPath>$(PackDir)$(MSBuildProjectName)$(NuspecPackageExt)</NuspecPath>
+    <NuspecName>$(MSBuildProjectName)$(NuspecPackageExt)</NuspecName>
+    <NuspecPath>$(PackDir)$(NuspecName)</NuspecPath>
     <PackVerbosity>$(Verbosity)</PackVerbosity>
   </PropertyGroup>
 

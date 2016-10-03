@@ -1,83 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project
+  xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+  ToolsVersion="12.0" 
+  InitialTargets="InitialGenTarget"
+>
 
-  <PropertyGroup>
-    <BuildDependsOn>
-      RefreshTemplateExpansions;
-      $(BuildDependsOn)
-    </BuildDependsOn>
-  </PropertyGroup>
-  
+  <!--copyIfDifferent-->
+  <!--rename package.nuspec -> [project].nuspec-->
+  <!--depend on metaproject resolution-->
+
+  <ItemDefinitionGroup>
+    <Template>
+      <CompileOutput />
+    </Template>
+  </ItemDefinitionGroup>
+
+  <!--InitialGenTarget-->
+  <Target
+    Name="InitialGenTarget"
+  >
+    <!--copy None items with IsMxbuildTemplet to Template items-->
+    <ItemGroup>
+      <Template Include="@(None->WithMetadataValue('IsMxbuildTemplate', 'True'))"/>
+      <Template Condition="'%(Template.Link)'!=''">
+        <ProjectPath>%(Template.Link)</ProjectPath>
+      </Template>
+      <Template Condition="'%(Template.ProjectPath)'==''">
+        <ProjectPath>%(Template.Identity)</ProjectPath>
+      </Template>
+      <Template Condition="'%(Template.CompileOutput)'!=''">
+        <CompileProjectPath>$([System.IO.Path]::GetDirectoryName('%(Template.ProjectPath)'))\%(CompileOutput)</CompileProjectPath>
+      </Template>
+    </ItemGroup>
+
+    <!--trim None items of templates (so they don't get copied to the output before transforming)-->
+    <ItemGroup>
+      <None Remove="@(Template)" />
+    </ItemGroup>
+    
+    <!--augment Compile items with ProjectPath-->
+    <ItemGroup>
+      <Compile Condition="'%(Compile.Link)'!=''">
+        <ProjectPath>%(Compile.Link)</ProjectPath>
+      </Compile>
+      <Compile Condition="'%(Compile.ProjectPath)'==''">
+        <ProjectPath>%(Compile.Identity)</ProjectPath>
+      </Compile>
+    </ItemGroup>
+  </Target>
+
   <!--RefreshTemplateExpansions-->
   <Target
     Name="RefreshTemplateExpansions"
     Outputs="%(Template.Identity)"
-    Condition="'@(Template)'!=''"
+    Condition="@(Template->Count()) > 0"
   >
-    <!--get path to tempalte-->
     <PropertyGroup>
-      <TemplateIdentity>%(Template.Identity)</TemplateIdentity>
-      <TemplatePath>$([System.IO.Path]::GetFullPath('%(Template.Identity)'))</TemplatePath>
-      <TemplateText>$([System.IO.File]::ReadAllText($(TemplatePath)))</TemplateText>
-    </PropertyGroup>
+      <Template>@(Template)</Template>
+      
+      <!--get path of template project artifact (i.e. account for links)-->
+      <TemplateProjectPath>%(Template.ProjectPath)</TemplateProjectPath>
 
-    <!--get path to expansion-->
+      <!--get output path of expansion-->
+      <TemplateProjectPathAbsolute>$([System.IO.Path]::GetFullPath('$(TemplateProjectPath)'))</TemplateProjectPathAbsolute>
+      <TemplateProjectRelPath>$([MSBuild]::MakeRelative($(ProjDir), $(TemplateProjectPathAbsolute)))</TemplateProjectRelPath>
+      <TemplateProjectRelDir>$([System.IO.Path]::GetDirectoryName($(TemplateProjectRelPath)))</TemplateProjectRelDir>
+      <TemplateTargetName>%(Template.CopyTargetName)</TemplateTargetName>
+      <TemplateTargetName Condition="'$(TemplateTargetName)'==''">%(Template.Filename)%(Template.Extension)</TemplateTargetName>
+      <TemplateTargetRelPath>$([System.IO.Path]::Combine($(TemplateProjectRelDir),$(TemplateTargetName)))</TemplateTargetRelPath>
+      <TemplateTempPath>$(IntermediateOutputPath)$(TemplateTargetRelPath)</TemplateTempPath>
+      <TemplateOutputPath>$(OutDir)$(TemplateTargetRelPath)</TemplateOutputPath>
+    </PropertyGroup>
+    
+    <!--log paths-->
+    <Message Text="Template: $(Template)" Importance="$(GenVerbosityLow)" />
+    <Message Text="TemplateProjectPath: $(TemplateProjectPath)" Importance="$(GenVerbosityLow)" />
+    <Message Text="TemplateTempPath: $(TemplateTempPath)" Importance="$(GenVerbosityLow)" />
+    <Message Text="TemplateOutputPath: $(TemplateOutputPath)" Importance="$(GenVerbosityLow)" />
+
+    <!--find properties-->
     <PropertyGroup>
-      <DefaultExpansionPath>$(TemplatePath.Replace('$(TemplateExtension)','.cs'))</DefaultExpansionPath>
-      <ExpansionIdentity>@(Compile->WithMetadataValue('FullPath', '$(DefaultExpansionPath)')->'%(Identity)')</ExpansionIdentity>
-      <ExpansionText>$([System.IO.File]::ReadAllText($(ExpansionIdentity)))</ExpansionText>
-      <ExpansionFileName>$([System.IO.Path]::GetFileName($(DefaultExpansionPath)))</ExpansionFileName>
-      <FreshExpansionPath>$(IntermediateOutputPathAbsolute)$(ExpansionFileName)</FreshExpansionPath>
+      <TemplateText>$([System.IO.File]::ReadAllText($(Template)))</TemplateText>
     </PropertyGroup>
-
-    <!--find variables of form: $(Name)-->
     <RegexMatches
       Input="$(TemplateText)"
       Pattern="(?&lt;=[$][(]).*?(?=[)])"
     >
-      <Output ItemName="Match" TaskParameter="Matches" />
+      <Output ItemName="TemplatePropertyNames" TaskParameter="Matches" />
     </RegexMatches>
 
-    <!--load replacement values-->
+    <!--load properties-->
     <ItemGroup>
-      <Pattern Include="@(Match->'[$(Ds)][(]%(Identity)[)]')">
+      <Pattern Include="@(TemplatePropertyNames->'[$(Ds)][(]%(Identity)[)]')">
         <Name>%(Identity)</Name>
         <Replacement>$(%(Identity))</Replacement>
       </Pattern>
     </ItemGroup>
+    
+    <!--log properties-->
+    <Message Text="Properties (@(Pattern->Count())):" Importance="$(GenVerbosityLow)" />
+    <Message Text="  %(Pattern.Name) -> %(Replacement)" Condition="'%(Replacement)'!=''" Importance="$(GenVerbosityLow)" />
+    <Message Text="  %(Pattern.Name) -> [null]" Condition="'%(Replacement)'==''" Importance="$(GenVerbosityLow)" />
 
-    <!--replace variables with values-->
+    <!--process properties-->
     <RegexReplace
       Input="$(TemplateText)"
       Pattern="@(Pattern)"
     >
-      <Output PropertyName="FreshExpansionText" TaskParameter="Result" />
+      <Output PropertyName="ExpansionText" TaskParameter="Result" />
     </RegexReplace>
 
-    <!--write fresh expansion-->
-    <MakeDir Directories="$(IntermediateOutputPathAbsolute)" />
+    <!--find items-->
+    <RegexMatches
+      Input="$(ExpansionText)"
+      Pattern="(?&lt;=[%][(])\w*?(?=[.]\w*[)])"
+    >
+      <Output ItemName="TemplateItemsNames" TaskParameter="Matches" />
+    </RegexMatches>
+
+    <!--load items-->
+    <ItemGroup>
+      <TemplateItems 
+        Include="@(%(TemplateItemsNames.Identity))"
+        Condition="@(TemplateItemsNames->Count()) > 0"
+      >
+        <__Name>%(Identity)</__Name>
+      </TemplateItems>
+    </ItemGroup>
+    
+    <!--log items-->
+    <Message Text="Item Names:" Importance="$(GenVerbosityLow)" />
+    <Message Text="  %(TemplateItemsNames.Identity)" Importance="$(GenVerbosityLow)" Condition="@(TemplateItemsNames->Count()) > 0" />
+    <Message Text="Items (@(TemplateItems->Count())):" Importance="$(GenVerbosityLow)" />
+    <Message Text="  %(TemplateItems.__Name)" Importance="$(GenVerbosityLow)" Condition="@(TemplateItems->Count()) > 0" />
+    
+    <!--process items-->
+    <ExpandXmlTemplate
+      Input="$(ExpansionText)"
+      Items="@(TemplateItems)"
+      Condition="@(TemplateItemsNames->Count()) > 0"
+    >
+      <Output PropertyName="ExpansionText" TaskParameter="Result" />
+    </ExpandXmlTemplate>
+
+    <!--write temp file-->
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(TemplateTempPath)'))" />
     <WriteTextToFile
-      File="$(FreshExpansionPath)"
-      Text="$(FreshExpansionText)"
+      File="$(TemplateTempPath)"
+      Text="$(ExpansionText)"
       Overwrite="true"
     />
-    
-    <!--log substitution-->
-    <Message Text="  TemplatePath: $(TemplatePath)" Importance="$(GenVerbosity)" />
-    <Message Text="  DefaultExpansionPath: $(DefaultExpansionPath)" Importance="$(GenVerbosity)" />
-    <Message Text="  FreshExpansionPath -> $(FreshExpansionPath)" Importance="$(GenVerbosity)" />
-    <Message Text="  Variables:" Importance="$(GenVerbosity)" />
-    <Message Text="    %(Pattern.Name) -> %(Replacement)" Condition="'%(Replacement)'!=''" Importance="$(GenVerbosity)" />
-    <Message Text="    %(Pattern.Name) -> [null]" Condition="'%(Replacement)'==''" Importance="$(GenVerbosity)" />
-
-    <!--substitute expanded result-->
     <Message
-      Text="  Subsituting: $(ExpansionIdentity) -> $(FreshExpansionPath)" 
+      Text="$(TemplateProjectPath) -> $(TemplateTempPath)"
       Importance="$(GenVerbosity)" 
     />
-    <ItemGroup>
-      <Compile Remove="$(ExpansionIdentity)"/>
-      <Compile Include="$(FreshExpansionPath)"/>
+
+    <!--copy to output-->
+    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(TemplateOutputPath)'))" />
+    <Diff 
+      SourceFiles="$(TemplateTempPath)"
+      TargetFiles="$(TemplateOutputPath)"
+      IgnoreLastWriteTime="true"
+      Condition="'%(Template.CopyToOutputDirectory)'=='PreserveNewest'"
+    >
+      <Output PropertyName="IsDifferent" TaskParameter="IsDifferent" />
+    </Diff>
+    <Copy
+      Condition="'%(Template.CopyToOutputDirectory)'=='Always' OR '$(IsDifferent)'=='true'"
+      SourceFiles="$(TemplateTempPath)"
+      DestinationFiles="$(TemplateOutputPath)"
+    />
+
+    <!--substitute expanded result-->
+    <PropertyGroup>
+      <TemplateCompileProjectPath>%(Template.CompileProjectPath)</TemplateCompileProjectPath>
+      <CompileTarget>@(Compile->WithMetadataValue('ProjectPath', '$(TemplateCompileProjectPath)')->'%(Identity)')</CompileTarget>
+    </PropertyGroup>
+    <Message
+      Text="Compile: $(TemplateCompileProjectPath) -> $(TemplateTempPath)"
+      Condition="'$(TemplateCompileProjectPath)'!=''"
+      Importance="$(GenVerbosity)" 
+    />
+    <ItemGroup Condition="'$(TemplateCompileProjectPath)'!=''">
+      <Compile Include="@(Compile->WithMetadataValue('Identity', '$(CompileTarget)')->'$(TemplateTempPath)')"/>
+      <Compile Remove="@(Compile->WithMetadataValue('Identity', '$(CompileTarget)')->'%(Identity)')"/>
     </ItemGroup>
   </Target>
 

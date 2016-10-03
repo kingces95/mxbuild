@@ -3,6 +3,14 @@
   ToolsVersion="12.0" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
+  <PropertyGroup
+    Condition="'$(IsPrimitivePlatform)'=='true'"
+  >
+    <ResolveMetaReferencesDependsOn>
+      $(ResolveMetaReferencesDependsOn)
+      RefreshTemplateExpansions;
+    </ResolveMetaReferencesDependsOn>
+  </PropertyGroup>
 
   <!--Download-->
   <Target

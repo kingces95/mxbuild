@@ -9,9 +9,6 @@
     
     DryRun
   -->
-  <PropertyGroup>
-    <DryRunDependsOn />
-  </PropertyGroup>
   <Target
     Name="DryRun"
     DependsOnTargets="$(DryRunDependsOn)"
@@ -23,12 +20,6 @@
   </Target>
 
   <!--ResolveMetaReferences-->
-  <PropertyGroup>
-    <ResolveMetaReferencesDependsOn>
-      _DumpFrame;
-      _ResolveMetaReferences;
-    </ResolveMetaReferencesDependsOn>
-  </PropertyGroup>
   <Target
     Name="ResolveMetaReferences"
     BeforeTargets="Proxy"

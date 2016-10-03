@@ -3,8 +3,9 @@
 
   <PropertyGroup>
     <ExtGenDir>$(MSBuildThisFileDirectory)</ExtGenDir>
+    <GenVerbosityLow>low</GenVerbosityLow>
+    <GenVerbosityLow Condition="'$(GenVerbosity)'!=''">$(GenVerbosity)</GenVerbosityLow>
     <GenVerbosity>normal</GenVerbosity>
-    <TemplateExtension>.tcs</TemplateExtension>
   </PropertyGroup>
 
   <ItemDefinitionGroup>

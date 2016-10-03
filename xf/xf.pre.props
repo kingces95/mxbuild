@@ -246,6 +246,8 @@
     <When Condition="'$(Plat)'=='$(PackPlatformId)'">
       <PropertyGroup>
         <Plat>$(PackPlatformId)</Plat>
+        <!--special case-->
+        <MetaPlatform>$(Plat)</MetaPlatform>
         <PrimitivePlatform>$(Plat)</PrimitivePlatform>
         <MetaPlatformType>$(PrimitiveMetaPlatformTypeId)</MetaPlatformType>
         <IsPrimitivePlatform>true</IsPrimitivePlatform>
