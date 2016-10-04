@@ -12,9 +12,8 @@
     <BuildLogDir>$(BuildBinConfigDir)</BuildLogDir>
 
     <!--outDir-->
-    <OutBaseDir Condition="'$(OutBaseDir)'==''">$(ProjDir)</OutBaseDir>
-    <OutRelDir>$(BuildBinConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(OutBaseDir)))\$(OutSubDir)</OutRelDir>
-    <OutDirAbsolute>$([System.IO.Path]::GetFullPath('$(OutRelDir)'))</OutDirAbsolute>
+    <OutBaseDir>$(BuildBinConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)))</OutBaseDir>
+    <OutDirAbsolute>$(OutBaseDir)$(OutSubDir)</OutDirAbsolute>
     <OutDir>$([MSBuild]::MakeRelative($(ProjDir), $(OutDirAbsolute)))</OutDir>
 
     <!--C# targets files say OutDir should be used over OutputPath but build fails if OutputPath is not set-->

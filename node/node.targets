@@ -57,6 +57,13 @@
       <Output ItemName="TargetResult" TaskParameter="TargetOutputs" />
     </MSBuild>
 
+    <!--augment TargetResult-->
+    <ItemGroup Condition="'$(BuildTarget)'!='DryRun'">
+      <TargetResult Condition="true">
+        <OutSubDir>$([MSBuild]::MakeRelative($(OutBaseDir), %(TargetResult.RootDir)%(Directory)))</OutSubDir>
+      </TargetResult>
+    </ItemGroup>
+    
     <!--refresh MetaReferences-->
     <ItemGroup>
       <MetaReference Remove="@(MetaReference)"/>
@@ -140,7 +147,10 @@
       <_Property Include="TargetFramework" />
     </ItemGroup>
     <ItemGroup Condition="'$(IsPrimitivePlatform)'=='true'">
+      <_Property Include="OutBaseDir" />
+      <_Property Include="OutSubDir" />
       <_Property Include="OutDirAbsolute" />
+      <_Property Include="OutDir" />
       <_Property Include="IntermediateOutputPathAbsolute" />
       <_Property Include="TargetsFile" />
     </ItemGroup>
