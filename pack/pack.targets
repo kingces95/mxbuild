@@ -153,11 +153,9 @@
   <!--_PackCreate-->
   <Target
     Name="_PackCreate"
-    DependsOnTargets="
-      _PackCreateNuspec;
-      _PackCreateIfNecessary
-    "
+    DependsOnTargets="_PackCreateIfNecessary"
   >
+    <Message Importance="$(PackVerbosity)" Text="$(MSBuildProjectName) -> $(NuspecPath)" />
     <Message Importance="high" Text="$(MSBuildProjectName) -> $(NugetPackagePath)" />
   </Target>
 
@@ -176,11 +174,4 @@
     </PropertyGroup>
     <Exec Command="$(_Command) >NUL" />
   </Target>
-
-  <Target 
-    Name="_PackCreateNuspec"
-  >
-    <Message Importance="high" Text="$(MSBuildProjectName) -> $(NuspecPath)" />
-  </Target>
-
 </Project>

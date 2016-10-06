@@ -1,1 +1,5 @@
-_ShimSubDir_
+_DesktopLibraryPlatformId_ => NetStandardLibraryPlatformId
+_IsDesktopLibraryProject_ => IsNetStandardLibraryProject
+_DesktopProjectId_ => NetStandardProjectId
+_DesktopLibraryPlatformId_ => NetStandardLibraryPlatformId
+_PortableLibraryPlatformId_ => DotNetLibraryPlatformId

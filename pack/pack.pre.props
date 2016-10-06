@@ -3,6 +3,7 @@
 
   <PropertyGroup>
     <ExtPackDir>$(MSBuildThisFileDirectory)</ExtPackDir>
+    <PackVerbosity>normal</PackVerbosity>
   </PropertyGroup>
 
   <PropertyGroup>

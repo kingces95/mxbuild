@@ -56,13 +56,6 @@
     >
       <Output ItemName="TargetResult" TaskParameter="TargetOutputs" />
     </MSBuild>
-
-    <!--augment TargetResult-->
-    <ItemGroup Condition="'$(BuildTarget)'!='DryRun'">
-      <TargetResult Condition="true">
-        <OutSubDir>$([MSBuild]::MakeRelative($(OutBaseDir), %(TargetResult.RootDir)%(Directory)))</OutSubDir>
-      </TargetResult>
-    </ItemGroup>
     
     <!--refresh MetaReferences-->
     <ItemGroup>
@@ -134,7 +127,7 @@
       <_Property Include="IsMobileAppProject" />
       <_Property Include="IsMobileLibraryProject" />
       <_Property Include="IsMobileTestProject" />
-      <_Property Include="IsDesktopLibraryProject" />
+      <_Property Include="IsNetStandardLibraryProject" />
       <_Property Include="PrimitivePlatform" />
       <_Property Include="MobilePlatform" />
       <_Property Include="MobileSubPlatform" />
