@@ -2,7 +2,13 @@
 <Project 
   ToolsVersion="12.0" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  
+
+  <!--mxbuild version-->
+  <PropertyGroup>
+    <MxbuildTaskPackageName>Mxbuild.Tasks</MxbuildTaskPackageName>
+    <MxbuildTaskVersion>0.2.0</MxbuildTaskVersion>
+  </PropertyGroup>
+
   <!--?-->
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
@@ -80,14 +86,12 @@
 
   <!--all mxbuild consumers must restore the task assembly-->
   <PropertyGroup>
-    <MxbuildTaskPackageName>Mxbuild.Tasks</MxbuildTaskPackageName>
-    <MxbuildTaskVersion>0.1.21</MxbuildTaskVersion>
-    <MxbuildTaskDir Condition="'$(MxbuildTaskDir)'==''">$(PkgDir)$(MxbuildTaskPackageName).$(MxbuildTaskVersion)\lib\dotnet\</MxbuildTaskDir>
+    <MxbuildTaskDir Condition="'$(MxbuildTaskDir)'==''">$(PkgDir)$(MxbuildTaskPackageName).$(MxbuildTaskVersion)\lib\netstandard\</MxbuildTaskDir>
   </PropertyGroup>
   <ItemGroup>
     <NugetPackage Include="$(MxbuildTaskPackageName)">
       <Version>$(MxbuildTaskVersion)</Version>
-      <TargetFramework></TargetFramework>
+      <TargetFramework>netstandard</TargetFramework>
     </NugetPackage>
   </ItemGroup>
 </Project>
