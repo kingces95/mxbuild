@@ -57,6 +57,8 @@
   >
     <PropertyGroup>
       <Template>@(Template)</Template>
+      <TemplateType>lineByLine</TemplateType>
+      <TemplateType Condition="'%(Template.Extension)'=='.xml'">xml</TemplateType>
       
       <!--get path of template project artifact (i.e. account for links)-->
       <TemplateProjectPath>%(Template.ProjectPath)</TemplateProjectPath>
@@ -138,7 +140,7 @@
     <ExpandTemplate
       Input="$(ExpansionText)"
       Items="@(TemplateItems)"
-      Type="xml"
+      Type="$(TemplateType)"
       Condition="@(TemplateItemsNames->Count()) > 0"
     >
       <Output PropertyName="ExpansionText" TaskParameter="Result" />
