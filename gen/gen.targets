@@ -5,13 +5,10 @@
   InitialTargets="InitialGenTarget"
 >
 
-  <!--copyIfDifferent-->
-  <!--rename package.nuspec -> [project].nuspec-->
-  <!--depend on metaproject resolution-->
-
   <ItemDefinitionGroup>
     <Template>
       <CompileOutput />
+      <Type />
     </Template>
   </ItemDefinitionGroup>
 
@@ -59,7 +56,8 @@
       <Template>@(Template)</Template>
       <TemplateType>lineByLine</TemplateType>
       <TemplateType Condition="'%(Template.Extension)'=='.xml'">xml</TemplateType>
-      
+      <TemplateType Condition="'%(Template.Type)'!=''">%(Type)</TemplateType>
+
       <!--get path of template project artifact (i.e. account for links)-->
       <TemplateProjectPath>%(Template.ProjectPath)</TemplateProjectPath>
 
