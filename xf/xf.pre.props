@@ -841,7 +841,7 @@
           $(IosAutomationLibraryPlatformId);
         </IosUnifiedMobilePlatformIds>
         <IosClassicMobilePlatformIds>
-          $(IosAutomationLibraryPlatformId);
+          <!--$(IosAutomationLibraryPlatformId);-->
         </IosClassicMobilePlatformIds>
         <IosMobilePlatformIds>
           $(IosAutomationLibraryPlatformId);
@@ -1012,7 +1012,7 @@
   <!--named platform groups-->
   <PropertyGroup>
     <MobilePlatformIds>
-      $(PortablePlatformId);
+      $(PortablePlatformIds);
       $(AndroidMobilePlatformIds);
       $(IosMobilePlatformIds);
       $(WindowsMobilePlatformIds)
