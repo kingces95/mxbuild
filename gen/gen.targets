@@ -135,13 +135,14 @@
     <Message Text="  %(TemplateItems.__Name)" Importance="$(GenVerbosityLow)" Condition="@(TemplateItems->Count()) > 0" />
     
     <!--process items-->
-    <ExpandXmlTemplate
+    <ExpandTemplate
       Input="$(ExpansionText)"
       Items="@(TemplateItems)"
+      Type="xml"
       Condition="@(TemplateItemsNames->Count()) > 0"
     >
       <Output PropertyName="ExpansionText" TaskParameter="Result" />
-    </ExpandXmlTemplate>
+    </ExpandTemplate>
 
     <!--write temp file-->
     <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(TemplateTempPath)'))" />

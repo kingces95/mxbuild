@@ -6,7 +6,7 @@
   <!--mxbuild version-->
   <PropertyGroup>
     <MxbuildTaskPackageName>Mxbuild.Tasks</MxbuildTaskPackageName>
-    <MxbuildTaskVersion>0.2.0</MxbuildTaskVersion>
+    <MxbuildTaskVersion>0.2.2</MxbuildTaskVersion>
   </PropertyGroup>
 
   <!--?-->
