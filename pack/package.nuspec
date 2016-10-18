@@ -14,17 +14,17 @@
     <projectUrl>$(NuspecProjectUrl)</projectUrl>
     <requireLicenseAcceptance>$(NuspecRequireLicenseAcceptance)</requireLicenseAcceptance>
     <dependencies>
-      <group>
-        <dependency id="%(NuspecDependency.Identity)" version="%(Version)" />
+      <group targetFramework="%(NuspecDependency.TargetFramework)">
+        <dependency id="%(Identity)" version="%(Version)" />
       </group>
     </dependencies>
     <references>
-      <group targetFramework="%(NuspecReference.Identity)">
-        <reference file="%(Name)" />
+      <group targetFramework="%(NuspecReference.TargetFramework)">
+        <reference file="%(FileName)%(Extension)" />
       </group>
     </references>
   </metadata>
   <files>
-    <file src="./**/*" target="." />
+    <file src="%(NuspecReference.OutSubDir)**\*" target="lib\%(TargetFramework)" />
   </files>
 </package>

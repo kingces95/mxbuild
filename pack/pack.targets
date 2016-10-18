@@ -164,6 +164,7 @@
     Name="_PackCreateIfNecessary"
     Inputs="$(NuspecPath);@(TargetResult)"
     Outputs="$(NugetPackagePath)"
+    DependsOnTargets="_AddNugetAssemblyAttributes;_GetNugetAssemblyAttributes"
   >
     <MakeDir Directories="$(PackDir)" />
 
@@ -173,5 +174,54 @@
       <_Command>$(_Command) -OutputDirectory $(PackDir)</_Command>
     </PropertyGroup>
     <Exec Command="$(_Command) >NUL" />
+  </Target>
+
+  <!--
+    NugetReference vs NugetDependency
+    Pack.targets to adopt MS.Common.targets
+      PackCreate -> CoreCompile
+      Get/Add NugetAssemblyAttributes after ResolveAssemblyReference
+    RefreshTemplateExpansions hook like Custom Tool
+  -->
+  
+  <!--_GetNugetAssemblyAttributes-->
+  <Target
+    Name="_GetNugetAssemblyAttributes"
+    BeforeTargets="RefreshTemplateExpansions"
+  >
+    <ItemGroup>
+      <NugetReferenceAttributeMap Include="NugetReferenceAttribute">
+        <Package>Identity</Package>
+        <Version/>
+        <TargetFramework/>
+        <Assembly/>
+      </NugetReferenceAttributeMap>
+    </ItemGroup>
+
+    <GetAssemblyAttribute
+      Assemblies="@(TargetResult)"
+      Attribute="@(NugetReferenceAttributeMap)"
+    >
+      <Output ItemName="NuspecDependency" TaskParameter="Result" />
+    </GetAssemblyAttribute>
+  </Target>
+
+  <!--_AddNugetAssemblyAttributes-->
+  <Target
+    Name="_AddNugetAssemblyAttributes"
+    BeforeTargets="RefreshTemplateExpansions"
+  >
+    <ItemGroup>
+      <NugetTargetFrameworkMonikerAttributeMap Include="NugetTargetFrameworkMonikerAttribute">
+        <TargetFramework/>
+      </NugetTargetFrameworkMonikerAttributeMap>
+    </ItemGroup>
+
+    <AddAssemblyAttribute
+      Assemblies="@(TargetResult)"
+      Attributes="@(NugetTargetFrameworkMonikerAttributeMap)"
+    >
+      <Output ItemName="NuspecReference" TaskParameter="Result" />
+    </AddAssemblyAttribute>
   </Target>
 </Project>

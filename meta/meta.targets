@@ -84,9 +84,9 @@
     <ItemGroup>
       <MetaReference Include="$(ProjFile)">
         <ReferenceSource>ProxyPlatform</ReferenceSource>
+        <OutSubDir>$(OutSubDir)</OutSubDir>
         <Platform>$(PrimitivePlatform)</Platform>
         <AdditionalProperties>$(KeepRecursiveFrame)Platform=$(PrimitivePlatform);_MetaPlatform=$(MetaPlatform)</AdditionalProperties>
-        <TargetFramework>$(TargetFramework)</TargetFramework>
       </MetaReference>
     </ItemGroup>
   </Target>

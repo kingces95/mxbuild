@@ -6,6 +6,8 @@
   <!--version-->
   <PropertyGroup>
     <NuspecVersion>$(BuildVersion)</NuspecVersion>
+    <NuspecPreReleaseVersion Condition="'$(NuspecVersion)'=='0.0.0'">private</NuspecPreReleaseVersion>
+    <NuspecVersion Condition="'$(NuspecPreReleaseVersion)'!=''">$(NuspecVersion)-$(NuspecPreReleaseVersion)</NuspecVersion>
   </PropertyGroup>
 
   <!--package-->

@@ -4,7 +4,9 @@
     <TaskAssemblyPath>$(MxbuildTaskDir)Mxbuild.Tasks.dll</TaskAssemblyPath>
     <TaskRootNamespace>Mxbuild.Tasks.</TaskRootNamespace>
   </PropertyGroup>
-  
+
+  <UsingTask TaskName="$(TaskRootNamespace)AddAssemblyAttribute" AssemblyFile="$(TaskAssemblyPath)" />
+  <UsingTask TaskName="$(TaskRootNamespace)GetAssemblyAttribute" AssemblyFile="$(TaskAssemblyPath)" />
   <UsingTask TaskName="$(TaskRootNamespace)DumpTaskItems" AssemblyFile="$(TaskAssemblyPath)" />
   <UsingTask TaskName="$(TaskRootNamespace)WriteTextToFile" AssemblyFile="$(TaskAssemblyPath)" />
   <UsingTask TaskName="$(TaskRootNamespace)Diff" AssemblyFile="$(TaskAssemblyPath)" />
