@@ -4,13 +4,6 @@
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
 
-  <!--package-->
-  <PropertyGroup>
-    
-    <!--$(NuspecId) is declared in nuspec.props which resides next to the .csproj file-->
-    <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
-  </PropertyGroup>
-
   <!--pack-->
   <PropertyGroup Condition="'$(TargetProject)' == '$(PackProjectId)'">
     <TargetsFile>$(ExtPackDir)pack.targets</TargetsFile>

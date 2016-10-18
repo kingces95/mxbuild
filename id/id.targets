@@ -43,7 +43,7 @@
   </Target>
 
   <Target Name="_GetBuildVersion">
-      <Error Condition="!Exists($(BuildVersionFile))" Text="Expected file '$(BuildVersionFile)' to exist." />
+    <Error Condition="!Exists($(BuildVersionFile))" Text="Expected file '$(BuildVersionFile)' to exist." />
 
     <ReadLinesFromFile File="$(BuildVersionFile)">
       <Output TaskParameter="Lines" PropertyName="BuildMajorMinorVersion" />

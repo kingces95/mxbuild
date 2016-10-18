@@ -204,6 +204,27 @@
     >
       <Output ItemName="NuspecDependency" TaskParameter="Result" />
     </GetAssemblyAttribute>
+    
+    <!--IsPreReleaseVersion-->
+    <ItemGroup>
+      <NuspecDependency Condition="true">
+        <IsPreReleaseVersion>$([System.Text.RegularExpressions.Regex]::IsMatch('%(NuspecDependency.Version)','.*-.*'))</IsPreReleaseVersion>
+      </NuspecDependency>
+    </ItemGroup>
+
+    <!--NuspecPreReleaseVersion-->
+    <PropertyGroup>
+      <NuspecPreReleaseVersion Condition="'$(NuspecVersion)'=='0.0.0'">pre</NuspecPreReleaseVersion>
+      <NuspecPreReleaseVersion Condition="@(NuspecDependency->AnyHaveMetadataValue('IsPreReleaseVersion','true'))">pre</NuspecPreReleaseVersion>
+      <NuspecVersion Condition="'$(NuspecPreReleaseVersion)'!=''">$(NuspecVersion)-$(NuspecPreReleaseVersion)</NuspecVersion>
+    </PropertyGroup>
+
+    <!--package-->
+    <PropertyGroup>
+
+      <!--$(NuspecId) is declared in nuspec.props which resides next to the .csproj file-->
+      <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
+    </PropertyGroup>
   </Target>
 
   <!--_AddNugetAssemblyAttributes-->
