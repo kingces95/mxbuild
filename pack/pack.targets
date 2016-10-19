@@ -177,7 +177,6 @@
   </Target>
 
   <!--
-    NugetReference vs NugetDependency
     Pack.targets to adopt MS.Common.targets
       PackCreate -> CoreCompile
       Get/Add NugetAssemblyAttributes after ResolveAssemblyReference
@@ -190,17 +189,15 @@
     BeforeTargets="RefreshTemplateExpansions"
   >
     <ItemGroup>
-      <NugetReferenceAttributeMap Include="NugetReferenceAttribute">
+      <NugetDependencyAttributeMap Include="NugetDependencyAttribute">
         <Package>Identity</Package>
         <Version/>
-        <TargetFramework/>
-        <Assembly/>
-      </NugetReferenceAttributeMap>
+      </NugetDependencyAttributeMap>
     </ItemGroup>
 
     <GetAssemblyAttribute
       Assemblies="@(TargetResult)"
-      Attribute="@(NugetReferenceAttributeMap)"
+      Attribute="@(NugetDependencyAttributeMap)"
     >
       <Output ItemName="NuspecDependency" TaskParameter="Result" />
     </GetAssemblyAttribute>

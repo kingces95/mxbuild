@@ -30,8 +30,6 @@
     <!--emit packages.config file-->
     <PropertyGroup>
       <NugetPackageAttributes>id='%(NugetPackage.Identity)' version='%(Version)'</NugetPackageAttributes>
-      <NugetPackageAttributes Condition="'%(NugetPackage.TargetFramework)'!=''"
-        >$(NugetPackageAttributes) targetFramework='%(TargetFramework)'</NugetPackageAttributes>
       <NugetPackageElement>&lt;package $(NugetPackageAttributes)/&gt;</NugetPackageElement>
       <NugetPackageXml>&lt;packages&gt;$(NugetPackageElement)&lt;/packages&gt;</NugetPackageXml>
     </PropertyGroup>

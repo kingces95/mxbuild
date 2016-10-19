@@ -55,6 +55,7 @@
     <Ds>%24</Ds><!--$-->
     <Cr>%0D</Cr>
     <Lf>%0A</Lf>
+    <Lt>&lt;</Lt>
     <Nl>$(Cr)$(Lf)</Nl>
     <Quot>&quot;</Quot>
     <Amp>&amp;</Amp>

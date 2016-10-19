@@ -1,7 +1,7 @@
 using System;
 
 [assembly: NugetTargetFrameworkMoniker("$(TargetFramework)")]
-[assembly: NugetReference("%(NugetReference.Package)", "%(Version)", "$(LibraryPlatform)", "%(Identity)")]
+[assembly: NugetDependency("%(NugetDependency.Identity)", "%(Version)")]
 
 [AttributeUsage(AttributeTargets.Assembly)]
 internal class NugetTargetFrameworkMonikerAttribute : Attribute {
@@ -14,17 +14,13 @@ internal class NugetTargetFrameworkMonikerAttribute : Attribute {
 }
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-internal class NugetReferenceAttribute : Attribute {
+internal class NugetDependencyAttribute : Attribute {
 
-    internal NugetReferenceAttribute(string package, string version, string targetFramework, string assembly) {
-        TargetFramework = targetFramework;
+    internal NugetDependencyAttribute(string package, string version) {
         Package = package;
         Version = version;
-        Assembly = assembly;
     }
 
-    public string Assembly { get; private set; }
     public string Package { get; private set; }
     public string Version { get; private set; }
-    public string TargetFramework { get; private set; }
 }

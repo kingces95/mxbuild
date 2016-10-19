@@ -480,7 +480,6 @@
         <MetaPlatform>$(NetStandardLibraryPlatformId)</MetaPlatform>
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
-        <TargetFramework>netstandard</TargetFramework>
         <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
@@ -489,7 +488,6 @@
         <MetaPlatform>$(DotNetLibraryPlatformId)</MetaPlatform>
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
-        <TargetFramework>portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10</TargetFramework>
         <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
@@ -501,7 +499,6 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
-        <TargetFramework>MonoAndroid10</TargetFramework>
         <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
@@ -511,7 +508,6 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
-        <TargetFramework>Xamarin.iOS10</TargetFramework>
         <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
@@ -521,7 +517,6 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
-        <TargetFramework>MonoTouch10</TargetFramework>
         <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
@@ -531,7 +526,6 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
-        <TargetFramework>uap10.0</TargetFramework>
         <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
@@ -541,7 +535,6 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
-        <TargetFramework>wpa81</TargetFramework>
         <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
@@ -551,7 +544,6 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
-        <TargetFramework>win81</TargetFramework>
         <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
@@ -695,21 +687,82 @@
     <When Condition="'$(LibraryPlatform)'=='$(NetStandardLibraryPlatformId)'">
       <PropertyGroup>
         <TargetProject>$(NetStandardProjectId)</TargetProject>
+        <NugetTargetFrameworkMoniker>netstandard</NugetTargetFrameworkMoniker>
+        <TargetFramework>$(NugetTargetFrameworkMoniker)</TargetFramework>
       </PropertyGroup>
     </When>
     <When Condition="'$(LibraryPlatform)'=='$(DotNetLibraryPlatformId)'">
       <PropertyGroup>
         <TargetProject>$(PortableProjectId)</TargetProject>
+        <NugetTargetFrameworkMoniker>portable</NugetTargetFrameworkMoniker>
+        <TargetFramework>$(NugetTargetFrameworkMoniker)-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10</TargetFramework>
       </PropertyGroup>
     </When>
     
-    <!--mobile-->
+    <!--automation-->
     <When Condition="'$(LibraryPlatform)'=='$(AndroidAutomationLibraryPlatformId)'">
       <PropertyGroup>
         <TargetProject>$(NetStandardProjectId)</TargetProject>
         <MobilePlatform>$(AndroidMobilePlatformId)</MobilePlatform>
       </PropertyGroup>
     </When>
+    
+    <!--mobile-->
+    <When Condition="'$(LibraryPlatform)'=='$(AndroidLibraryPlatformId)'">
+      <PropertyGroup>
+        <TargetProject>$(AndroidProjectId)</TargetProject>
+        <MobilePlatform>$(AndroidMobilePlatformId)</MobilePlatform>
+        <NugetTargetFrameworkMoniker>MonoAndroid</NugetTargetFrameworkMoniker>
+        <TargetFramework>$(NugetTargetFrameworkMoniker)43</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(LibraryPlatform)'=='$(IosUnifiedLibraryPlatformId)'">
+      <PropertyGroup>
+        <TargetProject>$(IosUnifiedProjectId)</TargetProject>
+        <MobilePlatform>$(IosMobilePlatformId)</MobilePlatform>
+        <MobileSubPlatform>$(IosUnifiedMobileSubPlatformId)</MobileSubPlatform>
+        <NugetTargetFrameworkMoniker>Xamarin.iOS</NugetTargetFrameworkMoniker>
+        <TargetFramework>$(NugetTargetFrameworkMoniker)10</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(LibraryPlatform)'=='$(IosClassicLibraryPlatformId)'">
+      <PropertyGroup>
+        <TargetProject>$(IosClassicProjectId)</TargetProject>
+        <MobilePlatform>$(IosMobilePlatformId)</MobilePlatform>
+        <MobileSubPlatform>$(IosClassicMobileSubPlatformId)</MobileSubPlatform>
+        <NugetTargetFrameworkMoniker>MonoTouch10</NugetTargetFrameworkMoniker>
+        <TargetFramework>$(NugetTargetFrameworkMoniker)10</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(LibraryPlatform)'=='$(WindowsUniversalLibraryPlatformId)'">
+      <PropertyGroup>
+        <TargetProject>$(WindowsUniversalProjectId)</TargetProject>
+        <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
+        <MobileSubPlatform>$(WindowsUniversalMobileSubPlatformId)</MobileSubPlatform>
+        <NugetTargetFrameworkMoniker>uap</NugetTargetFrameworkMoniker>
+        <TargetFramework>$(NugetTargetFrameworkMoniker)10.0</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(LibraryPlatform)'=='$(WindowsPhoneLibraryPlatformId)'">
+      <PropertyGroup>
+        <TargetProject>$(WindowsPhoneProjectId)</TargetProject>
+        <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
+        <MobileSubPlatform>$(WindowsPhoneMobileSubPlatformId)</MobileSubPlatform>
+        <NugetTargetFrameworkMoniker>wpa</NugetTargetFrameworkMoniker>
+        <TargetFramework>$(NugetTargetFrameworkMoniker)81</TargetFramework>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(LibraryPlatform)'=='$(WindowsTabletLibraryPlatformId)'">
+      <PropertyGroup>
+        <TargetProject>$(WindowsTabletProjectId)</TargetProject>
+        <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
+        <MobileSubPlatform>$(WindowsTabletMobileSubPlatformId)</MobileSubPlatform>
+        <NugetTargetFrameworkMoniker>win</NugetTargetFrameworkMoniker>
+        <TargetFramework>$(NugetTargetFrameworkMoniker)81</TargetFramework>
+      </PropertyGroup>
+    </When>
+
+    <!--automation-->
     <When Condition="'$(LibraryPlatform)'=='$(IosAutomationLibraryPlatformId)'">
       <PropertyGroup>
         <TargetProject>$(NetStandardProjectId)</TargetProject>
@@ -720,47 +773,6 @@
       <PropertyGroup>
         <TargetProject>$(NetStandardProjectId)</TargetProject>
         <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(LibraryPlatform)'=='$(AndroidLibraryPlatformId)'">
-      <PropertyGroup>
-        <TargetProject>$(AndroidProjectId)</TargetProject>
-        <MobilePlatform>$(AndroidMobilePlatformId)</MobilePlatform>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(LibraryPlatform)'=='$(IosUnifiedLibraryPlatformId)'">
-      <PropertyGroup>
-        <TargetProject>$(IosUnifiedProjectId)</TargetProject>
-        <MobilePlatform>$(IosMobilePlatformId)</MobilePlatform>
-        <MobileSubPlatform>$(IosUnifiedMobileSubPlatformId)</MobileSubPlatform>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(LibraryPlatform)'=='$(IosClassicLibraryPlatformId)'">
-      <PropertyGroup>
-        <TargetProject>$(IosClassicProjectId)</TargetProject>
-        <MobilePlatform>$(IosMobilePlatformId)</MobilePlatform>
-        <MobileSubPlatform>$(IosClassicMobileSubPlatformId)</MobileSubPlatform>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(LibraryPlatform)'=='$(WindowsUniversalLibraryPlatformId)'">
-      <PropertyGroup>
-        <TargetProject>$(WindowsUniversalProjectId)</TargetProject>
-        <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
-        <MobileSubPlatform>$(WindowsUniversalMobileSubPlatformId)</MobileSubPlatform>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(LibraryPlatform)'=='$(WindowsPhoneLibraryPlatformId)'">
-      <PropertyGroup>
-        <TargetProject>$(WindowsPhoneProjectId)</TargetProject>
-        <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
-        <MobileSubPlatform>$(WindowsPhoneMobileSubPlatformId)</MobileSubPlatform>
-      </PropertyGroup>
-    </When>
-    <When Condition="'$(LibraryPlatform)'=='$(WindowsTabletLibraryPlatformId)'">
-      <PropertyGroup>
-        <TargetProject>$(WindowsTabletProjectId)</TargetProject>
-        <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
-        <MobileSubPlatform>$(WindowsTabletMobileSubPlatformId)</MobileSubPlatform>
       </PropertyGroup>
     </When>
   </Choose>
