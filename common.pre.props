@@ -67,7 +67,9 @@
     <SrcDir>$(RootDir)src\</SrcDir>
     <DlsDir>$(RootDir)dls\</DlsDir>
     <RefDir>$(RootDir)ref\</RefDir>
-    <ToolsDir>$(DlsDir)tools\</ToolsDir>
+    <SubDir>$(RootDir)sub\</SubDir>
+    <LfxDir>$(RootDir)lfx\</LfxDir>
+    <ToolsDir>$(LfxDir)tools\</ToolsDir>
     <PkgDir>$(DlsDir)packages\</PkgDir>
   </PropertyGroup>
 

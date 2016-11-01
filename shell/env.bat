@@ -16,24 +16,28 @@ if "%iosServerUser%"=="" (echo Please set 'iosServerUser' to enable building iOS
 set platform=
 
 :: msbuild environment
-set msbuildVar=%msbuildVar%RootDir;SrcDir;RefDir;
+set msbuildVar=%msbuildVar%RootDir;SrcDir;RefDir;SubDir;
 set msbuildVar=%msbuildVar%BuildDir;BuildBinDir;BuildTempDir;
 set msbuildVar=%msbuildVar%DlsDir;MxbuildDir;DropDir;ToolsDir;
-set msbuildVar=%msbuildVar%PkgDir;
+set msbuildVar=%msbuildVar%PkgDir;LfxDir;
 set msbuildVar=%msbuildVar%ShimProj;PublishProj;IdProj;
 msbuild %~dp0shell.proj /nologo /v:m /p:property=^"%msbuildVar%^" > init.bat
 call init.bat
 erase init.bat
 
+:: repo paths
+set path=%envDir%;%path%
+set path=%toolsDir%;%path%
+set path=%toolsDir%git\cmd\;%path%
+set path=%subDir%lfx.shim\;%path%
+set path=%packagesDir%NUnit.Runners.2.6.4\tools\;%path%
+
 :: path
-set path=%path%;%envDir%
 set path=%path%;%ProgramFiles(x86)%\MSBuild\Xamarin\Android
 set path=%path%;%ProgramFiles(x86)%\Windows Kits\10\Debuggers\x64
 set path=%path%;%ProgramFiles(x86)%\Android\android-sdk\platform-tools
 set path=%path%;%ProgramFiles(x86)%\Android\android-sdk\tools
 set path=%path%;%ProgramFiles(x86)%\Microsoft Emulator Manager\1.0
-set path=%path%;%ProgramFiles%\Perforce
-set path=%path%;%packagesDir%NUnit.Runners.2.6.4\tools\
 
 :: alises
 set doskey=%~dp0doskey.txt
