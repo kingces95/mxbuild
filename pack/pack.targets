@@ -2,10 +2,26 @@
 <Project 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
   ToolsVersion="4.0"
+  InitialTargets="PackTargetsInitialTargets"
 >
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets"/>
   <Import Project="$(MxbuildDir)empty.targets" />
 
+  <Target Name="PackTargetsInitialTargets">
+
+    <!--package-->
+    <PropertyGroup>
+      <!--$(NuspecId) is declared in nuspec.props which resides next to the .csproj file-->
+      <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
+    </PropertyGroup>
+
+    <!--msbuild /v:m /p:platform=pack /t:_PackCreate /p:Assemblies=-->
+    <ItemGroup Condition="'$(Assemblies)'!=''">
+      <TargetResult Include="$(Assemblies)"/>
+    </ItemGroup>
+    
+  </Target>
+  
   <!--augment TargetResult-->
   <!--<ItemGroup>
     <TargetResult Condition="true">
@@ -149,7 +165,7 @@
 
     <Message Importance="high" Text="$(MSBuildProjectName) -> $(UnpackBeforeDir) => $(UnpackAfterDir)" />
   </Target>
-  
+
   <!--_PackCreate-->
   <Target
     Name="_PackCreate"
@@ -164,7 +180,7 @@
     Name="_PackCreateIfNecessary"
     Inputs="$(NuspecPath);@(TargetResult)"
     Outputs="$(NugetPackagePath)"
-    DependsOnTargets="_AddNugetAssemblyAttributes;_GetNugetAssemblyAttributes"
+    DependsOnTargets="RefreshTemplateExpansions"
   >
     <MakeDir Directories="$(PackDir)" />
 
@@ -187,6 +203,8 @@
   <Target
     Name="_GetNugetAssemblyAttributes"
     BeforeTargets="RefreshTemplateExpansions"
+    DependsOnTargets="_AddNugetAssemblyAttributes"
+    Outputs="%(NuspecReference.Identity)"
   >
     <ItemGroup>
       <NugetDependencyAttributeMap Include="NugetDependencyAttribute">
@@ -196,12 +214,12 @@
     </ItemGroup>
 
     <GetAssemblyAttribute
-      Assemblies="@(TargetResult)"
+      Assemblies="@(NuspecReference)"
       Attribute="@(NugetDependencyAttributeMap)"
     >
       <Output ItemName="NuspecDependency" TaskParameter="Result" />
     </GetAssemblyAttribute>
-    
+
     <!--IsPreReleaseVersion-->
     <ItemGroup>
       <NuspecDependency Condition="true">
@@ -216,18 +234,11 @@
       <NuspecVersion Condition="'$(NuspecPreReleaseVersion)'!=''">$(NuspecVersion)-$(NuspecPreReleaseVersion)</NuspecVersion>
     </PropertyGroup>
 
-    <!--package-->
-    <PropertyGroup>
-
-      <!--$(NuspecId) is declared in nuspec.props which resides next to the .csproj file-->
-      <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
-    </PropertyGroup>
   </Target>
 
   <!--_AddNugetAssemblyAttributes-->
   <Target
     Name="_AddNugetAssemblyAttributes"
-    BeforeTargets="RefreshTemplateExpansions"
   >
     <ItemGroup>
       <NugetTargetFrameworkMonikerAttributeMap Include="NugetTargetFrameworkMonikerAttribute">

@@ -18,7 +18,7 @@ set platform=
 :: msbuild environment
 set msbuildVar=%msbuildVar%RootDir;SrcDir;RefDir;SubDir;
 set msbuildVar=%msbuildVar%BuildDir;BuildBinDir;BuildTempDir;
-set msbuildVar=%msbuildVar%DlsDir;MxbuildDir;DropDir;ToolsDir;
+set msbuildVar=%msbuildVar%MxbuildDir;DropDir;ToolsDir;
 set msbuildVar=%msbuildVar%PkgDir;LfxDir;
 set msbuildVar=%msbuildVar%ShimProj;PublishProj;IdProj;
 msbuild %~dp0shell.proj /nologo /v:m /p:property=^"%msbuildVar%^" > init.bat

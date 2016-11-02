@@ -65,12 +65,11 @@
   <PropertyGroup>
     <RootDir Condition="'$(RootDir)'==''">$(MSBuildThisFileDirectory)</RootDir>
     <SrcDir>$(RootDir)src\</SrcDir>
-    <DlsDir>$(RootDir)dls\</DlsDir>
     <RefDir>$(RootDir)ref\</RefDir>
     <SubDir>$(RootDir)sub\</SubDir>
     <LfxDir>$(RootDir)lfx\</LfxDir>
     <ToolsDir>$(LfxDir)tools\</ToolsDir>
-    <PkgDir>$(DlsDir)packages\</PkgDir>
+    <PkgDir>$(LfxDir)packages\</PkgDir>
   </PropertyGroup>
 
   <!--build root paths-->
