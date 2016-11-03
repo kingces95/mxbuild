@@ -16,7 +16,7 @@
   <Target
     Name="InitialGenTarget"
   >
-    <!--copy None items with IsMxbuildTemplet to Template items-->
+    <!--copy None items with IsMxbuildTemplete to Template items-->
     <ItemGroup>
       <Template Include="@(None->WithMetadataValue('IsMxbuildTemplate', 'True'))"/>
       <Template Condition="'%(Template.Link)'!=''">
@@ -78,7 +78,7 @@
     <Message Text="TemplateTempPath: $(TemplateTempPath)" Importance="$(GenVerbosityLow)" />
     <Message Text="TemplateOutputPath: $(TemplateOutputPath)" Importance="$(GenVerbosityLow)" />
 
-    <!--find properties-->
+    <!--find properties like $(propertyName)-->
     <PropertyGroup>
       <TemplateText>$([System.IO.File]::ReadAllText($(Template)))</TemplateText>
     </PropertyGroup>
@@ -102,7 +102,7 @@
     <Message Text="  %(Pattern.Name) -> %(Replacement)" Condition="'%(Replacement)'!=''" Importance="$(GenVerbosityLow)" />
     <Message Text="  %(Pattern.Name) -> [null]" Condition="'%(Replacement)'==''" Importance="$(GenVerbosityLow)" />
 
-    <!--process properties-->
+    <!--replace properties with values-->
     <RegexReplace
       Input="$(TemplateText)"
       Pattern="@(Pattern)"
@@ -110,7 +110,7 @@
       <Output PropertyName="ExpansionText" TaskParameter="Result" />
     </RegexReplace>
 
-    <!--find items-->
+    <!--find items like '%(itemName.metadata)'-->
     <RegexMatches
       Input="$(ExpansionText)"
       Pattern="(?&lt;=[%][(])\w*?(?=[.]\w*[)])"
@@ -133,6 +133,7 @@
     <Message Text="  %(TemplateItemsNames.Identity)" Importance="$(GenVerbosityLow)" Condition="@(TemplateItemsNames->Count()) > 0" />
     <Message Text="Items (@(TemplateItems->Count())):" Importance="$(GenVerbosityLow)" />
     <Message Text="  %(TemplateItems.__Name)" Importance="$(GenVerbosityLow)" Condition="@(TemplateItems->Count()) > 0" />
+
     
     <!--process items-->
     <ExpandTemplate

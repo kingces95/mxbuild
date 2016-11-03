@@ -212,7 +212,7 @@
     <!--NuspecPreReleaseVersion-->
     <PropertyGroup>
       <NuspecPreReleaseVersion Condition="'$(NuspecVersion)'=='0.0.0'">pre</NuspecPreReleaseVersion>
-      <NuspecPreReleaseVersion Condition="@(NuspecDependency->AnyHaveMetadataValue('IsPreReleaseVersion','true'))">pre</NuspecPreReleaseVersion>
+      <NuspecPreReleaseVersion Condition="'@(NuspecDependency->AnyHaveMetadataValue('IsPreReleaseVersion','true'))'=='true'">pre</NuspecPreReleaseVersion>
       <NuspecVersion Condition="'$(NuspecPreReleaseVersion)'!=''">$(NuspecVersion)-$(NuspecPreReleaseVersion)</NuspecVersion>
     </PropertyGroup>
 
