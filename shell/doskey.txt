@@ -38,7 +38,7 @@ ga=git add .
 gc=git commit -m $*
 gl=git log -1 $1
 nuke=git clean -fdXq
-scorch=git clean -fdXq -e !dls
+scorch=git clean -fdXq -e !lfx
 
 ;= idProj
 build-id=msbuild %idProj% /v:m
@@ -77,7 +77,7 @@ src=pushd %SrcDir%
 bin=pushd %BuildBinDir%
 obj=pushd %BuildTempDir%
 bld=pushd %BuildDir%
-dls=pushd %DlsDir%
+lfx=pushd %LfxDir%
 ext=pushd %MxbuildDir%
 drp=pushd %DropDir%
 pkg=pushd %PkgDir%

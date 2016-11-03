@@ -6,18 +6,6 @@
   
   <!--
 
-    Nuspec Dependencies
-  -->
-  <ItemGroup>
-    <!--
-    <NuspecDependency Include="[name]">
-      <Version>[version]</Version>
-    </NuspecDependency>
-    -->
-  </ItemGroup>
-
-  <!--
-
     Nuspec Properties
   -->
   <PropertyGroup>

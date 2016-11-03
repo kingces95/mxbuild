@@ -4,7 +4,6 @@
   ToolsVersion="12.0"
 >
   <PropertyGroup>
-    <!--augment $(NugetDependencyFullNames) for later conversion to @(NugetDependency)-->
     <_NugetPackageDir>$(MSBuildThisFileDirectory)</_NugetPackageDir>
     <NugetPackageDirs>$(_NugetPackageDir);$(NugetPackageDirs)</NugetPackageDirs>
     
