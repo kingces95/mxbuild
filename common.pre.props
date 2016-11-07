@@ -9,14 +9,13 @@
     <MxbuildTaskVersion>0.2.7</MxbuildTaskVersion>
   </PropertyGroup>
 
-  <!--?-->
-  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
-    <VisualStudioVersion>12.0</VisualStudioVersion>
-  </PropertyGroup>
-
-  <!--default configuration-->
+  <!--MxbuildDir-->
   <PropertyGroup>
-    <Configuration Condition="'$(Configuration)'==''">debug</Configuration>
+    <MxbuildDir>$(MSBuildThisFileDirectory)</MxbuildDir>
+    <MxbuildLfxDir>$(MxbuildDir)lfx\</MxbuildLfxDir>
+    <MxbuildPkgDir>$(MxbuildLfxDir)packages\</MxbuildPkgDir>
+    <MxbuildTaskDir Condition="'$(MxbuildTaskDir)'==''">$(MxbuildPkgDir)$(MxbuildTaskPackageName).$(MxbuildTaskVersion)\lib\netstandard\</MxbuildTaskDir>
+    <MxbuildToolsDir>$(MxbuildLfxDir)tools\</MxbuildToolsDir>
   </PropertyGroup>
 
   <!--msbuild paths-->
@@ -36,6 +35,19 @@
     <ProjFile Include="$(ProjFile)" />
     <MsbuildExe Include="$(MsbuildExe)" />
   </ItemGroup>
+
+  <!--?-->
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
+    <VisualStudioVersion>12.0</VisualStudioVersion>
+  </PropertyGroup>
+
+  <!--configuration-->
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)'==''">debug</Configuration>
+  </PropertyGroup>
+  <ItemGroup>
+    <Configuration Include="$(Configuration)" />
+  </ItemGroup>
   
   <!--vs-->
   <PropertyGroup>
@@ -43,11 +55,6 @@
     <BuildingInsideVisualStudio Condition="'$(BuildingInsideVisualStudio)'==''">$(IsInVs)</BuildingInsideVisualStudio>
     <Plat>$(Platform)</Plat>
   </PropertyGroup>
-  
-  <!--configuration-->
-  <ItemGroup>
-    <Configuration Include="$(Configuration)" />
-  </ItemGroup>
   
   <!--escaping-->
   <PropertyGroup>
@@ -85,15 +92,4 @@
     <BuildTempSubDir>obj\</BuildTempSubDir>
     <BuildTempDir>$(BuildBinDir.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</BuildTempDir>
   </PropertyGroup>
-
-  <!--all mxbuild consumers must restore the task assembly-->
-  <PropertyGroup>
-    <MxbuildTaskDir Condition="'$(MxbuildTaskDir)'==''">$(PkgDir)$(MxbuildTaskPackageName).$(MxbuildTaskVersion)\lib\netstandard\</MxbuildTaskDir>
-  </PropertyGroup>
-  <ItemGroup>
-    <NugetPackage Include="$(MxbuildTaskPackageName)">
-      <Version>$(MxbuildTaskVersion)</Version>
-      <TargetFramework>netstandard</TargetFramework>
-    </NugetPackage>
-  </ItemGroup>
 </Project>
