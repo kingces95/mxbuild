@@ -2,7 +2,7 @@ using System.Reflection;
 
 [assembly: AssemblyVersion(BuildInfo.MajorVersion + "." + BuildInfo.MinorVersion + "." + BuildInfo.Number)]
 
-internal class BuildInfo {
+internal static class BuildInfo {
     internal const string Number = "$(BuildNumber)";
     internal const string EnlistmentRevision = "$(EnlistmentRevision)";
     internal const string EnlistmentUrl = "$(EnlistmentUrl)";

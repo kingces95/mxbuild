@@ -1,7 +1,7 @@
 using System;
 
 [AttributeUsage(AttributeTargets.Assembly)]
-internal class NugetTargetFrameworkMonikerAttribute : Attribute {
+internal sealed class NugetTargetFrameworkMonikerAttribute : Attribute {
 
     public NugetTargetFrameworkMonikerAttribute(string targetFramework) {
         TargetFramework = targetFramework;
@@ -11,7 +11,7 @@ internal class NugetTargetFrameworkMonikerAttribute : Attribute {
 }
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-internal class NugetDependencyAttribute : Attribute {
+internal sealed class NugetDependencyAttribute : Attribute {
 
     internal NugetDependencyAttribute(string package, string version) {
         Package = package;
