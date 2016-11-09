@@ -23,10 +23,6 @@
   <!--import nuget dependency target files-->
   <Import Project="$(NugetImportCurrent)" Condition="'$(NugetImportFinished)'!='true'" />
 
-  <ItemGroup>
-    <NugetPackageDir Include="$(NugetPackageDirs)" />
-  </ItemGroup>
-
   <!--_BuildNugetDependencyAndReferenceItemGroups-->
   <Target
     Name="_BuildNugetDependencyAndReferenceItemGroups"
@@ -35,6 +31,7 @@
   >
     <PropertyGroup>
       <_NugetPackageDir>%(NugetPackageDir.Identity)</_NugetPackageDir>
+      <_TargetFrameworkSubDir>%(NugetPackageDir.TargetFrameworkSubDir)</_TargetFrameworkSubDir>
       
       <!--infer package id and version from current directory-->
       <_NugetPackageFullName>$([System.IO.Path]::GetFileName( $([System.IO.Path]::GetDirectoryName($(_NugetPackageDir))) ))</_NugetPackageFullName>
@@ -42,7 +39,7 @@
       <_NugetPackageVersion>$([System.Text.RegularExpressions.Regex]::Match('$(_NugetPackageFullName)','$(NugetPackageVersionRegex)'))</_NugetPackageVersion>
 
       <!--construct well known nuget directories-->
-      <_NugetLibDir>$(_NugetPackageDir)lib\</_NugetLibDir>
+      <_NugetLibDir>$(_NugetPackageDir)lib\$(_TargetFrameworkSubDir)</_NugetLibDir>
     </PropertyGroup>
 
     <ItemGroup>
@@ -52,11 +49,7 @@
       </NugetDependency>
 
       <!--augment NugetReference-->
-      <NugetReference Include="$(_NugetLibDir)*.dll" />
-      <!--
-          could be huge bug that any version of NugetTargetFrameworkMoniker is probed for dlls...
-      -->
-      <NugetReference Include="$(_NugetLibDir)$(NugetTargetFrameworkMoniker)*\*.dll" />
+      <NugetReference Include="$(_NugetLibDir)*.dll" />      
     </ItemGroup>
   </Target>
   
