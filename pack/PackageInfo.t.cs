@@ -6,11 +6,11 @@ using System;
 [AttributeUsage(AttributeTargets.Assembly)]
 internal sealed class NugetTargetFrameworkMonikerAttribute : Attribute {
 
-    public NugetTargetFrameworkMonikerAttribute(string targetFramework) {
+    internal NugetTargetFrameworkMonikerAttribute(string targetFramework) {
         TargetFramework = targetFramework;
     }
 
-    public string TargetFramework { get; private set; }
+    internal string TargetFramework { get; private set; }
 }
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
@@ -21,6 +21,6 @@ internal sealed class NugetDependencyAttribute : Attribute {
         Version = version;
     }
 
-    public string Package { get; private set; }
-    public string Version { get; private set; }
+    internal string Package { get; private set; }
+    internal string Version { get; private set; }
 }
