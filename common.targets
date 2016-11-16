@@ -6,7 +6,7 @@
   <!--CallRefreshTemplateExpansions-->
   <Target 
     Name="CallRefreshTemplateExpansions"
-    AfterTargets="ResolveMetaReferences"
+    AfterTargets="ResolveAssemblyReferences"
     Condition="'$(BuildTarget)'=='Build' AND '$(IsPrimitivePlatform)'=='true'"
   >
     <CallTarget Targets="RefreshTemplateExpansions"/>

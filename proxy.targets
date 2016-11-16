@@ -85,7 +85,6 @@
     <BuildDependsOn>_SetProxyTargetBuild;Proxy;$(BuildDependsOn)</BuildDependsOn>
     <CleanDependsOn>_SetProxyTargetClean;Proxy;$(CleanDependsOn)</CleanDependsOn>
     <InstallDependsOn>_SetProxyTargetInstall;Proxy;$(InstallDependsOn)</InstallDependsOn>
-    <NugetRestoreDependsOn>_SetProxyTargetNugetRestore;Proxy;$(NugetRestoreDependsOn)</NugetRestoreDependsOn>
     <DryRunDependsOn>_SetProxyTargetDryRun;Proxy;$(DryRunDependsOn)</DryRunDependsOn>
     <CompileDependsOn>_SetProxyTargetCompile;Proxy;$(CompileDependsOn)</CompileDependsOn>
     <GetTargetPathDependsOn>_SetProxyTargetGetTargetPath;Proxy;$(GetTargetPathDependsOn)</GetTargetPathDependsOn>

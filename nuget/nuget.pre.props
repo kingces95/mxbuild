@@ -5,11 +5,6 @@
     <ExtNugetDir>$(MSBuildThisFileDirectory)</ExtNugetDir>
   </PropertyGroup>
 
-  <!--DependsOn-->
-  <PropertyGroup>
-    <NugetRestoreDependsOn>_NugetRestore</NugetRestoreDependsOn>
-  </PropertyGroup>
-
   <!--Regex-->
   <PropertyGroup>
     <NugetPackageIdRegex>([.]?[^.0-9][^.]*)*</NugetPackageIdRegex>

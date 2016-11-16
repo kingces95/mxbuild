@@ -241,14 +241,14 @@
     Name="_AddNugetAssemblyAttributes"
   >
     <ItemGroup>
-      <NugetTargetFrameworkMonikerAttributeMap Include="NugetTargetFrameworkMonikerAttribute">
+      <NugetPackageAttributeMap Include="NugetPackageAttribute">
         <TargetFramework/>
-      </NugetTargetFrameworkMonikerAttributeMap>
+      </NugetPackageAttributeMap>
     </ItemGroup>
 
     <AddAssemblyAttribute
       Assemblies="@(TargetResult)"
-      Attributes="@(NugetTargetFrameworkMonikerAttributeMap)"
+      Attributes="@(NugetPackageAttributeMap)"
     >
       <Output ItemName="NuspecReference" TaskParameter="Result" />
     </AddAssemblyAttribute>

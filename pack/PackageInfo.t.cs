@@ -1,15 +1,19 @@
 using System;
 
-[assembly: NugetTargetFrameworkMoniker("$(TargetFramework)")]
+[assembly: NugetPackage("$(NuspecId)", "$(NuspecVersion)", "$(TargetFramework)")]
 [assembly: NugetDependency("%(NugetDependency.Identity)", "%(Version)")]
 
 [AttributeUsage(AttributeTargets.Assembly)]
-internal sealed class NugetTargetFrameworkMonikerAttribute : Attribute {
+internal sealed class NugetPackageAttribute : Attribute {
 
-    internal NugetTargetFrameworkMonikerAttribute(string targetFramework) {
+    internal NugetPackageAttribute(string name, string version, string targetFramework) {
+        Name = name;
+        Version = version;
         TargetFramework = targetFramework;
     }
 
+    internal string Name { get; private set; }
+    internal string Version { get; private set; }
     internal string TargetFramework { get; private set; }
 }
 

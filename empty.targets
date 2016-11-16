@@ -8,7 +8,6 @@
     <InstallDependsOn />
     <CompileDependsOn />
     <GetTargetPathDependsOn />
-    <NugetRestoreDependsOn />
     <PackageDependsOn />
     <SignDependsOn />
     <DryRunDependsOn />
@@ -22,9 +21,6 @@
   <!--see also: https://msdn.microsoft.com/en-us/library/ms171468.aspx?f=255&MSPPError=-2147217396-->
   <Target Name="Compile" Outputs="@(TargetResult)" DependsOnTargets="$(CompileDependsOn)" />
   <Target Name="GetTargetPath" Outputs="@(TargetResult)" DependsOnTargets="$(GetTargetPathDependsOn)" />
-  
-  <!--nugetRestore (e.g. nuget packages)-->
-  <Target Name="NugetRestore" Outputs="@(TargetResult)" DependsOnTargets="$(NugetRestoreDependsOn)" />
   
   <!--xamarin android-->
   <Target Name="Package" Outputs="@(TargetResult)" DependsOnTargets="$(PackageDependsOn)" />
