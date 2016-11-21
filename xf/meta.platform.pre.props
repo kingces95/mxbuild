@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--library-->
+  <Choose>
+    
+    <!--standard-->
+    <When Condition="'$(MetaPlatform)'=='$(NetStandardLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(NetStandardLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(DotNetLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(DotNetLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+
+    <!--mobile misc-->
+    <When Condition="'$(MetaPlatform)'=='$(AndroidBindingsLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(AndroidBindingsLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+
+    <!--mobile-->
+    <When Condition="'$(MetaPlatform)'=='$(AndroidLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(AndroidLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(IosUnifiedLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(IosUnifiedLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(IosClassicLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(IosClassicLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsUniversalLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsUniversalLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsPhoneLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsPhoneLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsTabletLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsTabletLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+
+    <!--mobile automation-->
+    <When Condition="'$(MetaPlatform)'=='$(AndroidAutomationLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <IsMobileTestPlatform>true</IsMobileTestPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(AndroidAutomationLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(IosAutomationLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <IsMobileTestPlatform>true</IsMobileTestPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(IosAutomationLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsAutomationLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsLibraryPlatform>true</IsLibraryPlatform>
+        <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
+        <IsMobileTestPlatform>true</IsMobileTestPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsAutomationLibraryPlatformId)</MetaPlatform>
+        <OutSubDir>$(MetaPlatform)\</OutSubDir>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <!--IsLibraryPlatform-->
+  <PropertyGroup Condition="'$(IsLibraryPlatform)'=='true'">
+    <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
+  </PropertyGroup>
+
+  <!--app-->
+  <Choose>
+    
+    <!--mobile-->
+    <When Condition="'$(MetaPlatform)'=='$(AndroidAppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(AndroidAppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(AndroidLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(IosUnifiedSimAppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(IPhoneSimulatorPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(IosUnifiedSimAppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(IosUnifiedLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(IosUnifiedPhoneAppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(IPhonePlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(IosUnifiedPhoneAppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(IosUnifiedLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(IosClassicSimAppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <MetaPlatform>$(IosClassicSimAppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(IosClassicLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(IosClassicPhoneAppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(IPhoneSimulatorPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(IosClassicPhoneAppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(IosClassicLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsUniversal32AppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(X86PlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsUniversal32AppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(WindowsUniversalLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsPhone32AppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(X86PlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsPhone32AppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(WindowsPhoneLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsTablet32AppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(X86PlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsTablet32AppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(WindowsTabletLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsTablet64AppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(X64PlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsTablet64AppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(WindowsTabletLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatform)'=='$(WindowsTabletArmAppPlatformId)'">
+      <PropertyGroup>
+        <IsAppPlatform>true</IsAppPlatform>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(ArmPlatformId)</PrimitivePlatform>
+        <MetaPlatform>$(WindowsTabletArmAppPlatformId)</MetaPlatform>
+        <LibraryPlatform>$(WindowsTabletLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <!--IsAppPlatform-->
+  <PropertyGroup Condition="'$(IsAppPlatform)'=='true'">
+    <AppPlatform>$(MetaPlatform)</AppPlatform>
+    <OutSubDir>$(MetaPlatform)\</OutSubDir>
+  </PropertyGroup>
+
+</Project>

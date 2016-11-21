@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--primitive-->
+  <PropertyGroup>
+    <AnyCPUPlatformId>anycpu</AnyCPUPlatformId>
+    <X86PlatformId>x86</X86PlatformId>
+    <X64PlatformId>x64</X64PlatformId>
+    <ArmPlatformId>arm</ArmPlatformId>
+    <PackPlatformId>pack</PackPlatformId>
+    <IPhonePlatformId>iPhone</IPhonePlatformId>
+    <IPhoneSimulatorPlatformId>iPhoneSimulator</IPhoneSimulatorPlatformId>
+  </PropertyGroup>
+
+  <!--library-->
+  <PropertyGroup>
+
+    <!--netstandard-->
+    <NetStandardLibraryPlatformId>netstandard</NetStandardLibraryPlatformId>
+
+    <!--dotnet-->
+    <DotNetLibraryPlatformId>dotnet</DotNetLibraryPlatformId>
+
+    <!--mobile-->
+    <AndroidLibraryPlatformId>monoDroid</AndroidLibraryPlatformId>
+    <AndroidBindingsLibraryPlatformId>monoDroid.bindings</AndroidBindingsLibraryPlatformId>
+    <IosUnifiedLibraryPlatformId>xamarin.ios</IosUnifiedLibraryPlatformId>
+    <IosClassicLibraryPlatformId>monoTouch</IosClassicLibraryPlatformId>
+    <WindowsUniversalLibraryPlatformId>uap</WindowsUniversalLibraryPlatformId>
+    <WindowsPhoneLibraryPlatformId>wpa</WindowsPhoneLibraryPlatformId>
+    <WindowsTabletLibraryPlatformId>win</WindowsTabletLibraryPlatformId>
+
+    <!--mobile automation-->
+    <AndroidAutomationLibraryPlatformId>android.aut</AndroidAutomationLibraryPlatformId>
+    <IosAutomationLibraryPlatformId>ios.aut</IosAutomationLibraryPlatformId>
+    <WindowsAutomationLibraryPlatformId>windows.aut</WindowsAutomationLibraryPlatformId>
+  </PropertyGroup>
+
+  <!--app-->
+  <PropertyGroup>
+    <AndroidAppPlatformId>$(AndroidLibraryPlatformId).app</AndroidAppPlatformId>
+    <IosUnifiedSimAppPlatformId>$(IosUnifiedLibraryPlatformId).sim</IosUnifiedSimAppPlatformId>
+    <IosUnifiedPhoneAppPlatformId>$(IosUnifiedLibraryPlatformId).phone</IosUnifiedPhoneAppPlatformId>
+    <IosClassicSimAppPlatformId>$(IosClassicLibraryPlatformId).sim</IosClassicSimAppPlatformId>
+    <IosClassicPhoneAppPlatformId>$(IosClassicLibraryPlatformId).phone</IosClassicPhoneAppPlatformId>
+    <WindowsUniversal32AppPlatformId>$(WindowsUniversalLibraryPlatformId).32</WindowsUniversal32AppPlatformId>
+    <WindowsPhone32AppPlatformId>$(WindowsPhoneLibraryPlatformId).32</WindowsPhone32AppPlatformId>
+    <WindowsTablet32AppPlatformId>$(WindowsTabletLibraryPlatformId).32</WindowsTablet32AppPlatformId>
+    <WindowsTablet64AppPlatformId>$(WindowsTabletLibraryPlatformId).64</WindowsTablet64AppPlatformId>
+    <WindowsTabletArmAppPlatformId>$(WindowsTabletLibraryPlatformId).arm</WindowsTabletArmAppPlatformId>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PortablePlatformId>portable</PortablePlatformId>
+  </PropertyGroup>
+
+  <!--mobile-->
+  <PropertyGroup>
+    <AndroidMobilePlatformId>android</AndroidMobilePlatformId>
+    <IosMobilePlatformId>ios</IosMobilePlatformId>
+    <WindowsMobilePlatformId>windows</WindowsMobilePlatformId>
+  </PropertyGroup>
+
+  <!--sub-mobile-->
+  <PropertyGroup>
+    <AndroidMobileSubPlatformId>$(AndroidMobilePlatformId)</AndroidMobileSubPlatformId>
+    <IosUnifiedMobileSubPlatformId>$(IosMobilePlatformId).unified</IosUnifiedMobileSubPlatformId>
+    <IosClassicMobileSubPlatformId>$(IosMobilePlatformId).classic</IosClassicMobileSubPlatformId>
+    <WindowsUniversalMobileSubPlatformId>$(WindowsMobilePlatformId).universal</WindowsUniversalMobileSubPlatformId>
+    <WindowsPhoneMobileSubPlatformId>$(WindowsMobilePlatformId).phone</WindowsPhoneMobileSubPlatformId>
+    <WindowsTabletMobileSubPlatformId>$(WindowsMobilePlatformId).tablet</WindowsTabletMobileSubPlatformId>
+  </PropertyGroup>
+
+  <!--ur-->
+  <PropertyGroup>
+    <AllPlatformId>all</AllPlatformId>
+    <MobilePlatformId>mobile</MobilePlatformId>
+    <PackagePlatformId>package</PackagePlatformId>
+    <UnpackagePlatformId>unpackage</UnpackagePlatformId>
+  </PropertyGroup>
+
+</Project>

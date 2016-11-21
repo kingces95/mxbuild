@@ -17,7 +17,7 @@
   <!--test-->
   <PropertyGroup Condition="'$(IsTest)'=='true'">
     <!--only copy local when building test-->
-    <PrivateReference>True</PrivateReference>
+    <NugetCopyLocal>True</NugetCopyLocal>
   </PropertyGroup>
 
 </Project>

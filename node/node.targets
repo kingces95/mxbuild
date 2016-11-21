@@ -78,6 +78,7 @@
   <Target
     Name="_AugmentReferences"
     AfterTargets="ResolveMetaReferences"
+    Condition="'@(MetaReference)'!=''"
   >
     <!--MetaReference -> Reference-->
     <ItemGroup>
@@ -88,7 +89,7 @@
     </ItemGroup>
     <Message 
       Text="$(ProjName) [$(FrameId)]: Reference += %(Identity)"
-      Condition="@(_Reference->Count()) > 0"
+      Condition="'@(_Reference)'!=''"
       Importance="$(Verbosity)" 
     />
   </Target>
@@ -97,6 +98,7 @@
   <Target
     Name="_TrimTargetResult"
     AfterTargets="ResolveMetaReferences"
+    Condition="'@(MetaReference)'!=''"
   >
     <ItemGroup>
       <TargetResult Remove="@(MetaReference->WithMetadataValue('ExcludeFromTargetResult', 'true'))" />
@@ -120,24 +122,20 @@
       <_Property Include="BuildTarget" />
       <_Property Include="ProjFile" />
       <_Property Include="IsPrimitivePlatform" />
-      <_Property Include="IsProxyPlatform" />
+      <_Property Include="IsShimPlatform" />
       <_Property Include="IsMobileLibraryPlatform" />
       <_Property Include="IsMobileAppPlatform" />
       <_Property Include="IsPartPlatform" />
-      <_Property Include="IsMobileAppProject" />
-      <_Property Include="IsMobileLibraryProject" />
-      <_Property Include="IsMobileTestProject" />
-      <_Property Include="IsNetStandardLibraryProject" />
       <_Property Include="PrimitivePlatform" />
       <_Property Include="MobilePlatform" />
       <_Property Include="MobileSubPlatform" />
       <_Property Include="LibraryPlatform" />
       <_Property Include="DefineConstants" />
-      <_Property Include="TargetProject" />
       <_Property Include="CommonTargetsPath" />
       <_Property Include="BuildingInsideVisualStudio" />
       <_Property Include="FrameProperties" />
-      <_Property Include="TargetFramework" />
+      <_Property Include="NugetTargetFrameworkMoniker" />
+      <_Property Include="NugetTargetFrameworkVersion" />
     </ItemGroup>
     <ItemGroup Condition="'$(IsPrimitivePlatform)'=='true'">
       <_Property Include="OutBaseDir" />

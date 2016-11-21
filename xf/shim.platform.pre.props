@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!--properties-->
+  <Choose>
+    
+    <!--netstandard-->
+    <When Condition="'$(Plat)'=='$(NetStandardLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(NetStandardLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+
+    <!--portable-->
+    <When Condition="'$(Plat)'=='$(DotNetLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(DotNetLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+
+    <!--mobile misc-->
+    <When Condition="'$(Plat)'=='$(AndroidBindingsLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(AndroidBindingsLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+
+    <!--mobile library-->
+    <When Condition="'$(Plat)'=='$(AndroidLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(AndroidLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(IosUnifiedLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(IosUnifiedLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(IosClassicLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(IosClassicLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsUniversalLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsUniversalLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsPhoneLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsPhoneLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsTabletLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsTabletLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+
+    <!--mobile automation-->
+    <When Condition="'$(Plat)'=='$(AndroidAutomationLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(AndroidAutomationLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(IosAutomationLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(IosAutomationLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsAutomationLibraryPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsAutomationLibraryPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+
+    <!--mobile app-->
+    <When Condition="'$(Plat)'=='$(AndroidAppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(AndroidAppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(IosUnifiedSimAppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(IosUnifiedSimAppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(IosUnifiedPhoneAppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(IosUnifiedPhoneAppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(IosClassicSimAppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(IosClassicSimAppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(IosClassicPhoneAppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(IosClassicPhoneAppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsUniversal32AppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsUniversal32AppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsPhone32AppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsPhone32AppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsTablet32AppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsTablet32AppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsTablet64AppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsTablet64AppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(Plat)'=='$(WindowsTabletArmAppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsTabletArmAppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <!--IsShimPlatform-->
+  <PropertyGroup Condition="'$(IsShimPlatform)'=='true'">
+    <MetaPlatformType>$(ProxyMetaPlatformTypeId)</MetaPlatformType>
+    <MetaPlatform>$(Plat)</MetaPlatform>
+  </PropertyGroup>
+
+</Project>

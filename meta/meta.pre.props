@@ -50,4 +50,12 @@
     </SelfReference>
   </ItemDefinitionGroup>
 
+  <ItemDefinitionGroup>
+    <PlatformGroup>
+      <!--hide from VS solution explorer-->
+      <InProject>false</InProject>
+      <Platforms/>
+    </PlatformGroup>
+  </ItemDefinitionGroup>
+
 </Project>

@@ -58,11 +58,15 @@
     Name="_NugetPostPropsInitialTarget"
     DependsOnTargets="_BuildNugetDependencyAndReferenceItemGroups"
   >
+    <PropertyGroup Condition="'$(NugetCopyLocal)'==''">
+      <NugetCopyLocal>false</NugetCopyLocal>
+    </PropertyGroup>
+    
     <!--NugetReference -> Reference-->
     <ItemGroup Condition="'@(NugetReference)'!=''">
       <Reference Include="@(NugetReference->'%(Filename)%(Extension)')">
         <HintPath>$([MSBuild]::MakeRelative($(ProjDir), %(Identity)))</HintPath>
-        <Private>$(PrivateReference)</Private>
+        <Private>$(NugetCopyLocal)</Private>
       </Reference>
     </ItemGroup>
   </Target>

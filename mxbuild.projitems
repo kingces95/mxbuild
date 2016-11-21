@@ -38,7 +38,6 @@
     <None Include="$(MSBuildThisFileDirectory)msbuild.nuspec" />
     <None Include="$(MSBuildThisFileDirectory)nuspec.props" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.build.targets" />
-    <None Include="$(MSBuildThisFileDirectory)pack\pack.post.props" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.props" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.targets" />
@@ -60,7 +59,6 @@
     <None Include="$(MSBuildThisFileDirectory)shim\shim.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)shim\shim.proj" />
     <None Include="$(MSBuildThisFileDirectory)shim\shim.targets" />
-    <None Include="$(MSBuildThisFileDirectory)xf\xf.post.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.targets" />

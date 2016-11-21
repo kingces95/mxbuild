@@ -9,7 +9,6 @@
 
     <ItemGroup>
       <_NugetPackageAttributeMap Include="NugetPackageAttribute">
-        <TargetFramework/>
         <Version>NuspecVersion</Version>
         <Name>NuspecId</Name>
       </_NugetPackageAttributeMap>

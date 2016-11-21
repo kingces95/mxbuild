@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <Choose>
+    <!--anycpu-->
+    <When Condition="'$(Plat)'=='$(AnyCPUPlatformId)'">
+      <PropertyGroup>
+        <IsPrimitivePlatform>true</IsPrimitivePlatform>
+        <Plat>$(AnyCPUPlatformId)</Plat>
+        <DefineConstants>$(DefineConstants)ANYCPU;</DefineConstants>
+      </PropertyGroup>
+    </When>
+  
+    <!--x86-->
+    <When Condition="'$(Plat)'=='$(X86PlatformId)'">
+      <PropertyGroup>
+        <IsPrimitivePlatform>true</IsPrimitivePlatform>
+        <Plat>$(X86PlatformId)</Plat>
+        <DefineConstants>$(DefineConstants)X86;</DefineConstants>
+      </PropertyGroup>
+    </When>
+
+    <!--x64-->
+    <When Condition="'$(Plat)'=='$(X64PlatformId)'">
+      <PropertyGroup>
+        <IsPrimitivePlatform>true</IsPrimitivePlatform>
+        <Plat>$(X64PlatformId)</Plat>
+        <DefineConstants>$(DefineConstants)X64;</DefineConstants>
+      </PropertyGroup>
+    </When>
+
+    <!--arm-->
+    <When Condition="'$(Plat)'=='$(ArmPlatformId)'">
+      <PropertyGroup>
+        <IsPrimitivePlatform>true</IsPrimitivePlatform>
+        <Plat>$(ArmPlatformId)</Plat>
+        <DefineConstants>$(DefineConstants)ARM;</DefineConstants>
+      </PropertyGroup>
+    </When>
+
+    <!--iphone-->
+    <When Condition="'$(Plat)'=='$(IPhonePlatformId)'">
+      <PropertyGroup>
+        <IsPrimitivePlatform>true</IsPrimitivePlatform>
+        <Plat>$(IPhonePlatformId)</Plat>
+        <DefineConstants>$(DefineConstants)IPHONE;</DefineConstants>
+      </PropertyGroup>
+    </When>
+
+    <!--iphonsimulator-->
+    <When Condition="'$(Plat)'=='$(IPhoneSimulatorPlatformId)'">
+      <PropertyGroup>
+        <IsPrimitivePlatform>true</IsPrimitivePlatform>
+        <Plat>$(IPhoneSimulatorPlatformId)</Plat>
+        <DefineConstants>$(DefineConstants)IPHONE_SIMULATOR;</DefineConstants>
+      </PropertyGroup>
+    </When>
+
+    <!--pack-->
+    <When Condition="'$(Plat)'=='$(PackPlatformId)'">
+      <PropertyGroup>
+        <IsPrimitivePlatform>true</IsPrimitivePlatform>
+        <Plat>$(PackPlatformId)</Plat>
+        <DefineConstants>$(DefineConstants)PACK;</DefineConstants>
+        <!--special case: new platform doesn't need metaPlatform proxy-->
+        <MetaPlatform>$(Plat)</MetaPlatform>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <!--defaults-->
+  <PropertyGroup Condition="'$(IsPrimitivePlatform)'=='true'">
+    <MetaPlatformType>$(PrimitiveMetaPlatformTypeId)</MetaPlatformType>
+    <PrimitivePlatform>$(Plat)</PrimitivePlatform>
+  </PropertyGroup>
+
+</Project>

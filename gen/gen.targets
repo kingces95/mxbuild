@@ -7,8 +7,23 @@
 
   <ItemDefinitionGroup>
     <Template>
+      <!--
+        Name of design time source file to replace with expansion; 
+        Design time source file is usually DependentUpon the template
+        (e.g. BuildInfo.cs depends on template BuildInfo.t.cs)
+       -->
       <CompileOutput />
+      
+      <!--
+        'xml' or 'lineByLine'; 'xml' for nuspec; 'lineByLine' for source
+      -->
       <Type />
+      
+      <!--
+        Copies template expansion to output directory with a different name;
+        Just like how app.config has it's name changed to that of the project
+      -->
+      <CopyTargetName />
     </Template>
   </ItemDefinitionGroup>
 
@@ -16,9 +31,16 @@
   <Target
     Name="InitialGenTarget"
   >
-    <!--copy None items with IsMxbuildTemplete to Template items-->
     <ItemGroup>
+      <!--Compile (with IsMxbuildTemplete) -> Template-->
+      <Template Include="@(Compile->WithMetadataValue('IsMxbuildTemplate', 'True'))">
+        <CompileOutput>%(Compile.FileName)%(Extension)</CompileOutput>
+      </Template>
+
+      <!--None (with IsMxbuildTemplete) -> Template-->
       <Template Include="@(None->WithMetadataValue('IsMxbuildTemplate', 'True'))"/>
+      
+      <!--Template += ProjectPath (artifact path in solution explorer)-->
       <Template Condition="'%(Template.Link)'!=''">
         <ProjectPath>%(Template.Link)</ProjectPath>
       </Template>
@@ -30,12 +52,12 @@
       </Template>
     </ItemGroup>
 
-    <!--trim None items of templates (so they don't get copied to the output before transforming)-->
+    <!--None -= Templates (so they don't get copied to the output dir before transforming)-->
     <ItemGroup>
       <None Remove="@(Template)" />
     </ItemGroup>
     
-    <!--augment Compile items with ProjectPath-->
+    <!--Compile += ProjectPath-->
     <ItemGroup>
       <Compile Condition="'%(Compile.Link)'!=''">
         <ProjectPath>%(Compile.Link)</ProjectPath>
@@ -54,11 +76,13 @@
   >
     <PropertyGroup>
       <Template>@(Template)</Template>
+      
+      <!--TemplateType = 'lineByLine' or 'xml'-->
       <TemplateType>lineByLine</TemplateType>
       <TemplateType Condition="'%(Template.Extension)'=='.xml'">xml</TemplateType>
       <TemplateType Condition="'%(Template.Type)'!=''">%(Type)</TemplateType>
 
-      <!--get path of template project artifact (i.e. account for links)-->
+      <!--get path of template project artifact (accounts for links)-->
       <TemplateProjectPath>%(Template.ProjectPath)</TemplateProjectPath>
 
       <!--get output path of expansion-->
@@ -158,7 +182,6 @@
     />
 
     <!--copy to output-->
-    <MakeDir Directories="$([System.IO.Path]::GetDirectoryName('$(TemplateOutputPath)'))" />
     <Diff 
       SourceFiles="$(TemplateTempPath)"
       TargetFiles="$(TemplateOutputPath)"
@@ -167,6 +190,10 @@
     >
       <Output PropertyName="IsDifferent" TaskParameter="IsDifferent" />
     </Diff>
+    <MakeDir 
+      Condition="'%(Template.CopyToOutputDirectory)'=='Always' OR '$(IsDifferent)'=='true'"
+      Directories="$([System.IO.Path]::GetDirectoryName('$(TemplateOutputPath)'))" 
+    />
     <Copy
       Condition="'%(Template.CopyToOutputDirectory)'=='Always' OR '$(IsDifferent)'=='true'"
       SourceFiles="$(TemplateTempPath)"

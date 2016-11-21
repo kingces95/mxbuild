@@ -4,9 +4,10 @@
   <PropertyGroup>
     <ResolveMetaReferencesDependsOn>
       _FindBadMetaPlatform;
-      _ResolveMetaProjectReferences; <!--primitive-->
+      _ResolveProjectReferences; <!--primitive-->
+      _ResolveSelfReferences; <!--primitive-->
       _ResolveMetaProjectReferencePaths; <!--augmeneted-->
-      _ResolveProxyPlatform; <!--proxy-->
+      _ResolveShimPlatform; <!--proxy-->
       _ResolveMetaPlatformGroup; <!--group-->
       $(ResolveMetaReferencesDependsOn);
     </ResolveMetaReferencesDependsOn>
@@ -15,8 +16,13 @@
   <!--_ResolveMetaProjectReferencePaths-->
   <Target
     Name="_ResolveMetaProjectReferencePaths"
-    Condition="'$(MetaPlatformType)'=='$(PrimitiveMetaPlatformTypeId)' AND '$(BuildTarget)'=='Compile'"
+    Condition="'$(IsPrimitivePlatform)'=='true' AND '$(BuildTarget)'=='Compile'"
   >
+    <Error
+      Condition="'$(IsInVS)'!='true'"
+      Text="Platform 'Compile' is only supported when building in VS during intellisesne loading."
+    />
+
     <PropertyGroup>
       <!--
         MS.Common.targets intellisense logic: 
@@ -33,40 +39,39 @@
     </PropertyGroup>
   </Target>
 
-  <!--_ResolveMetaProjectReferences-->
-  <Target 
-    Name="_ResolveMetaProjectReferences"
-    Condition="'$(IsPrimitivePlatform)'=='true'"
+  <!--_ResolveProjectReferences-->
+  <Target
+    Name="_ResolveProjectReferences"
+    Condition="'$(IsPrimitivePlatform)'=='true' AND '@(ProjectReference)'!=''"
+    Outputs="%(ProjectReference.Identity)"
   >
-    <Error
-      Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('$(SupportedPlatforms.ToLower())', '(^|;)\s*$(MetaPlatform.ToLower())\s*($|;)'))"
-      Text="Platform '$(MetaPlatform)' is not supported by '$(MetaProjectName)' project type."
-    />
-    <Error
-      Condition="'$(BuildTarget)'=='Compile' AND '$(IsInVS)'!='true'"
-      Text="Platform 'Compile' is only supported when building in VS during intellisesne loading."
-    />
-
-    <!--MetaReference-->
+    <PropertyGroup>
+      <_Platform>%(ProjectReference.Platform)</_Platform>
+      <_Platform Condition="'$(_Platform)'==''">$(LibraryPlatform)</_Platform>
+    </PropertyGroup>
+    
+    <!--ProjectReference -> MetaReference-->
     <ItemGroup>
-
-      <!--ProjectReference -> MetaReference-->
-      <MetaReference
-        Condition="'@(ProjectReference)'!=''"
-        Include="@(ProjectReference)"
-      >
+      <MetaReference Include="%(ProjectReference.Identity)">
         <ReferenceSource>ProjectReference</ReferenceSource>
-        <Platform>$(LibraryPlatform)</Platform>
-        <AdditionalProperties>$(ClearRecursiveFrame)Platform=$(LibraryPlatform)</AdditionalProperties>
+        <Platform>$(_Platform)</Platform>
+        <AdditionalProperties>$(ClearRecursiveFrame)Platform=$(_Platform)</AdditionalProperties>
         <IncludeInReferences>true</IncludeInReferences>
+        <Name>%(ProjectReference.Name)</Name>
+        <Project>%(ProjectReference.Project)</Project>
       </MetaReference>
-      <ProjectReference Remove="@(ProjectReference)" />
+      <ProjectReference Remove="%(ProjectReference.Identity)" />
+    </ItemGroup>
+  </Target>
 
-      <!--SelfReference -> MetaReference-->
-      <MetaReference
-        Condition="'@(SelfReference)'!=''" 
-        Include="$(ProjFile)" 
-      >
+  <!--_ResolveSelfReferences-->
+  <Target 
+    Name="_ResolveSelfReferences"
+    Condition="'$(IsPrimitivePlatform)'=='true' AND '@(SelfReference)'!=''"
+  >
+    <!--SelfReference -> MetaReference-->
+    <ItemGroup>
+      <MetaReference Include="$(ProjFile)" >
         <ReferenceSource>SelfReference</ReferenceSource>
         <Platform>%(SelfReference.Identity)</Platform>
         <AdditionalProperties>$(ClearRecursiveFrame)Platform=%(Identity)</AdditionalProperties>
@@ -76,14 +81,14 @@
     </ItemGroup>
   </Target>
 
-  <!--_ResolveProxyPlatform-->
+  <!--_ResolveShimPlatform-->
   <Target
-    Name="_ResolveProxyPlatform"
-    Condition="'$(IsProxyPlatform)'=='true'"
+    Name="_ResolveShimPlatform"
+    Condition="'$(IsShimPlatform)'=='true'"
   >
     <ItemGroup>
       <MetaReference Include="$(ProjFile)">
-        <ReferenceSource>ProxyPlatform</ReferenceSource>
+        <ReferenceSource>ShimPlatform</ReferenceSource>
         <OutSubDir>$(OutSubDir)</OutSubDir>
         <Platform>$(PrimitivePlatform)</Platform>
         <AdditionalProperties>$(KeepRecursiveFrame)Platform=$(PrimitivePlatform);_MetaPlatform=$(MetaPlatform)</AdditionalProperties>
@@ -94,12 +99,23 @@
   <!--_ResolveMetaPlatformGroup-->
   <Target
     Name="_ResolveMetaPlatformGroup"
-    Condition="'$(IsGroupPlatform)'=='true'"
+    Condition="'@(PlatformGroup->AnyHaveMetadataValue('Identity', '$(Platform)'))'=='true'"
   >
+    <!--Members -> Property-->
+    <PropertyGroup>
+      <PlatformGroupMembers>@(PlatformGroup->WithMetadataValue('Identity', '$(Platform)')->'%(Platforms)')</PlatformGroupMembers>
+    </PropertyGroup>
+
+    <!--Members -> ItemGroup-->
+    <ItemGroup>
+      <PlatformGroupMembers Include="$(PlatformGroupMembers)"/>
+    </ItemGroup>
+    
+    <!--Members -> MetaReference-->
     <ItemGroup>
       <MetaReference Include="$(ProjFile)">
         <ReferenceSource>GroupPlatform</ReferenceSource>
-        <Platform>%(GroupMetaPlatformMembers.Identity)</Platform>
+        <Platform>%(PlatformGroupMembers.Identity)</Platform>
         <AdditionalProperties>$(KeepRecursiveFrame)Platform=%(Identity)</AdditionalProperties>
       </MetaReference>
     </ItemGroup>
@@ -108,9 +124,15 @@
   <!--_FindBadMetaPlatform-->
   <Target
     Name="_FindBadMetaPlatform"
-    Condition="'$(MetaPlatformType)'==''"
+    Condition="'$(IsPrimitivePlatform)'!='true'"
   >
-    <Error Text="Platform '$(Plat)' is unrecognized." />
+    <PropertyGroup>
+      <SupportedPlatforms>all;@(PlatformGroup->'%(Platforms)', ';')</SupportedPlatforms>
+    </PropertyGroup>
+    <Error 
+      Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('$(SupportedPlatforms.ToLower())', '(^|;)\s*$(Platform.ToLower())\s*($|;)'))"
+      Text="Platform '$(Platform)' is not supported by '$(ProjFile)'."
+    />
   </Target>
   
 </Project>

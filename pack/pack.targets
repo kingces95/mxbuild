@@ -241,16 +241,23 @@
     Name="_AddNugetAssemblyAttributes"
   >
     <ItemGroup>
-      <NugetPackageAttributeMap Include="NugetPackageAttribute">
-        <TargetFramework/>
-      </NugetPackageAttributeMap>
+      <NugetTargetFrameworkAttributeMap Include="NugetTargetFrameworkAttribute">
+        <Monkier>TargetFrameworkMonkier</Monkier>
+        <Version>TargetFrameworkVersion</Version>
+      </NugetTargetFrameworkAttributeMap>
     </ItemGroup>
 
     <AddAssemblyAttribute
       Assemblies="@(TargetResult)"
-      Attributes="@(NugetPackageAttributeMap)"
+      Attributes="@(NugetTargetFrameworkAttributeMap)"
     >
       <Output ItemName="NuspecReference" TaskParameter="Result" />
     </AddAssemblyAttribute>
+
+    <ItemGroup>
+      <NuspecReference Condition="true">
+        <TargetFramework>%(NuspecReference.TargetFrameworkMonkier)%(TargetFrameworkVersion)</TargetFramework>
+      </NuspecReference>
+    </ItemGroup>
   </Target>
 </Project>

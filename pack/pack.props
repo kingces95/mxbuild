@@ -6,6 +6,7 @@
   <!--version-->
   <PropertyGroup>
     <NuspecVersion>$(BuildVersion)</NuspecVersion>
+    <NuspecTargetFramework>$(NugetTargetFrameworkMoniker)$(NugetTargetFrameworkVersion)</NuspecTargetFramework>
   </PropertyGroup>
 
   <!--package-->
