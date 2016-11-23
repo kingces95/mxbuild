@@ -4,71 +4,38 @@
   ToolsVersion="12.0" 
   InitialTargets="_NugetPostPropsInitialTarget"
 >
-  <!--enumerate targets-->
+  <!--import targets files-->
   <PropertyGroup>
-    <NugetPackageTargetsShim>$(NugetPackageTargetsShim.Trim(';'))</NugetPackageTargetsShim>
-    <NugetImportCount>$(NugetPackageTargetsShim.Split(';').Length)</NugetImportCount>
-    <NugetImportCount Condition="'$(NugetPackageTargetsShim)'==''">0</NugetImportCount>
+    <NugetTargetList>$(NugetTargetList.Trim(';'))</NugetTargetList>
+    <NugetTargetListCount Condition="'$(NugetTargetList)'==''">0</NugetTargetListCount>
+    <NugetTargetListCount Condition="'$(NugetTargetListCount)'==''">$(NugetTargetList.Split(';').Length)</NugetTargetListCount>
 
-    <NugetImportIndex>0</NugetImportIndex>
+    <NugetTargetListIndex>0</NugetTargetListIndex>
 
-    <NugetImportFinished
-      Condition="$(NugetImportCount) == 0 OR '$(SkipNugetImports)'=='true'"
-    >true</NugetImportFinished>
+    <_NugetTargetListEmpty
+      Condition="$(NugetTargetListCount) == 0 OR '$(SkipNugetImports)'=='true'"
+    >true</_NugetTargetListEmpty>
 
-    <NugetImportCurrent Condition="'$(NugetImportFinished)'!='true'"
-      >$(NugetPackageTargetsShim.Split(';')[$(NugetImportIndex)])</NugetImportCurrent>
+    <_NugetTarget Condition="'$(_NugetTargetListEmpty)'!='true'"
+      >$(NugetTargetList.Split(';')[$(NugetTargetListIndex)])</_NugetTarget>
   </PropertyGroup>
-  
-  <!--import nuget dependency target files-->
-  <Import Project="$(NugetImportCurrent)" Condition="'$(NugetImportFinished)'!='true'" />
-
-  <!--_BuildNugetDependencyAndReferenceItemGroups-->
-  <Target
-    Name="_BuildNugetDependencyAndReferenceItemGroups"
-    Outputs="%(NugetPackageDir.Identity)"
-    Condition="'@(NugetPackageDir)'!=''"
-  >
-    <PropertyGroup>
-      <_NugetPackageDir>%(NugetPackageDir.Identity)</_NugetPackageDir>
-      <_TargetFrameworkSubDir>%(NugetPackageDir.TargetFrameworkSubDir)</_TargetFrameworkSubDir>
-      
-      <!--infer package id and version from current directory-->
-      <_NugetPackageFullName>$([System.IO.Path]::GetFileName( $([System.IO.Path]::GetDirectoryName($(_NugetPackageDir))) ))</_NugetPackageFullName>
-      <_NugetPackageId>$([System.Text.RegularExpressions.Regex]::Match('$(_NugetPackageFullName)','$(NugetPackageIdRegex)'))</_NugetPackageId>
-      <_NugetPackageVersion>$([System.Text.RegularExpressions.Regex]::Match('$(_NugetPackageFullName)','$(NugetPackageVersionRegex)'))</_NugetPackageVersion>
-
-      <!--construct well known nuget directories-->
-      <_NugetLibDir>$(_NugetPackageDir)lib\$(_TargetFrameworkSubDir)</_NugetLibDir>
-    </PropertyGroup>
-
-    <ItemGroup>
-      <!--augment NugetDependency-->
-      <NugetDependency Include="$(_NugetPackageId)" >
-        <Version>$(_NugetPackageVersion)</Version>
-      </NugetDependency>
-
-      <!--augment NugetReference-->
-      <NugetReference Include="$(_NugetLibDir)*.dll" />
-    </ItemGroup>
-  </Target>
+  <Import Condition="'$(_NugetTargetListEmpty)'!='true'" Project="$(_NugetTarget)" />
 
   <!--_NugetPostPropsInitialTarget-->
   <Target 
     Name="_NugetPostPropsInitialTarget"
-    DependsOnTargets="_BuildNugetDependencyAndReferenceItemGroups"
+    Condition="'@(NugetReference)'!=''"
   >
     <PropertyGroup Condition="'$(NugetCopyLocal)'==''">
       <NugetCopyLocal>false</NugetCopyLocal>
     </PropertyGroup>
     
     <!--NugetReference -> Reference-->
-    <ItemGroup Condition="'@(NugetReference)'!=''">
+    <ItemGroup>
       <Reference Include="@(NugetReference->'%(Filename)%(Extension)')">
         <HintPath>$([MSBuild]::MakeRelative($(ProjDir), %(Identity)))</HintPath>
         <Private>$(NugetCopyLocal)</Private>
       </Reference>
     </ItemGroup>
   </Target>
-  
 </Project>

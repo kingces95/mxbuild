@@ -9,30 +9,30 @@
 
     <ItemGroup>
       <_NugetPackageAttributeMap Include="NugetPackageAttribute">
-        <Version>NuspecVersion</Version>
-        <Name>NuspecId</Name>
+        <Version/>
+        <Name/>
       </_NugetPackageAttributeMap>
     </ItemGroup>
 
-    <!--extract custom attributes-->
-    <!--<AddAssemblyAttribute
-      Assemblies="@(ReferencePath)"
-      Attributes="@(_NugetPackageAttributeMap)"
-    >
-      <Output ItemName="_ReferencedNugetPackage" TaskParameter="Result" />
-    </AddAssemblyAttribute>-->
     <GetAssemblyAttribute
       Assemblies="@(ReferencePath)"
       Attribute="@(_NugetPackageAttributeMap)"
     >
-      <Output ItemName="_ReferencedNugetPackage" TaskParameter="Result" />
+      <Output ItemName="_NugetDependency" TaskParameter="Result" />
     </GetAssemblyAttribute>
 
     <!--augment NugetDependency-->
     <ItemGroup>
-      <NugetDependency Include="@(_ReferencedNugetPackage->'%(NuspecId)')">
-        <Version>%(_ReferencedNugetPackage.NuspecVersion)</Version>
+      <NugetDependency 
+        Condition="'@(_NugetDependency)'!=''"
+        Include="@(_NugetDependency->'%(Name).%(Version)')"
+      >
+        <Name>%(Name)</Name>
+        <Version>%(Version)</Version>
       </NugetDependency>
+      
+      <!--remove intra nuget dependencies-->
+      <NugetDependency Remove="$(NuspecId).$(NuspecVersion)"/>
     </ItemGroup>
     
     <Message 
@@ -40,5 +40,4 @@
       Condition="@(_ReferencedNugetPackage)!=''"
     />
   </Target>
-
 </Project>
