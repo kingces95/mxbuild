@@ -24,8 +24,8 @@
       <!--IsCompositePlatform -> MetaReference-->
       <MetaReference Include="$(ProjFile)" >
         <ReferenceSource>PartReference</ReferenceSource>
-        <Platform>part</Platform>
         <AdditionalProperties>$(KeepRecursiveFrame)_IsPartPlatform=true</AdditionalProperties>
+        <PlatformHint>part</PlatformHint>
         <Name>$(AssemblyName)</Name>
         <ExcludeFromTargetResult>true</ExcludeFromTargetResult>
       </MetaReference>

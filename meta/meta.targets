@@ -54,8 +54,8 @@
     <ItemGroup>
       <MetaReference Include="%(ProjectReference.Identity)">
         <ReferenceSource>ProjectReference</ReferenceSource>
-        <Platform>$(_Platform)</Platform>
         <AdditionalProperties>$(ClearRecursiveFrame)Platform=$(_Platform)</AdditionalProperties>
+        <PlatformHint>$(_Platform)</PlatformHint>
         <IncludeInReferences>true</IncludeInReferences>
         <Name>%(ProjectReference.Name)</Name>
         <Project>%(ProjectReference.Project)</Project>
@@ -73,8 +73,8 @@
     <ItemGroup>
       <MetaReference Include="$(ProjFile)" >
         <ReferenceSource>SelfReference</ReferenceSource>
-        <Platform>%(SelfReference.Identity)</Platform>
-        <AdditionalProperties>$(ClearRecursiveFrame)Platform=%(Identity)</AdditionalProperties>
+        <AdditionalProperties>$(ClearRecursiveFrame)Platform=%(SelfReference.Identity)</AdditionalProperties>
+        <PlatformHint>%(SelfReference.Identity)</PlatformHint>
         <Name>$(AssemblyName)</Name>
         <IncludeInReferences>true</IncludeInReferences>
       </MetaReference>
@@ -90,8 +90,8 @@
       <MetaReference Include="$(ProjFile)">
         <ReferenceSource>ShimPlatform</ReferenceSource>
         <OutSubDir>$(OutSubDir)</OutSubDir>
-        <Platform>$(PrimitivePlatform)</Platform>
-        <AdditionalProperties>$(KeepRecursiveFrame)Platform=$(PrimitivePlatform);_MetaPlatform=$(MetaPlatform)</AdditionalProperties>
+        <AdditionalProperties>$(KeepRecursiveFrame)_MetaPlatform=$(MetaPlatform);Platform=$(PrimitivePlatform)</AdditionalProperties>
+        <PlatformHint>$(PrimitivePlatform)</PlatformHint>
       </MetaReference>
     </ItemGroup>
   </Target>
@@ -115,8 +115,8 @@
     <ItemGroup>
       <MetaReference Include="$(ProjFile)">
         <ReferenceSource>GroupPlatform</ReferenceSource>
-        <Platform>%(PlatformGroupMembers.Identity)</Platform>
-        <AdditionalProperties>$(KeepRecursiveFrame)Platform=%(Identity)</AdditionalProperties>
+        <AdditionalProperties>$(KeepRecursiveFrame)Platform=%(PlatformGroupMembers.Identity)</AdditionalProperties>
+        <PlatformHint>%(Identity)</PlatformHint>
       </MetaReference>
     </ItemGroup>
   </Target>
@@ -126,10 +126,15 @@
     Name="_FindBadMetaPlatform"
     Condition="'$(IsPrimitivePlatform)'!='true'"
   >
+    <ItemGroup>
+      <SupportedPlatforms Include="@(PlatformGroup)"/>
+      <SupportedPlatforms Include="@(PlatformGroup->'%(Platforms)')"/>
+    </ItemGroup>
     <PropertyGroup>
-      <SupportedPlatforms>all;@(PlatformGroup->'%(Platforms)', ';')</SupportedPlatforms>
+      <SupportedPlatforms>@(SupportedPlatforms->'%(Identity)', ';')</SupportedPlatforms>
     </PropertyGroup>
-    <Error 
+    
+    <Error
       Condition="!$([System.Text.RegularExpressions.Regex]::IsMatch('$(SupportedPlatforms.ToLower())', '(^|;)\s*$(Platform.ToLower())\s*($|;)'))"
       Text="Platform '$(Platform)' is not supported by '$(ProjFile)'."
     />

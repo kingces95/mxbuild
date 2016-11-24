@@ -148,7 +148,7 @@
 
     <Message 
       Importance="high" 
-      Text="$(Tag) [$(FrameId)]: $(AssemblyName) -> { @(MetaReference->'%(Platform)', ', ') }"
+      Text="$(Tag) [$(FrameId)]: $(AssemblyName) -> { @(MetaReference->'%(PlatformHint)', ', ') }"
     />
     <Message
       Importance="high"
