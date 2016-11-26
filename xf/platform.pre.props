@@ -7,16 +7,20 @@
   <Import Project="meta.platform.pre.props"/>
   <Import Project="mobile.platform.pre.props"/>
 
+  <!--xamarin forms design-->
+  <PropertyGroup Condition="'$(MetaPlatform)' == '$(XamarinFormsDesign)'">
+    <DefineConstants>$(DefineConstants)XAMARIN_FORMS_DESIGN;</DefineConstants>
+    <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
+  </PropertyGroup>
+
   <!--netstandard-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(NetStandardLibraryPlatformId)'">
-    <NugetTargetFrameworkMoniker>netstandard</NugetTargetFrameworkMoniker>
     <NugetTargetFrameworkVersion/>
     <TargetsFile>$(MSBuildToolsPath)\Microsoft.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
   <!--portable-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(DotNetLibraryPlatformId)'">
-    <NugetTargetFrameworkMoniker>portable</NugetTargetFrameworkMoniker>
     <NugetTargetFrameworkVersion>-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10</NugetTargetFrameworkVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetsFile>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</TargetsFile>
@@ -24,7 +28,6 @@
 
   <!--android binding-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(AndroidBindingsLibraryPlatformId)'">
-    <NugetTargetFrameworkMoniker>MonoAndroid</NugetTargetFrameworkMoniker>
     <NugetTargetFrameworkVersion>43</NugetTargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)ANDROID;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets</TargetsFile>
@@ -32,7 +35,6 @@
 
   <!--android-->
   <PropertyGroup Condition="'$(MobilePlatform)' == '$(AndroidMobilePlatformId)'">
-    <NugetTargetFrameworkMoniker>MonoAndroid</NugetTargetFrameworkMoniker>
     <NugetTargetFrameworkVersion>43</NugetTargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)ANDROID;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets</TargetsFile>
@@ -46,7 +48,6 @@
   <!--ios unified-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(IosUnifiedMobileSubPlatformId)'">
     <NugetTargetFrameworkVersion>10</NugetTargetFrameworkVersion>
-    <NugetTargetFrameworkMoniker>Xamarin.iOS</NugetTargetFrameworkMoniker>
     <DefineConstants>$(DefineConstants)IOS_UNIFIED;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets</TargetsFile>
   </PropertyGroup>
@@ -54,7 +55,6 @@
   <!--ios classic-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(IosClassicMobileSubPlatformId)'">
     <NugetTargetFrameworkVersion>10</NugetTargetFrameworkVersion>
-    <NugetTargetFrameworkMoniker>MonoTouch</NugetTargetFrameworkMoniker>
     <DefineConstants>$(DefineConstants)IOS_CLASSIC;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets</TargetsFile>
   </PropertyGroup>
@@ -66,7 +66,6 @@
 
   <!--windows universal-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsUniversalMobileSubPlatformId)'">
-    <NugetTargetFrameworkMoniker>uap</NugetTargetFrameworkMoniker>
     <NugetTargetFrameworkVersion>10.0</NugetTargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_UWP;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
@@ -74,7 +73,6 @@
 
   <!--windows phone-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsPhoneMobileSubPlatformId)'">
-    <NugetTargetFrameworkMoniker>wpa</NugetTargetFrameworkMoniker>
     <NugetTargetFrameworkVersion>81</NugetTargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_PHONE_APP;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
@@ -82,7 +80,6 @@
 
   <!--windows tablet-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsTabletMobileSubPlatformId)'">
-    <NugetTargetFrameworkMoniker>win</NugetTargetFrameworkMoniker>
     <NugetTargetFrameworkVersion>81</NugetTargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_APP;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
@@ -92,5 +89,11 @@
   <PropertyGroup Condition="'$(Platform)' == '$(PackPlatformId)'">
     <TargetsFile>$(ExtPackDir)pack.targets</TargetsFile>
   </PropertyGroup>
-  
+
+  <!--IsLibraryPlatform-->
+  <PropertyGroup Condition="'$(IsLibraryPlatform)'=='true'">
+    <OutSubDir Condition="'$(NugetTargetFrameworkVersion)'!=''"
+      >$(MetaPlatform)$(NugetTargetFrameworkVersion)\</OutSubDir>
+  </PropertyGroup>
+
 </Project>

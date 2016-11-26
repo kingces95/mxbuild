@@ -10,7 +10,7 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(NetStandardLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>netstandard</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
     <When Condition="'$(MetaPlatform)'=='$(DotNetLibraryPlatformId)'">
@@ -18,7 +18,7 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(DotNetLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>portable</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
 
@@ -28,7 +28,7 @@
         <IsLibraryPlatform>true</IsLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(AndroidBindingsLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>MonoAndroid</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
 
@@ -39,7 +39,7 @@
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(AndroidLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>MonoAndroid</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
     <When Condition="'$(MetaPlatform)'=='$(IosUnifiedLibraryPlatformId)'">
@@ -48,7 +48,7 @@
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(IosUnifiedLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>Xamarin.iOS</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
     <When Condition="'$(MetaPlatform)'=='$(IosClassicLibraryPlatformId)'">
@@ -57,7 +57,7 @@
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(IosClassicLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>MonoTouch</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
     <When Condition="'$(MetaPlatform)'=='$(WindowsUniversalLibraryPlatformId)'">
@@ -66,7 +66,7 @@
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(WindowsUniversalLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>uap</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
     <When Condition="'$(MetaPlatform)'=='$(WindowsPhoneLibraryPlatformId)'">
@@ -75,7 +75,7 @@
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(WindowsPhoneLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>wpa</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
     <When Condition="'$(MetaPlatform)'=='$(WindowsTabletLibraryPlatformId)'">
@@ -84,7 +84,7 @@
         <IsMobileLibraryPlatform>true</IsMobileLibraryPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(WindowsTabletLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>lib\$(MetaPlatform)\</OutSubDir>
+        <NugetTargetFrameworkMoniker>win</NugetTargetFrameworkMoniker>
       </PropertyGroup>
     </When>
 
@@ -96,7 +96,6 @@
         <IsMobileTestPlatform>true</IsMobileTestPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(AndroidAutomationLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
     <When Condition="'$(MetaPlatform)'=='$(IosAutomationLibraryPlatformId)'">
@@ -106,7 +105,6 @@
         <IsMobileTestPlatform>true</IsMobileTestPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(IosAutomationLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
     <When Condition="'$(MetaPlatform)'=='$(WindowsAutomationLibraryPlatformId)'">
@@ -116,7 +114,6 @@
         <IsMobileTestPlatform>true</IsMobileTestPlatform>
         <PrimitivePlatform>$(AnyCPUPlatformId)</PrimitivePlatform>
         <MetaPlatform>$(WindowsAutomationLibraryPlatformId)</MetaPlatform>
-        <OutSubDir>$(MetaPlatform)\</OutSubDir>
       </PropertyGroup>
     </When>
   </Choose>
@@ -124,6 +121,7 @@
   <!--IsLibraryPlatform-->
   <PropertyGroup Condition="'$(IsLibraryPlatform)'=='true'">
     <LibraryPlatform>$(MetaPlatform)</LibraryPlatform>
+    <OutSubDir>$(MetaPlatform)\</OutSubDir>
   </PropertyGroup>
 
   <!--app-->
