@@ -38,7 +38,7 @@ ga=git add .
 gc=git commit -m $*
 gl=git log -1 $1
 nuke=git clean -fdXq
-scorch=git clean -fdXq -e !lfx
+scorch=git clean -fdX -e !lfx
 
 ;= idProj
 build-id=msbuild %idProj% /v:m

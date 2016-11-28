@@ -88,7 +88,7 @@
   >
     <ItemGroup>
       <MetaReference Include="$(ProjFile)">
-        <ReferenceSource>ShimPlatform</ReferenceSource>
+        <ReferenceSource>ShimReference</ReferenceSource>
         <OutSubDir>$(OutSubDir)</OutSubDir>
         <AdditionalProperties>$(KeepRecursiveFrame)_MetaPlatform=$(MetaPlatform);Platform=$(PrimitivePlatform)</AdditionalProperties>
         <PlatformHint>$(PrimitivePlatform)</PlatformHint>
@@ -99,11 +99,11 @@
   <!--_ResolveMetaPlatformGroup-->
   <Target
     Name="_ResolveMetaPlatformGroup"
-    Condition="'@(PlatformGroup->AnyHaveMetadataValue('Identity', '$(Platform)'))'=='true'"
+    Condition="'@(PlatformGroup->AnyHaveMetadataValue('Identity', '$(MetaPlatform)'))'=='true'"
   >
     <!--Members -> Property-->
     <PropertyGroup>
-      <PlatformGroupMembers>@(PlatformGroup->WithMetadataValue('Identity', '$(Platform)')->'%(Platforms)')</PlatformGroupMembers>
+      <PlatformGroupMembers>@(PlatformGroup->WithMetadataValue('Identity', '$(MetaPlatform)')->'%(Platforms)')</PlatformGroupMembers>
     </PropertyGroup>
 
     <!--Members -> ItemGroup-->
@@ -114,8 +114,8 @@
     <!--Members -> MetaReference-->
     <ItemGroup>
       <MetaReference Include="$(ProjFile)">
-        <ReferenceSource>GroupPlatform</ReferenceSource>
-        <AdditionalProperties>$(KeepRecursiveFrame)Platform=%(PlatformGroupMembers.Identity)</AdditionalProperties>
+        <ReferenceSource>GroupReference</ReferenceSource>
+        <AdditionalProperties>$(KeepRecursiveFrame)_MetaPlatform=%(PlatformGroupMembers.Identity);Platform=%(PlatformGroupMembers.Identity)</AdditionalProperties>
         <PlatformHint>%(Identity)</PlatformHint>
       </MetaReference>
     </ItemGroup>

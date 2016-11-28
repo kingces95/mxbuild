@@ -3,39 +3,41 @@
 
   <Import Project="ids.platform.pre.props"/>
   <Import Project="primitive.platform.pre.props"/>
-  <Import Project="shim.platform.pre.props"/>
+  <Import Project="shim.platform.pre.props" Condition="'$(IsPrimitivePlatform)'!='true'"/>
   <Import Project="meta.platform.pre.props"/>
   <Import Project="mobile.platform.pre.props"/>
 
   <!--xamarin forms design-->
-  <PropertyGroup Condition="'$(MetaPlatform)' == '$(XamarinFormsDesign)'">
+  <PropertyGroup Condition="'$(MetaPlatformIdentifier)' == '$(XamarinFormsDesign)'">
     <DefineConstants>$(DefineConstants)XAMARIN_FORMS_DESIGN;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
   <!--netstandard-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(NetStandardLibraryPlatformId)'">
-    <NugetTargetFrameworkVersion/>
     <TargetsFile>$(MSBuildToolsPath)\Microsoft.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
   <!--portable-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(DotNetLibraryPlatformId)'">
-    <NugetTargetFrameworkVersion>-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10</NugetTargetFrameworkVersion>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile$(MetaPlatformVersion)</TargetFrameworkProfile>
+
+    <!--Profile259-->
+    <TargetFrameworkVersion Condition="'$(MetaPlatformVersion)'=='259'">v4.5</TargetFrameworkVersion>
+    
     <TargetsFile>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
   <!--android binding-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(AndroidBindingsLibraryPlatformId)'">
-    <NugetTargetFrameworkVersion>43</NugetTargetFrameworkVersion>
+    <TargetFrameworkVersion>v$(MetaPlatformVersion)</TargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)ANDROID;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets</TargetsFile>
   </PropertyGroup>
 
   <!--android-->
   <PropertyGroup Condition="'$(MobilePlatform)' == '$(AndroidMobilePlatformId)'">
-    <NugetTargetFrameworkVersion>43</NugetTargetFrameworkVersion>
+    <TargetFrameworkVersion>v$(MetaPlatformVersion)</TargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)ANDROID;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets</TargetsFile>
   </PropertyGroup>
@@ -47,14 +49,12 @@
 
   <!--ios unified-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(IosUnifiedMobileSubPlatformId)'">
-    <NugetTargetFrameworkVersion>10</NugetTargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)IOS_UNIFIED;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
   <!--ios classic-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(IosClassicMobileSubPlatformId)'">
-    <NugetTargetFrameworkVersion>10</NugetTargetFrameworkVersion>
     <DefineConstants>$(DefineConstants)IOS_CLASSIC;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets</TargetsFile>
   </PropertyGroup>
@@ -66,21 +66,24 @@
 
   <!--windows universal-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsUniversalMobileSubPlatformId)'">
-    <NugetTargetFrameworkVersion>10.0</NugetTargetFrameworkVersion>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>$(MetaPlatformVersion)</TargetPlatformVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_UWP;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
   <!--windows phone-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsPhoneMobileSubPlatformId)'">
-    <NugetTargetFrameworkVersion>81</NugetTargetFrameworkVersion>
+    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
+    <TargetPlatformVersion>$(MetaPlatformVersion)</TargetPlatformVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_PHONE_APP;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
   <!--windows tablet-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsTabletMobileSubPlatformId)'">
-    <NugetTargetFrameworkVersion>81</NugetTargetFrameworkVersion>
+    <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
+    <TargetPlatformVersion>$(MetaPlatformVersion)</TargetPlatformVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_APP;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
   </PropertyGroup>
@@ -90,10 +93,15 @@
     <TargetsFile>$(ExtPackDir)pack.targets</TargetsFile>
   </PropertyGroup>
 
+  
   <!--IsLibraryPlatform-->
   <PropertyGroup Condition="'$(IsLibraryPlatform)'=='true'">
-    <OutSubDir Condition="'$(NugetTargetFrameworkVersion)'!=''"
-      >$(MetaPlatform)$(NugetTargetFrameworkVersion)\</OutSubDir>
+    <OutSubDir>$(MetaPlatformIdentifier)\$(MetaPlatformVersion)\</OutSubDir>
+  </PropertyGroup>
+
+  <!--!IsPrimitivePlatform-->
+  <PropertyGroup Condition="'$(IsPrimitivePlatform)'!='true'">
+    <TargetsFile/>
   </PropertyGroup>
 
 </Project>

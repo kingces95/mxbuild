@@ -9,17 +9,24 @@
     <MetaVerbosity>$(Verbosity)</MetaVerbosity>
   </PropertyGroup>
 
+  <!--Platform-->
   <PropertyGroup Condition="'$(Platform)'==''">
     <Platform>all</Platform>
     <Platform Condition="'$(MetaPlatform)'!=''">$(MetaPlatform)</Platform>
     <Plat>$(Platform)</Plat>
   </PropertyGroup>
 
+  <!--MetaPlatform-->
   <PropertyGroup>
+    <MetaPlatform Condition="'$(MetaPlatform)'==''">$(Platform)</MetaPlatform>
     <MetaPlatform Condition="'$(_MetaPlatform)'!=''">$(_MetaPlatform)</MetaPlatform>
     <ClearRecursiveFrame>$(ClearRecursiveFrame)_MetaPlatform=;</ClearRecursiveFrame>
     <KeepRecursiveFrame>$(KeepRecursiveFrame)_MetaPlatform=$(_MetaPlatform);</KeepRecursiveFrame>
     <FrameProperties>$(FrameProperties)MetaPlatform;</FrameProperties>
+
+    <!--version & monkier-->
+    <MetaPlatformVersion>$([System.Text.RegularExpressions.Regex]::Match('$(MetaPlatform)', '(?$(Lt)=-)[\d][\d.]*'))</MetaPlatformVersion>
+    <MetaPlatformIdentifier Condition="'$(MetaPlatformVersion)'!=''">$([System.Text.RegularExpressions.Regex]::Match('$(MetaPlatform)', '[^\d-]*'))</MetaPlatformIdentifier>
   </PropertyGroup>
 
   <!--library platform ids-->

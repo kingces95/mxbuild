@@ -5,10 +5,4 @@
     <ExtNugetDir>$(MSBuildThisFileDirectory)</ExtNugetDir>
   </PropertyGroup>
 
-  <!--Regex-->
-  <PropertyGroup>
-    <NugetPackageIdRegex>([.]?[^.0-9][^.]*)*</NugetPackageIdRegex>
-    <NugetPackageVersionRegex>(?&lt;=[.])[0-9].*</NugetPackageVersionRegex>
-  </PropertyGroup>
-
 </Project>

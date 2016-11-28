@@ -119,6 +119,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <_Property Include="MetaPlatformVersion" />
+      <_Property Include="MetaPlatformIdentifier" />
       <_Property Include="BuildTarget" />
       <_Property Include="ProjFile" />
       <_Property Include="IsPrimitivePlatform" />
@@ -138,6 +140,8 @@
       <_Property Include="NugetTargetFrameworkVersion" />
     </ItemGroup>
     <ItemGroup Condition="'$(IsPrimitivePlatform)'=='true'">
+      <_Property Include="TargetFrameworkVersion" />
+      <_Property Include="TargetFrameworkProfile" />
       <_Property Include="OutBaseDir" />
       <_Property Include="OutSubDir" />
       <_Property Include="OutDirAbsolute" />
@@ -154,6 +158,13 @@
       Importance="high"
       Text="  %(_Property.Identity) -> $(%(Identity))"
       Condition="'$(%(Identity))'!='' AND '$(%(Identity))'!='false'"
+    />
+    
+    <!--ProjectReference-->
+    <Message
+      Importance="high"
+      Text="  ProjectReferences:"
+      Condition="'@(ProjectReference)'!=''"
     />
     <Message
       Importance="high"
