@@ -22,16 +22,19 @@
   <Import Condition="'$(_NugetTargetListEmpty)'!='true'" Project="$(_NugetTarget)" />
 
   <!--_NugetPostPropsInitialTarget-->
-  <Target 
-    Name="_NugetPostPropsInitialTarget"
-    Condition="'@(NugetReference)'!=''"
-  >
+  <Target Name="_NugetPostPropsInitialTarget">
     <PropertyGroup Condition="'$(NugetCopyLocal)'==''">
       <NugetCopyLocal>false</NugetCopyLocal>
+      <NugetCopyLocal Condition="'$(NuspecIsBuildPackage)'=='true'">true</NugetCopyLocal>
+    </PropertyGroup>
+
+    <PropertyGroup>
+      <NuspecSubDir>lib</NuspecSubDir>
+      <NuspecSubDir Condition="'$(NuspecIsBuildPackage)'=='true'">build</NuspecSubDir>
     </PropertyGroup>
     
     <!--NugetReference -> Reference-->
-    <ItemGroup>
+    <ItemGroup Condition="'@(NugetReference)'!=''">
       <Reference Include="@(NugetReference->'%(Filename)%(Extension)')">
         <HintPath>$([MSBuild]::MakeRelative($(ProjDir), %(Identity)))</HintPath>
         <Private>$(NugetCopyLocal)</Private>

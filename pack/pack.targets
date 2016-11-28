@@ -9,12 +9,6 @@
 
   <Target Name="PackTargetsInitialTargets">
 
-    <!--package-->
-    <PropertyGroup>
-      <!--$(NuspecId) is declared in nuspec.props which resides next to the .csproj file-->
-      <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
-    </PropertyGroup>
-
     <!--msbuild /v:m /p:platform=pack /t:_PackCreate /p:Assemblies=-->
     <ItemGroup Condition="'$(Assemblies)'!=''">
       <TargetResult Include="$(Assemblies)"/>
@@ -234,12 +228,16 @@
       <NuspecVersion Condition="'$(NuspecPreReleaseVersion)'!=''">$(NuspecVersion)-$(NuspecPreReleaseVersion)</NuspecVersion>
     </PropertyGroup>
 
+    <!--package-->
+    <PropertyGroup>
+      <!--$(NuspecId) is declared in nuspec.props which resides next to the .csproj file-->
+      <NugetPackagePath>$(PackDir)$(NuspecId).$(NuspecVersion)$(NugetPackageExt)</NugetPackagePath>
+    </PropertyGroup>
+
   </Target>
 
   <!--_AddNugetAssemblyAttributes-->
-  <Target
-    Name="_AddNugetAssemblyAttributes"
-  >
+  <Target Name="_AddNugetAssemblyAttributes">
     <ItemGroup>
       <NugetTargetFrameworkAttributeMap Include="NugetTargetFrameworkAttribute">
         <Monkier>TargetFrameworkMonkier</Monkier>
@@ -251,13 +249,18 @@
       Assemblies="@(TargetResult)"
       Attributes="@(NugetTargetFrameworkAttributeMap)"
     >
-      <Output ItemName="NuspecReference" TaskParameter="Result" />
+      <Output ItemName="NuspecFile" TaskParameter="Result" />
     </AddAssemblyAttribute>
 
     <ItemGroup>
-      <NuspecReference Condition="true">
-        <TargetFramework>%(NuspecReference.TargetFrameworkMonkier)%(TargetFrameworkVersion)</TargetFramework>
-      </NuspecReference>
+      <NuspecFile Condition="true">
+        <TargetFramework>%(NuspecFile.TargetFrameworkMonkier)%(TargetFrameworkVersion)</TargetFramework>
+      </NuspecFile>
+
+      <NuspecReference
+        Condition="'$(NuspecIsBuildPackage)'!='true'"
+        Include="@(NuspecFile)"
+      />
     </ItemGroup>
   </Target>
 </Project>

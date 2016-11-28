@@ -17,6 +17,7 @@
 
     <!--netstandard-->
     <NetStandardLibraryPlatformId>netstandard</NetStandardLibraryPlatformId>
+    <NetStandardLibraryPlatformId-4_5>$(NetStandardLibraryPlatformId)-4.5</NetStandardLibraryPlatformId-4_5>
 
     <!--dotnet-->
     <DotNetLibraryPlatformId>dotnet</DotNetLibraryPlatformId>
@@ -35,7 +36,7 @@
 
     <IosClassicLibraryPlatformId>monoTouch</IosClassicLibraryPlatformId>
     <IosClassicLibraryPlatformId-1_0>$(IosUnifiedLibraryPlatformId)-1.0</IosClassicLibraryPlatformId-1_0>
-    
+
     <!--uap-->
     <WindowsUniversalLibraryPlatformId>uap</WindowsUniversalLibraryPlatformId>
     <WindowsUniversalLibraryPlatformId-10_0_10586_0>$(WindowsUniversalLibraryPlatformId)-10.0.10586.0</WindowsUniversalLibraryPlatformId-10_0_10586_0>
@@ -43,17 +44,16 @@
     <!--wpa-->
     <WindowsPhoneLibraryPlatformId>wpa</WindowsPhoneLibraryPlatformId>
     <WindowsPhoneLibraryPlatformId-8_1>$(WindowsPhoneLibraryPlatformId)-8.1</WindowsPhoneLibraryPlatformId-8_1>
-    
+
     <!--win-->
     <WindowsTabletLibraryPlatformId>win</WindowsTabletLibraryPlatformId>
-      <WindowsTabletLibraryPlatformId-8_1>$(WindowsPhoneLibraryPlatformId)-8.1</WindowsTabletLibraryPlatformId-8_1>
+    <WindowsTabletLibraryPlatformId-8_1>$(WindowsPhoneLibraryPlatformId)-8.1</WindowsTabletLibraryPlatformId-8_1>
 
     <!--mobile automation-->
     <AndroidAutomationLibraryPlatformId>android.aut</AndroidAutomationLibraryPlatformId>
     <IosAutomationLibraryPlatformId>ios.aut</IosAutomationLibraryPlatformId>
     <WindowsAutomationLibraryPlatformId>windows.aut</WindowsAutomationLibraryPlatformId>
-  
-</PropertyGroup>
+  </PropertyGroup>
 
   <!--app-->
   <PropertyGroup>
