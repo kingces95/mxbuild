@@ -9,29 +9,21 @@
 
     <ItemGroup>
       <_NugetPackageAttributeMap Include="NugetPackageAttribute">
-        <Version/>
-        <Name/>
+        <Version>${Version}</Version>
+        <Name>${Name}</Name>
       </_NugetPackageAttributeMap>
     </ItemGroup>
 
     <GetAssemblyAttribute
       Assemblies="@(ReferencePath)"
       Attribute="@(_NugetPackageAttributeMap)"
+      Identity="${Name}.${Version}"
     >
-      <Output ItemName="_NugetDependency" TaskParameter="Result" />
+      <Output ItemName="NugetDependency" TaskParameter="Result" />
     </GetAssemblyAttribute>
 
-    <!--augment NugetDependency-->
+    <!--remove intra nuget dependencies-->
     <ItemGroup>
-      <NugetDependency 
-        Condition="'@(_NugetDependency)'!=''"
-        Include="@(_NugetDependency->'%(Name).%(Version)')"
-      >
-        <Name>%(Name)</Name>
-        <Version>%(Version)</Version>
-      </NugetDependency>
-      
-      <!--remove intra nuget dependencies-->
       <NugetDependency Remove="$(NuspecId).$(NuspecVersion)"/>
     </ItemGroup>
     

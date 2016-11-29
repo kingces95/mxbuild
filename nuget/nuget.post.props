@@ -25,12 +25,12 @@
   <Target Name="_NugetPostPropsInitialTarget">
     <PropertyGroup Condition="'$(NugetCopyLocal)'==''">
       <NugetCopyLocal>false</NugetCopyLocal>
-      <NugetCopyLocal Condition="'$(NuspecIsBuildPackage)'=='true'">true</NugetCopyLocal>
     </PropertyGroup>
 
-    <PropertyGroup>
-      <NuspecSubDir>lib</NuspecSubDir>
-      <NuspecSubDir Condition="'$(NuspecIsBuildPackage)'=='true'">build</NuspecSubDir>
+    <!--NugetIsBuildAssembly-->
+    <PropertyGroup Condition="'$(NugetIsBuildAssembly)'=='true'">
+      <NugetCopyLocal>true</NugetCopyLocal>
+      <DefineConstants>$(DefineConstants)NUGET_BUILD_ASSEMBLY;</DefineConstants>
     </PropertyGroup>
     
     <!--NugetReference -> Reference-->

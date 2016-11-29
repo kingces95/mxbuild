@@ -47,7 +47,7 @@
 
     <!--win-->
     <WindowsTabletLibraryPlatformId>win</WindowsTabletLibraryPlatformId>
-    <WindowsTabletLibraryPlatformId-8_1>$(WindowsPhoneLibraryPlatformId)-8.1</WindowsTabletLibraryPlatformId-8_1>
+    <WindowsTabletLibraryPlatformId-8_1>$(WindowsTabletLibraryPlatformId)-8.1</WindowsTabletLibraryPlatformId-8_1>
 
     <!--mobile automation-->
     <AndroidAutomationLibraryPlatformId>android.aut</AndroidAutomationLibraryPlatformId>

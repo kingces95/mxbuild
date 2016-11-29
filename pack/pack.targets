@@ -200,16 +200,17 @@
     DependsOnTargets="_AddNugetAssemblyAttributes"
     Outputs="%(NuspecReference.Identity)"
   >
+    <!--NugetDependencyAttribute-->
     <ItemGroup>
       <NugetDependencyAttributeMap Include="NugetDependencyAttribute">
-        <Package>Identity</Package>
-        <Version/>
+        <Version>${Version}</Version>
+        <TargetFramework>%{TargetFramework}</TargetFramework>
       </NugetDependencyAttributeMap>
     </ItemGroup>
-
     <GetAssemblyAttribute
       Assemblies="@(NuspecReference)"
       Attribute="@(NugetDependencyAttributeMap)"
+      Identity="${Package}"
     >
       <Output ItemName="NuspecDependency" TaskParameter="Result" />
     </GetAssemblyAttribute>
@@ -238,29 +239,49 @@
 
   <!--_AddNugetAssemblyAttributes-->
   <Target Name="_AddNugetAssemblyAttributes">
+    
+    <!--NugetTargetFrameworkAttribute-->
     <ItemGroup>
       <NugetTargetFrameworkAttributeMap Include="NugetTargetFrameworkAttribute">
-        <Monkier>TargetFrameworkMonkier</Monkier>
-        <Version>TargetFrameworkVersion</Version>
+        <TargetFrameworkMonkier>${Monkier}</TargetFrameworkMonkier>
+        <TargetFrameworkVersion>${Version}</TargetFrameworkVersion>
+        <TargetFramework>${Monkier}${Version}</TargetFramework>
+        <TargetRootDirName>lib</TargetRootDirName>
+        <TargetSubDirName/>
       </NugetTargetFrameworkAttributeMap>
     </ItemGroup>
-
     <AddAssemblyAttribute
       Assemblies="@(TargetResult)"
       Attributes="@(NugetTargetFrameworkAttributeMap)"
     >
+      <Output ItemName="_NuspecFile" TaskParameter="Result" />
+    </AddAssemblyAttribute>
+
+    <!--NugetBuildAssemblyAttribute-->
+    <ItemGroup>
+      <NugetBuildAssemblyAttributeMap Include="NugetBuildAssemblyAttribute">
+        <TargetRootDirName>build</TargetRootDirName>
+        <TargetSubDirName>${Directory}</TargetSubDirName>
+      </NugetBuildAssemblyAttributeMap>
+    </ItemGroup>
+    <AddAssemblyAttribute
+      Assemblies="@(_NuspecFile)"
+      Attributes="@(NugetBuildAssemblyAttributeMap)"
+    >
       <Output ItemName="NuspecFile" TaskParameter="Result" />
     </AddAssemblyAttribute>
 
+    <!--build nuspec path; combine TargetRootDirName, TargetFramework, and TargetSubDirName-->
     <ItemGroup>
       <NuspecFile Condition="true">
-        <TargetFramework>%(NuspecFile.TargetFrameworkMonkier)%(TargetFrameworkVersion)</TargetFramework>
+        <NuspecTargetDir>$([System.IO.Path]::Combine(%(TargetRootDirName), %(TargetFramework), %(TargetSubDirName)))\</NuspecTargetDir>
+        <NuspecSourceDir>$([MSBuild]::MakeRelative($(OutBaseDir), %(NuspecFile.OutDirAbsolute)))</NuspecSourceDir>
       </NuspecFile>
+    </ItemGroup>
 
-      <NuspecReference
-        Condition="'$(NuspecIsBuildPackage)'!='true'"
-        Include="@(NuspecFile)"
-      />
+    <!--NuspecFile -> NuspecReference when TargetRootDirName is 'lib'-->
+    <ItemGroup>
+      <NuspecReference Include="@(NuspecFile->WithMetadataValue('TargetRootDirName', 'lib'))" />
     </ItemGroup>
   </Target>
 </Project>

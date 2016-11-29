@@ -25,6 +25,6 @@
     </references>
   </metadata>
   <files>
-    <file src="%(NuspecFile.OutSubDir)**\*" target="$(NuspecSubDir)\%(TargetFramework)" />
+    <file src="%(NuspecFile.NuspecSourceDir)**\*" target="%(NuspecTargetDir)" />
   </files>
 </package>

@@ -33,3 +33,12 @@ internal sealed class NugetDependencyAttribute : Attribute {
     public string Package { get; private set; }
     public string Version { get; private set; }
 }
+
+[AttributeUsage(AttributeTargets.Assembly)]
+internal sealed class NugetBuildAssemblyAttribute : Attribute {
+
+    public NugetBuildAssemblyAttribute() {
+    }
+
+    public string Directory { get; set; }
+}

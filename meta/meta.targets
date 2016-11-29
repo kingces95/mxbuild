@@ -89,7 +89,7 @@
     <ItemGroup>
       <MetaReference Include="$(ProjFile)">
         <ReferenceSource>ShimReference</ReferenceSource>
-        <OutSubDir>$(OutSubDir)</OutSubDir>
+        <OutDirAbsolute>$(OutDirAbsolute)</OutDirAbsolute>
         <AdditionalProperties>$(KeepRecursiveFrame)_MetaPlatform=$(MetaPlatform);Platform=$(PrimitivePlatform)</AdditionalProperties>
         <PlatformHint>$(PrimitivePlatform)</PlatformHint>
       </MetaReference>
