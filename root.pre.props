@@ -13,6 +13,7 @@
   <Import Project="$(MxbuildDir)id\id.pre.props"/>
   <Import Project="$(MxbuildDir)nuget\nuget.pre.props"/>
   <Import Project="$(MxbuildDir)pack\pack.pre.props"/>
+  <Import Project="$(MxbuildDir)plat\plat.pre.props"/>
   <Import Project="$(MxbuildDir)xf\xf.pre.props"/>
 
 </Project>

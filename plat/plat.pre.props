@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ExtPlatDir>$(MSBuildThisFileDirectory)</ExtPlatDir>
+  </PropertyGroup>
 
   <Import Project="ids.platform.pre.props"/>
   <Import Project="primitive.platform.pre.props"/>
@@ -54,7 +57,8 @@
 
   <!--IsLibraryPlatform-->
   <PropertyGroup>
-    <OutSubDir>$(MetaPlatformIdentifier)\$(MetaPlatformVersion)\</OutSubDir>
+    <OutSubDir Condition="'$(MetaPlatformIdentifier)'!=''">$(MetaPlatformIdentifier)\</OutSubDir>
+    <OutSubDir Condition="'$(MetaPlatformVersion)'!=''">$(OutSubDir)$(MetaPlatformVersion)\</OutSubDir>
   </PropertyGroup>
 
   <!--!IsPrimitivePlatform-->
