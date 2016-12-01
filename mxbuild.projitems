@@ -10,6 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory).gitignore" />
+    <None Include="$(MSBuildThisFileDirectory).lfx\packages\Mxbuild.Tasks.0.2.12" />
+    <None Include="$(MSBuildThisFileDirectory).lfx\tools\git" />
+    <None Include="$(MSBuildThisFileDirectory).lfx\tools\nuget.exe" />
     <None Include="$(MSBuildThisFileDirectory)clean\clean.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)clean\clean.targets" />
     <None Include="$(MSBuildThisFileDirectory)common.pre.props" />
@@ -24,26 +27,33 @@
     <None Include="$(MSBuildThisFileDirectory)id\id.proj" />
     <None Include="$(MSBuildThisFileDirectory)id\id.props" />
     <None Include="$(MSBuildThisFileDirectory)id\id.targets" />
-    <None Include="$(MSBuildThisFileDirectory)meta\meta.post.props" />
     <None Include="$(MSBuildThisFileDirectory)meta\meta.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)meta\meta.props" />
     <None Include="$(MSBuildThisFileDirectory)meta\meta.targets" />
+    <None Include="$(MSBuildThisFileDirectory)msbuild.nuspec" />
     <None Include="$(MSBuildThisFileDirectory)node\node.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)node\node.props" />
     <None Include="$(MSBuildThisFileDirectory)node\node.targets" />
+    <None Include="$(MSBuildThisFileDirectory)nuget\copyShims.bat" />
     <None Include="$(MSBuildThisFileDirectory)nuget\nuget.post.props" />
     <None Include="$(MSBuildThisFileDirectory)nuget\nuget.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)nuget\nuget.props" />
     <None Include="$(MSBuildThisFileDirectory)nuget\nuget.targets" />
-    <None Include="$(MSBuildThisFileDirectory)msbuild.nuspec" />
     <None Include="$(MSBuildThisFileDirectory)nuspec.props" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.build.targets" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.props" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.targets" />
+    <None Include="$(MSBuildThisFileDirectory)pack\package.nuspec" />
     <None Include="$(MSBuildThisFileDirectory)part\part.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)part\part.props" />
     <None Include="$(MSBuildThisFileDirectory)part\part.targets" />
+    <None Include="$(MSBuildThisFileDirectory)plat\ids.platform.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)plat\library.platform.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)plat\meta.platform.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)plat\plat.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)plat\primitive.platform.pre.props" />
+    <None Include="$(MSBuildThisFileDirectory)plat\shim.platform.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)proxy.targets" />
     <None Include="$(MSBuildThisFileDirectory)publish\publish.git.targets" />
     <None Include="$(MSBuildThisFileDirectory)publish\publish.pre.props" />
@@ -59,12 +69,22 @@
     <None Include="$(MSBuildThisFileDirectory)shim\shim.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)shim\shim.proj" />
     <None Include="$(MSBuildThisFileDirectory)shim\shim.targets" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.netstd.hierarchy.props" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.dotnet.hierarchy.props" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.app.hierarchy.props" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.aut.hierarchy.props" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.default.props" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.lib.hierarchy.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.targets" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)pack\nuspec.t.xml" />
     <Content Include="$(MSBuildThisFileDirectory)shell\doskey.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)id\BuildInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)id\BuildInfo.t.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)pack\PackageInfo.cs" />
   </ItemGroup>
 </Project>

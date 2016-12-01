@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" >
+  <!--
+  
+    Hierarchy
+  -->
+  <ItemGroup>
+    <!--all E { pack }-->
+    <PlatformGroup Include="$(AllPlatformId)">
+      <Platforms>$(PackPlatformId)</Platforms>
+    </PlatformGroup>
+    <!--portable E { dotnet }-->
+    <PlatformGroup Include="$(PortablePlatformId)">
+      <Platforms>$(DotNetLibraryPlatformId)</Platforms>
+    </PlatformGroup>
+    <!--dotnet E { dotnet-259 }-->
+    <PlatformGroup Include="$(DotNetLibraryPlatformId)">
+      <Platforms>$(DotNetLibraryPlatformId-259)</Platforms>
+    </PlatformGroup>
+  </ItemGroup>
+</Project>
