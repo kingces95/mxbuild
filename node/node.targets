@@ -171,6 +171,18 @@
       Text="    ProjectReference: %(ProjectReference.Identity) -> %(FullPath)"
       Condition="'@(ProjectReference)'!=''"
     />
+
+    <!--Reference-->
+    <Message
+      Importance="high"
+      Text="  Reference:"
+      Condition="'@(Reference)'!='' AND '$(IsPrimitivePlatform)'=='true' AND '$(Verbosity)'=='high'"
+    />
+    <Message
+      Importance="high"
+      Text="    %(Reference.Identity) -> %(HintPath)"
+      Condition="'@(Reference)'!='' AND '$(IsPrimitivePlatform)'=='true' AND '$(Verbosity)'=='high'"
+    />
   </Target>
   
 </Project>

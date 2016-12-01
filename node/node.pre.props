@@ -4,6 +4,13 @@
   <PropertyGroup>
     <ExtNodeDir>$(MSBuildThisFileDirectory)</ExtNodeDir>
   </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <Reference>
+      <HintPath/>
+      <Private/>
+    </Reference>
+  </ItemDefinitionGroup>
   
   <!--Creates a clean "stack frame" for recursive calls by clearing out unwanted inherited properties-->
   <!--see: https://github.com/Microsoft/msbuild/issues/902 -->

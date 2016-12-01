@@ -26,7 +26,7 @@
 
     <!--version & monkier-->
     <MetaPlatformVersion>$([System.Text.RegularExpressions.Regex]::Match('$(MetaPlatform)', '(?$(Lt)=-)[\d][\d.]*'))</MetaPlatformVersion>
-    <MetaPlatformIdentifier Condition="'$(MetaPlatformVersion)'!=''">$([System.Text.RegularExpressions.Regex]::Match('$(MetaPlatform)', '[^\d-]*'))</MetaPlatformIdentifier>
+    <MetaPlatformIdentifier Condition="'$(MetaPlatformVersion)'!=''">$([System.Text.RegularExpressions.Regex]::Match('$(MetaPlatform)', '[^-]*'))</MetaPlatformIdentifier>
   </PropertyGroup>
 
   <!--library platform ids-->

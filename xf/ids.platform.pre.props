@@ -49,24 +49,54 @@
     <WindowsTabletLibraryPlatformId>win</WindowsTabletLibraryPlatformId>
     <WindowsTabletLibraryPlatformId-8_1>$(WindowsTabletLibraryPlatformId)-8.1</WindowsTabletLibraryPlatformId-8_1>
 
-    <!--mobile automation-->
+    <!--android automation-->
     <AndroidAutomationLibraryPlatformId>android.aut</AndroidAutomationLibraryPlatformId>
+    <AndroidAutomationLibraryPlatformId-4_5>$(AndroidAutomationLibraryPlatformId)-4.5</AndroidAutomationLibraryPlatformId-4_5>
+
+    <!--ios automation-->
     <IosAutomationLibraryPlatformId>ios.aut</IosAutomationLibraryPlatformId>
+    <IosAutomationLibraryPlatformId-4_5>$(IosAutomationLibraryPlatformId)-4.5</IosAutomationLibraryPlatformId-4_5>
+
+    <!--windows automation-->
     <WindowsAutomationLibraryPlatformId>windows.aut</WindowsAutomationLibraryPlatformId>
+    <WindowsAutomationLibraryPlatformId-4_5>$(WindowsAutomationLibraryPlatformId)-4.5</WindowsAutomationLibraryPlatformId-4_5>
   </PropertyGroup>
 
   <!--app-->
   <PropertyGroup>
+    <!--monodroid-->
     <AndroidAppPlatformId>$(AndroidLibraryPlatformId).app</AndroidAppPlatformId>
+    <AndroidAppPlatformId-7_0>$(AndroidLibraryPlatformId)-7.0</AndroidAppPlatformId-7_0>
+
+    <!--xamarin.ios-->
     <IosUnifiedSimAppPlatformId>$(IosUnifiedLibraryPlatformId).sim</IosUnifiedSimAppPlatformId>
+    <IosUnifiedSimAppPlatformId-1_0>$(IosUnifiedSimAppPlatformId)-1.0</IosUnifiedSimAppPlatformId-1_0>
+
     <IosUnifiedPhoneAppPlatformId>$(IosUnifiedLibraryPlatformId).phone</IosUnifiedPhoneAppPlatformId>
+    <IosUnifiedPhoneAppPlatformId-1_0>$(IosUnifiedPhoneAppPlatformId)-1.0</IosUnifiedPhoneAppPlatformId-1_0>
+
+    <!--monotouch-->
     <IosClassicSimAppPlatformId>$(IosClassicLibraryPlatformId).sim</IosClassicSimAppPlatformId>
+    <IosClassicSimAppPlatformId-1_0>$(IosClassicSimAppPlatformId)-1.0</IosClassicSimAppPlatformId-1_0>
+    
     <IosClassicPhoneAppPlatformId>$(IosClassicLibraryPlatformId).phone</IosClassicPhoneAppPlatformId>
+    <IosClassicPhoneAppPlatformId-1_0>$(IosClassicPhoneAppPlatformId)-1.0</IosClassicPhoneAppPlatformId-1_0>
+
+    <!--uap-->
     <WindowsUniversal32AppPlatformId>$(WindowsUniversalLibraryPlatformId).32</WindowsUniversal32AppPlatformId>
+    <WindowsUniversal32AppPlatformId-10_0_10586_0>$(WindowsUniversal32AppPlatformId)-10.0.10586.0</WindowsUniversal32AppPlatformId-10_0_10586_0>
+
+    <!--wpa-->
     <WindowsPhone32AppPlatformId>$(WindowsPhoneLibraryPlatformId).32</WindowsPhone32AppPlatformId>
+    <WindowsPhone32AppPlatformId-8_1>$(WindowsPhone32AppPlatformId)-8.1</WindowsPhone32AppPlatformId-8_1>
+
+    <!--win-->
     <WindowsTablet32AppPlatformId>$(WindowsTabletLibraryPlatformId).32</WindowsTablet32AppPlatformId>
+    <WindowsTablet32AppPlatformId-8_1>$(WindowsTablet32AppPlatformId)-8.1</WindowsTablet32AppPlatformId-8_1>
     <WindowsTablet64AppPlatformId>$(WindowsTabletLibraryPlatformId).64</WindowsTablet64AppPlatformId>
+    <WindowsTablet64AppPlatformId-8_1>$(WindowsTablet64AppPlatformId)-8.1</WindowsTablet64AppPlatformId-8_1>
     <WindowsTabletArmAppPlatformId>$(WindowsTabletLibraryPlatformId).arm</WindowsTabletArmAppPlatformId>
+    <WindowsTabletArmAppPlatformId-8_1>$(WindowsTabletArmAppPlatformId)-8.1</WindowsTabletArmAppPlatformId-8_1>
   </PropertyGroup>
 
   <PropertyGroup>
