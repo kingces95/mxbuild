@@ -66,7 +66,7 @@
   <PropertyGroup>
     <!--monodroid-->
     <AndroidAppPlatformId>$(AndroidLibraryPlatformId).app</AndroidAppPlatformId>
-    <AndroidAppPlatformId-7_0>$(AndroidLibraryPlatformId)-7.0</AndroidAppPlatformId-7_0>
+    <AndroidAppPlatformId-7_0>$(AndroidAppPlatformId)-7.0</AndroidAppPlatformId-7_0>
 
     <!--xamarin.ios-->
     <IosUnifiedSimAppPlatformId>$(IosUnifiedLibraryPlatformId).sim</IosUnifiedSimAppPlatformId>

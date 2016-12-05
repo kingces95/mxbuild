@@ -173,7 +173,7 @@
     />
 
     <!--Reference-->
-    <Message
+    <!--<Message
       Importance="high"
       Text="  Reference:"
       Condition="'@(Reference)'!='' AND '$(IsPrimitivePlatform)'=='true' AND '$(Verbosity)'=='high'"
@@ -182,7 +182,7 @@
       Importance="high"
       Text="    %(Reference.Identity) -> %(HintPath)"
       Condition="'@(Reference)'!='' AND '$(IsPrimitivePlatform)'=='true' AND '$(Verbosity)'=='high'"
-    />
+    />-->
   </Target>
   
 </Project>

@@ -23,6 +23,7 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <ErrorReport>prompt</ErrorReport>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
   </PropertyGroup>
 
   <!--debug-->
@@ -65,7 +66,7 @@
     <NugetTargetFrameworkVersion>4.3</NugetTargetFrameworkVersion>
     
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <!--<TargetFrameworkVersion>v6.0</TargetFrameworkVersion>-->
+    <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
   </PropertyGroup>
@@ -129,7 +130,6 @@
   <!--windows-->
   <PropertyGroup Condition=" '$(MobilePlatform)' == '$(WindowsMobilePlatformId)' ">
     <DefaultLanguage>en-US</DefaultLanguage>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
     <!--<AppxPrependPriInitialPath>false</AppxPrependPriInitialPath>-->
     <!--<AppxPriInitialPath>bar</AppxPriInitialPath>-->
     <!--force all windows output to OutDir-->

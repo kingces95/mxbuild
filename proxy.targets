@@ -58,16 +58,6 @@
       <BuildTarget>Compile</BuildTarget>
     </PropertyGroup>
   </Target>
-  <Target Name="_SetProxyTargetPackage">
-    <PropertyGroup>
-      <BuildTarget>Package</BuildTarget>
-    </PropertyGroup>
-  </Target>
-  <Target Name="_SetProxyTargetSign">
-    <PropertyGroup>
-      <BuildTarget>Sign</BuildTarget>
-    </PropertyGroup>
-  </Target>
   <Target Name="_SetProxyTargetGetTargetPath">
     <PropertyGroup>
       <BuildTarget>GetTargetPath</BuildTarget>
@@ -88,7 +78,5 @@
     <DryRunDependsOn>_SetProxyTargetDryRun;Proxy;$(DryRunDependsOn)</DryRunDependsOn>
     <CompileDependsOn>_SetProxyTargetCompile;Proxy;$(CompileDependsOn)</CompileDependsOn>
     <GetTargetPathDependsOn>_SetProxyTargetGetTargetPath;Proxy;$(GetTargetPathDependsOn)</GetTargetPathDependsOn>
-    <PackageDependsOn>_SetProxyTargetPackage;Proxy;$(PackageDependsOn)</PackageDependsOn>
-    <SignDependsOn>_SetProxyTargetSign;Proxy;$(SignDependsOn)</SignDependsOn>
   </PropertyGroup>
 </Project>
