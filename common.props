@@ -12,7 +12,7 @@
     <BuildLogDir>$(BuildBinConfigDir)</BuildLogDir>
 
     <!--outDir-->
-    <OutBaseDir>$(BuildBinConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)))</OutBaseDir>
+    <OutBaseDir>$(BuildBinConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)$(OutRelDir)))</OutBaseDir>
     <OutDirAbsolute>$(OutBaseDir)$(OutSubDir)</OutDirAbsolute>
     <OutDir>$([MSBuild]::MakeRelative($(ProjDir), $(OutDirAbsolute)))</OutDir>
 
