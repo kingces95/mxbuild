@@ -132,12 +132,15 @@
       <_Property Include="MobilePlatform" />
       <_Property Include="MobileSubPlatform" />
       <_Property Include="LibraryPlatform" />
+      <_Property Include="AppPlatform" />
+      <_Property Include="OutputType" />
       <_Property Include="DefineConstants" />
       <_Property Include="CommonTargetsPath" />
       <_Property Include="BuildingInsideVisualStudio" />
       <_Property Include="FrameProperties" />
       <_Property Include="NugetTargetFrameworkMoniker" />
       <_Property Include="NugetTargetFrameworkVersion" />
+      <_Property Include="AndroidApplication" />
     </ItemGroup>
     <ItemGroup Condition="'$(IsPrimitivePlatform)'=='true'">
       <_Property Include="TargetFrameworkVersion" />

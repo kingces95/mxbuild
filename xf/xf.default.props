@@ -63,6 +63,7 @@
 
   <!--android-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(AndroidLibraryPlatformId)'">
+    <OutputType>library</OutputType>
     <NugetTargetFrameworkVersion>4.3</NugetTargetFrameworkVersion>
     
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>

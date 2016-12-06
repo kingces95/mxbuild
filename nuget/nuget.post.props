@@ -36,7 +36,7 @@
     <!--NugetReference -> Reference-->
     <ItemGroup Condition="'@(NugetReference)'!=''">
       <Reference Include="@(NugetReference->'%(Filename)%(Extension)')">
-        <HintPath>$([MSBuild]::MakeRelative($(ProjDir), %(Identity)))</HintPath>
+        <HintPath>$([MSBuild]::MakeRelative($(ProjDir), %(NugetReference.Identity)))</HintPath>
         <Private>$(NugetCopyLocal)</Private>
       </Reference>
     </ItemGroup>
