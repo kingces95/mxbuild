@@ -123,6 +123,18 @@
         <Plat>$(WindowsUniversal32AppPlatformId)</Plat>
       </PropertyGroup>
     </When>
+    <When Condition="'$(MetaPlatformIdentifier)'=='$(WindowsUniversal64AppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsUniversal64AppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatformIdentifier)'=='$(WindowsUniversalArmAppPlatformId)'">
+      <PropertyGroup>
+        <IsShimPlatform>true</IsShimPlatform>
+        <Plat>$(WindowsUniversalArmAppPlatformId)</Plat>
+      </PropertyGroup>
+    </When>
     <When Condition="'$(MetaPlatformIdentifier)'=='$(WindowsPhone32AppPlatformId)'">
       <PropertyGroup>
         <IsShimPlatform>true</IsShimPlatform>

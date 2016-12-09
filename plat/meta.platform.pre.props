@@ -144,6 +144,20 @@
         <LibraryPlatform>$(WindowsUniversalLibraryPlatformId)</LibraryPlatform>
       </PropertyGroup>
     </When>
+    <When Condition="'$(MetaPlatformIdentifier)'=='$(WindowsUniversal64AppPlatformId)'">
+      <PropertyGroup>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(X64PlatformId)</PrimitivePlatform>
+        <LibraryPlatform>$(WindowsUniversalLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(MetaPlatformIdentifier)'=='$(WindowsUniversalArmAppPlatformId)'">
+      <PropertyGroup>
+        <IsMobileAppPlatform>true</IsMobileAppPlatform>
+        <PrimitivePlatform>$(ArmPlatformId)</PrimitivePlatform>
+        <LibraryPlatform>$(WindowsUniversalLibraryPlatformId)</LibraryPlatform>
+      </PropertyGroup>
+    </When>
     <When Condition="'$(MetaPlatformIdentifier)'=='$(WindowsPhone32AppPlatformId)'">
       <PropertyGroup>
         <IsMobileAppPlatform>true</IsMobileAppPlatform>

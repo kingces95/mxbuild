@@ -141,8 +141,10 @@
       <_Property Include="NugetTargetFrameworkMoniker" />
       <_Property Include="NugetTargetFrameworkVersion" />
       <_Property Include="AndroidApplication" />
+      <_Property Include="VisualStudioVersion" />
     </ItemGroup>
     <ItemGroup Condition="'$(IsPrimitivePlatform)'=='true'">
+      <_Property Include="TargetPlatformIdentifier" />
       <_Property Include="TargetFrameworkVersion" />
       <_Property Include="TargetFrameworkProfile" />
       <_Property Include="OutBaseDir" />

@@ -164,6 +164,7 @@
     <Platform Condition="'$(Plat)'=='AnyCPU' AND '$(IsMobileAppProject)'=='true'">x86</Platform>
     <PlatformTarget>$(Plat)</PlatformTarget>
     <Prefer32Bit Condition="'$(IsMobileAppProject)'=='true'">true</Prefer32Bit>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">12.0</VisualStudioVersion>
   </PropertyGroup>
 
   <!--windows universal-->
@@ -171,14 +172,17 @@
     <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <NugetTargetFrameworkVersion>10.0</NugetTargetFrameworkVersion>
+    <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <UseDotNetNativeToolchain Condition="'$(Configuration)' == 'Release'">true</UseDotNetNativeToolchain>
+    <DefineConstants>$(DefineConstants)NETFX_CORE;WINDOWS_UWP;</DefineConstants>
+    <NoWarn>$(NoWarn)2008;</NoWarn>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">14.0</VisualStudioVersion>
   </PropertyGroup>
 
   <!--windows phone-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsPhoneMobileSubPlatformId)'">
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <NugetTargetFrameworkVersion>8.1</NugetTargetFrameworkVersion>
-    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
   </PropertyGroup>
 
   <!--windows tablet-->

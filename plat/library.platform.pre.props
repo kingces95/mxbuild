@@ -43,7 +43,6 @@
     <MobilePlatform>$(IosMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(IosUnifiedMobileSubPlatformId)</MobileSubPlatform>
     <DefineConstants>$(DefineConstants)IOS_UNIFIED;</DefineConstants>
-    <TargetsFile>*.nothing</TargetsFile>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets</TargetsFile>
   </PropertyGroup>
     
@@ -66,9 +65,7 @@
     <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(WindowsUniversalMobileSubPlatformId)</MobileSubPlatform>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>$(MetaPlatformVersion)</TargetPlatformVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_UWP;</DefineConstants>
-    <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
   </PropertyGroup>
     
   <!--windows phone-->
@@ -76,9 +73,7 @@
     <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(WindowsPhoneMobileSubPlatformId)</MobileSubPlatform>
     <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
-    <TargetPlatformVersion>$(MetaPlatformVersion)</TargetPlatformVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_PHONE_APP;</DefineConstants>
-    <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
   </PropertyGroup>
     
   <!--windows tablet-->
@@ -86,9 +81,7 @@
     <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(WindowsTabletMobileSubPlatformId)</MobileSubPlatform>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
-    <TargetPlatformVersion>$(MetaPlatformVersion)</TargetPlatformVersion>
     <DefineConstants>$(DefineConstants)WINDOWS_APP;</DefineConstants>
-    <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
   <!--windows automation-->
@@ -96,7 +89,14 @@
     <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
     <!--netstandard-->
   </PropertyGroup>
+
   
+  <!--WindowsMobilePlatformId-->
+  <PropertyGroup Condition="'$(MobilePlatform)' == '$(WindowsMobilePlatformId)'">
+    <TargetPlatformVersion>$(MetaPlatformVersion)</TargetPlatformVersion>
+    <TargetsFile>$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets</TargetsFile>
+  </PropertyGroup>
+
   <!--IsNetStandardPlatform-->
   <PropertyGroup Condition="'$(IsNetStandardPlatform)' == 'true'">
     <TargetFrameworkVersion>v$(MetaPlatformVersion)</TargetFrameworkVersion>
