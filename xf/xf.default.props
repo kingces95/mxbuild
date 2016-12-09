@@ -132,8 +132,8 @@
   
   <!--ios debug-->
   <PropertyGroup Condition="'$(Configuration)|$(MobilePlatform)' == 'debug|$(IosMobilePlatformId)'">
-    <!--VS is sensitive to the file in which MtouchDebug is defined; MtouchDebug must live in .csproj-->
-    <!--<MtouchDebug>true</MtouchDebug>-->
+    <!--VS is sensitive to the file in which MtouchDebug is defined; MtouchDebug must also live in .csproj-->
+    <MtouchDebug>true</MtouchDebug>
   </PropertyGroup>
 
   <!--ios app simulator-->
