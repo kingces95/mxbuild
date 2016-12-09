@@ -36,7 +36,7 @@
 
   <!--release-->
   <PropertyGroup Condition="'$(Configuration)'=='release'">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>pdbonly</DebugType><!--none-->
     <Optimize>true</Optimize>
     <DefineConstants>$(DefineConstants)TRACE;</DefineConstants>
   </PropertyGroup>
@@ -89,13 +89,13 @@
   </PropertyGroup>
 
   <!--android app debug-->
-  <PropertyGroup Condition="'$(AppPlatform)' == '$(AndroidAppPlatformId)' AND '$(Configuration)' == 'Debug'" >
+  <PropertyGroup Condition="'$(Configuration)|$(AppPlatform)' == 'debug|$(AndroidAppPlatformId)'" >
     <AndroidLinkMode>None</AndroidLinkMode>
     <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
   </PropertyGroup>
 
   <!--android app release-->
-  <PropertyGroup Condition="'$(AppPlatform)' == '$(AndroidAppPlatformId)' AND '$(Configuration)' == 'Release'" >
+  <PropertyGroup Condition="'$(Configuration)|$(AppPlatform)' == 'release|$(AndroidAppPlatformId)'" >
     <AndroidLinkMode>Full</AndroidLinkMode>
     <AndroidSupportedAbis>armeabi-v7a,x86</AndroidSupportedAbis>
     <AotAssemblies>False</AotAssemblies>
@@ -112,11 +112,13 @@
   </PropertyGroup>
 
   <!--ios app-->
-  <PropertyGroup Condition="'$(AppPlatform)' == '$(IosAppPlatformId)'">
+  <PropertyGroup Condition="'$(MobilePlatform)' == '$(IosMobilePlatformId)'">
     <OutputType>Exe</OutputType>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <MtouchSdkVersion>10.0</MtouchSdkVersion>
     <ConsolePause>false</ConsolePause>
+    
+    <!--not in default template-->
+    <MtouchSdkVersion>10.1</MtouchSdkVersion>
     <OptimizePNGs>True</OptimizePNGs>
     <MtouchFloat32>False</MtouchFloat32>
     <MtouchProfiling>False</MtouchProfiling>
@@ -126,6 +128,28 @@
     <MtouchUseSGen>False</MtouchUseSGen>
     <MtouchUseRefCounting>False</MtouchUseRefCounting>
     <MtouchI18n />
+  </PropertyGroup>
+  
+  <!--ios debug-->
+  <PropertyGroup Condition="'$(Configuration)|$(MobilePlatform)' == 'debug|$(IosMobilePlatformId)'">
+    <!--VS is sensitive to the file in which MtouchDebug is defined; MtouchDebug must live in .csproj-->
+    <!--<MtouchDebug>true</MtouchDebug>-->
+  </PropertyGroup>
+
+  <!--ios app simulator-->
+  <PropertyGroup Condition="'$(AppPlatform)' == '$(IosUnifiedSimAppPlatformId)'">
+    <MtouchLink>None</MtouchLink>
+    <MtouchArch>i386, x86_64</MtouchArch>
+  </PropertyGroup>
+
+  <!--ios app device-->
+  <PropertyGroup Condition="'$(AppPlatform)' == '$(IosUnifiedPhoneAppPlatformId)'">
+    <MtouchArch>ARMv7, ARM64</MtouchArch>
+    <CodesignKey>iPhone Developer</CodesignKey><!--iPhone Distribution-->
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <!--<CodesignProvision>Automatic:AdHoc</CodesignProvision>-->
+    <!--<BuildIpa>True</BuildIpa>-->
+    <!--<CodesignProvision>Automatic:AdHoc</CodesignProvision>--><!--Automatic:AppStore-->
   </PropertyGroup>
 
   <!--windows-->

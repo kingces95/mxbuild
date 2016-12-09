@@ -43,6 +43,7 @@
     <MobilePlatform>$(IosMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(IosUnifiedMobileSubPlatformId)</MobileSubPlatform>
     <DefineConstants>$(DefineConstants)IOS_UNIFIED;</DefineConstants>
+    <TargetsFile>*.nothing</TargetsFile>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets</TargetsFile>
   </PropertyGroup>
     

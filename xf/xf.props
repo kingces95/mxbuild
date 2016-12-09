@@ -7,7 +7,8 @@
     '$(iosServerAddress)'!='' AND 
     '$(iosServerUser)'!='' AND 
     '$(iosServerPassword)'!='' AND
-    '$(IsMobileAppPlatform)'=='true'
+    '$(IsMobileAppPlatform)'=='true' AND
+    '$(IsInVs)'!='true'
   ">
     <ServerAddress>$(iosServerAddress)</ServerAddress>
     <ServerUser>$(iosServerUser)</ServerUser>
