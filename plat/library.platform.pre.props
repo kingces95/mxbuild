@@ -20,7 +20,6 @@
   <!--android binding-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(AndroidBindingsLibraryPlatformId)'">
     <TargetFrameworkVersion>v$(MetaPlatformVersion)</TargetFrameworkVersion>
-    <DefineConstants>$(DefineConstants)ANDROID;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.Bindings.targets</TargetsFile>
   </PropertyGroup>
 
@@ -28,7 +27,6 @@
   <PropertyGroup Condition="'$(LibraryPlatform)'=='$(AndroidLibraryPlatformId)'">
     <MobilePlatform>$(AndroidMobilePlatformId)</MobilePlatform>
     <TargetFrameworkVersion>v$(MetaPlatformVersion)</TargetFrameworkVersion>
-    <DefineConstants>$(DefineConstants)ANDROID;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets</TargetsFile>
   </PropertyGroup>
 
@@ -42,7 +40,6 @@
   <PropertyGroup Condition="'$(LibraryPlatform)'=='$(IosUnifiedLibraryPlatformId)'">
     <MobilePlatform>$(IosMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(IosUnifiedMobileSubPlatformId)</MobileSubPlatform>
-    <DefineConstants>$(DefineConstants)IOS_UNIFIED;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets</TargetsFile>
   </PropertyGroup>
     
@@ -50,7 +47,6 @@
   <PropertyGroup Condition="'$(LibraryPlatform)'=='$(IosClassicLibraryPlatformId)'">
     <MobilePlatform>$(IosMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(IosClassicMobileSubPlatformId)</MobileSubPlatform>
-    <DefineConstants>$(DefineConstants)IOS_CLASSIC;</DefineConstants>
     <TargetsFile>$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.MonoTouch.CSharp.targets</TargetsFile>
   </PropertyGroup>
     
@@ -65,7 +61,6 @@
     <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(WindowsUniversalMobileSubPlatformId)</MobileSubPlatform>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <DefineConstants>$(DefineConstants)WINDOWS_UWP;</DefineConstants>
   </PropertyGroup>
     
   <!--windows phone-->
@@ -73,7 +68,6 @@
     <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(WindowsPhoneMobileSubPlatformId)</MobileSubPlatform>
     <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
-    <DefineConstants>$(DefineConstants)WINDOWS_PHONE_APP;</DefineConstants>
   </PropertyGroup>
     
   <!--windows tablet-->
@@ -81,7 +75,6 @@
     <MobilePlatform>$(WindowsMobilePlatformId)</MobilePlatform>
     <MobileSubPlatform>$(WindowsTabletMobileSubPlatformId)</MobileSubPlatform>
     <TargetPlatformIdentifier>Windows</TargetPlatformIdentifier>
-    <DefineConstants>$(DefineConstants)WINDOWS_APP;</DefineConstants>
   </PropertyGroup>
 
   <!--windows automation-->

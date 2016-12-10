@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--
+    OutputType
+    DefineConstants
+  -->
   <PropertyGroup>
     <ExtPlatDir>$(MSBuildThisFileDirectory)</ExtPlatDir>
   </PropertyGroup>
@@ -9,6 +13,11 @@
   <Import Project="shim.platform.pre.props" Condition="'$(IsPrimitivePlatform)'!='true'"/>
   <Import Project="meta.platform.pre.props"/>
   <Import Project="library.platform.pre.props"/>
+
+  <!--default-->
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+  </PropertyGroup>
 
   <!--xamarin forms design-->
   <PropertyGroup Condition="'$(MetaPlatformIdentifier)' == '$(XamarinFormsDesign)'">
@@ -23,39 +32,58 @@
   <PropertyGroup/>
 
   <!--android-->
-  <PropertyGroup Condition="'$(MobilePlatform)' == '$(AndroidMobilePlatformId)'" />
+  <PropertyGroup Condition="'$(MobilePlatform)' == '$(AndroidMobilePlatformId)'" >
+    <DefineConstants>$(DefineConstants)ANDROID;</DefineConstants>
+  </PropertyGroup>
 
   <!--ios-->
   <PropertyGroup Condition="'$(MobilePlatform)' == '$(IosMobilePlatformId)'">
     <DefineConstants>$(DefineConstants)IOS;</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(MobilePlatform)' == '$(IosMobilePlatformId)' AND '$(IsAppPlatform)'=='true'" >
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
 
   <!--ios unified-->
-  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(IosUnifiedMobileSubPlatformId)'" />
+  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(IosUnifiedMobileSubPlatformId)'" >
+    <DefineConstants>$(DefineConstants)IOS_UNIFIED;</DefineConstants>
+  </PropertyGroup>
 
   <!--ios classic-->
-  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(IosClassicMobileSubPlatformId)'" />
+  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(IosClassicMobileSubPlatformId)'" >
+    <DefineConstants>$(DefineConstants)IOS_CLASSIC;</DefineConstants>
+  </PropertyGroup>
 
   <!--windows platform-->
   <PropertyGroup Condition="'$(MobilePlatform)' == '$(WindowsMobilePlatformId)'">
     <DefineConstants>$(DefineConstants)WINDOWS;</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(MobilePlatform)' == '$(WindowsMobilePlatformId)' AND '$(IsAppPlatform)'=='true'" >
+    <OutputType>AppContainerExe</OutputType>
+    <DefineConstants>$(DefineConstants)NETFX_CORE;</DefineConstants>
+  </PropertyGroup>
 
   <!--windows universal-->
-  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsUniversalMobileSubPlatformId)'" />
+  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsUniversalMobileSubPlatformId)'" >
+    <DefineConstants>$(DefineConstants)WINDOWS_UWP;</DefineConstants>
+  </PropertyGroup>
 
   <!--windows phone-->
-  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsPhoneMobileSubPlatformId)'" />
+  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsPhoneMobileSubPlatformId)'" >
+    <DefineConstants>$(DefineConstants)WINDOWS_PHONE_APP;</DefineConstants>
+  </PropertyGroup>
 
   <!--windows tablet-->
-  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsTabletMobileSubPlatformId)'" />
+  <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsTabletMobileSubPlatformId)'" >
+    <DefineConstants>$(DefineConstants)WINDOWS_APP;</DefineConstants>
+  </PropertyGroup>
 
   <!--pack platform-->
   <PropertyGroup Condition="'$(Platform)' == '$(PackPlatformId)'">
     <TargetsFile>$(ExtPackDir)pack.targets</TargetsFile>
   </PropertyGroup>
 
-  <!--IsLibraryPlatform-->
+  <!--OutSubDir-->
   <PropertyGroup>
     <OutSubDir Condition="'$(MetaPlatformIdentifier)'!=''">$(MetaPlatformIdentifier)\</OutSubDir>
     <OutSubDir Condition="'$(MetaPlatformVersion)'!=''">$(OutSubDir)$(MetaPlatformVersion)\</OutSubDir>

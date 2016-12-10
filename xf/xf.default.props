@@ -63,7 +63,6 @@
 
   <!--android-->
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(AndroidLibraryPlatformId)'">
-    <OutputType>library</OutputType>
     <NugetTargetFrameworkVersion>4.3</NugetTargetFrameworkVersion>
     
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
@@ -113,7 +112,6 @@
 
   <!--ios app-->
   <PropertyGroup Condition="'$(MobilePlatform)' == '$(IosMobilePlatformId)'">
-    <OutputType>Exe</OutputType>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
     <ConsolePause>false</ConsolePause>
     
@@ -174,7 +172,6 @@
     <NugetTargetFrameworkVersion>10.0</NugetTargetFrameworkVersion>
     <EnableDotNetNativeCompatibleProfile>true</EnableDotNetNativeCompatibleProfile>
     <UseDotNetNativeToolchain Condition="'$(Configuration)' == 'Release'">true</UseDotNetNativeToolchain>
-    <DefineConstants>$(DefineConstants)NETFX_CORE;WINDOWS_UWP;</DefineConstants>
     <NoWarn>$(NoWarn)2008;</NoWarn>
     <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">14.0</VisualStudioVersion>
   </PropertyGroup>
@@ -183,11 +180,13 @@
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsPhoneMobileSubPlatformId)'">
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <NugetTargetFrameworkVersion>8.1</NugetTargetFrameworkVersion>
+    <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
   </PropertyGroup>
 
   <!--windows tablet-->
   <PropertyGroup Condition="'$(MobileSubPlatform)' == '$(WindowsTabletMobileSubPlatformId)'">
     <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <NugetTargetFrameworkVersion>8.1</NugetTargetFrameworkVersion>
+    <SynthesizeLinkMetadata>true</SynthesizeLinkMetadata>
   </PropertyGroup>
 </Project>
