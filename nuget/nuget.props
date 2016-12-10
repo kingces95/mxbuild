@@ -10,4 +10,9 @@
     <NugetFeed>https://api.nuget.org/v3/index.json</NugetFeed>
   </PropertyGroup>
 
+  <!--copying takes time so only do it when necessary; only copy local in VS for non-libraries-->
+  <PropertyGroup Condition="'$(IsLibraryPlatform)'!='true' AND '$(IsInVs)'=='true'">
+    <NugetCopyLocal>True</NugetCopyLocal>
+  </PropertyGroup>
+
 </Project>

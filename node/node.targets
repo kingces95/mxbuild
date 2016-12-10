@@ -142,6 +142,7 @@
       <_Property Include="NugetTargetFrameworkVersion" />
       <_Property Include="AndroidApplication" />
       <_Property Include="VisualStudioVersion" />
+      <_Property Include="NugetCopyLocal" />
     </ItemGroup>
     <ItemGroup Condition="'$(IsPrimitivePlatform)'=='true'">
       <_Property Include="TargetPlatformIdentifier" />
@@ -178,16 +179,16 @@
     />
 
     <!--Reference-->
-    <!--<Message
+    <Message
       Importance="high"
       Text="  Reference:"
       Condition="'@(Reference)'!='' AND '$(IsPrimitivePlatform)'=='true' AND '$(Verbosity)'=='high'"
     />
     <Message
       Importance="high"
-      Text="    %(Reference.Identity) -> %(HintPath)"
-      Condition="'@(Reference)'!='' AND '$(IsPrimitivePlatform)'=='true' AND '$(Verbosity)'=='high'"
-    />-->
+      Text="    %(Reference.Identity) -> %(HintPath), Private=%(Private)"
+      Condition="'@(Reference)'!='' AND '$(IsPrimitivePlatform)'=='true' AND '$(Verbosity)'=='high' AND '%(HintPath)'!=''"
+    />
   </Target>
   
 </Project>

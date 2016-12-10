@@ -14,11 +14,4 @@
     <ServerUser>$(iosServerUser)</ServerUser>
     <ServerPassword>$(iosServerPassword)</ServerPassword>
   </PropertyGroup>
-
-  <!--test-->
-  <PropertyGroup Condition="'$(IsTest)'=='true'">
-    <!--only copy local when building test-->
-    <NugetCopyLocal>True</NugetCopyLocal>
-  </PropertyGroup>
-
 </Project>
