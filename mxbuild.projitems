@@ -22,6 +22,7 @@
     <None Include="$(MSBuildThisFileDirectory)empty.targets" />
     <None Include="$(MSBuildThisFileDirectory)gen\gen.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)gen\gen.targets" />
+    <None Include="$(MSBuildThisFileDirectory)id\GlobalBuildInfo.cs" />
     <None Include="$(MSBuildThisFileDirectory)id\id.git.targets" />
     <None Include="$(MSBuildThisFileDirectory)id\id.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)id\id.proj" />
@@ -40,6 +41,7 @@
     <None Include="$(MSBuildThisFileDirectory)nuget\nuget.props" />
     <None Include="$(MSBuildThisFileDirectory)nuget\nuget.targets" />
     <None Include="$(MSBuildThisFileDirectory)nuspec.props" />
+    <None Include="$(MSBuildThisFileDirectory)pack\GlobalPackageInfo.cs" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.build.targets" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)pack\pack.props" />
