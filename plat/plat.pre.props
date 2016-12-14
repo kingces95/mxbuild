@@ -41,6 +41,7 @@
     <DefineConstants>$(DefineConstants)IOS;</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(MobilePlatform)' == '$(IosMobilePlatformId)' AND '$(IsAppPlatform)'=='true'" >
+    <IsNestedOutDirRequired>true</IsNestedOutDirRequired>
     <OutputType>Exe</OutputType>
   </PropertyGroup>
 

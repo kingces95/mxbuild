@@ -4,7 +4,8 @@
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
   <!--build-->
-  <PropertyGroup Condition="!$(Configuration.Contains(';'))">
+  <PropertyGroup 
+    Condition="!$(Configuration.Contains(';'))">
     
     <!--buildConfigurationDir-->
     <BuildConfigurationDir>$(Configuration)\</BuildConfigurationDir>
@@ -26,6 +27,17 @@
     <BuildTempConfigDir>$(BuildBinConfigDir.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</BuildTempConfigDir>
     <IntermediateOutputPath>$(OutDir.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</IntermediateOutputPath>
     <IntermediateOutputPathAbsolute>$(OutDirAbsolute.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</IntermediateOutputPathAbsolute>
+  </PropertyGroup>
+
+  <PropertyGroup 
+    Condition="!$(Configuration.Contains(';')) AND '$(IsNestedOutDirRequired)'=='true'">
+    
+    <OutDirTarget>$(OutDir)</OutDirTarget>
+    <IntermediateOutputPathTarget>$(IntermediateOutputPath)</IntermediateOutputPathTarget>
+
+    <OutDir>bld\bin\$(Configuration)\$(OutSubDir)</OutDir>
+    <OutputPath>$(OutDir)</OutputPath>
+    <IntermediateOutputPath>bld\obj\$(Configuration)\$(OutSubDir)</IntermediateOutputPath>
   </PropertyGroup>
 
 </Project>

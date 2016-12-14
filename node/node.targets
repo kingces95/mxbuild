@@ -148,6 +148,7 @@
       <_Property Include="TargetPlatformIdentifier" />
       <_Property Include="TargetFrameworkVersion" />
       <_Property Include="TargetFrameworkProfile" />
+      <_Property Include="IsNestedOutDirRequired" />
       <_Property Include="OutBaseDir" />
       <_Property Include="OutSubDir" />
       <_Property Include="OutDirAbsolute" />

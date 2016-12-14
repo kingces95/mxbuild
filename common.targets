@@ -3,6 +3,20 @@
   ToolsVersion="12.0" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
+  <PropertyGroup>
+    <BuildDependsOn>AliasOutDir;$(BuildDependsOn)</BuildDependsOn>
+  </PropertyGroup>
+  <Target
+    Name="AliasOutDir"
+    Condition="'$(IsNestedOutDirRequired)'=='true' AND '$(IsPrimitivePlatform)'=='true'"
+  >
+    <MakeDir Directories="$(OutDirTarget);$(IntermediateOutputPathTarget)"/>
+    <MakeDir Directories="$(OutDir);$(IntermediateOutputPath)"/>
+    <RemoveDir Directories="$(OutDir);$(IntermediateOutputPath)"/>
+    <Exec Command="mklink /j $(OutDir) $(OutDirTarget)" />
+    <Exec Command="mklink /j $(IntermediateOutputPath) $(IntermediateOutputPathTarget)" />
+  </Target>
+
   <!--CallRefreshTemplateExpansions-->
   <Target 
     Name="CallRefreshTemplateExpansions"
