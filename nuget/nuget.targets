@@ -2,34 +2,98 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="nuget.post.props" />
 
-  <!--_ResolveNugetDependencies-->
+  <PropertyGroup>
+    <GatherMetaProjectReferencesDependsOn>
+      _NugetProjectReferenceToProjectReference;
+      $(GatherMetaProjectReferencesDependsOn);
+      _NugetProjectReferenceToNugetReference;
+    </GatherMetaProjectReferencesDependsOn>
+  </PropertyGroup>
+
+  <!--_NugetProjectReferenceToProjectReference-->
   <Target
-    Name="_ResolveNugetDependencies"
+    Name="_NugetProjectReferenceToProjectReference"
+    Condition="'$(IsPrimitivePlatform)'=='true' AND '@(NugetProjectReference)'!=''"
+  >
+    <!--NugetProjectReference -> ProjectReference-->
+    <ItemGroup>
+      <ProjectReference Include="@(NugetProjectReference)">
+        <MetaReferenceSourceTarget>NugetProjectReference</MetaReferenceSourceTarget>
+      </ProjectReference>
+    </ItemGroup>
+    
+    <!--GetMetaReferences-->
+    <MSBuild
+      Projects="@(NugetProjectReference)"
+      Targets="GetMetaReferences"
+      BuildInParallel="true"
+    >
+      <Output TaskParameter="TargetOutputs" ItemName="NugetProjectMetaReferences" />
+    </MSBuild>
+
+    <!--Filter out non-private references; Then add ProjectReferences-->
+    <ItemGroup>
+      <NugetProjectMetaReferences Remove="@(NugetProjectMetaReferences->WithMetadataValue('Private', 'false'))" />
+      <NugetProjectPrivateMetaReferences Include="@(NugetProjectMetaReferences->WithMetadataValue('Private', 'true'))" />
+      <NugetProjectPrivateMetaReferences Include="@(NugetProjectMetaReferences->WithMetadataValue('MetaReferenceSourceTarget', 'ProjectReference'))" />
+    </ItemGroup>
+
+    <!--augment MetaProjectReference!-->
+    <ItemGroup>
+      <MetaProjectReference Include="@(NugetProjectPrivateMetaReferences)"/>
+    </ItemGroup>
+    
+    <Message
+      Importance="low"
+      Text="  Package '%(Identity)' contains assemblies:"
+      Condition="@(NugetProjectPrivateMetaReferences->Count()) > 0"
+    />
+    <Message
+      Importance="low"
+      Text="    %(NugetProjectPrivateMetaReferences.MetaReferenceSourceTarget): %(Identity) /t:$(MetaBuildTarget) /+p:%(AdditionalProperties), %(Private)"
+      Condition="@(NugetProjectPrivateMetaReferences->Count()) > 0 AND '%(MetaReferenceSourceTarget)'!='Reference'"
+    />
+    <Message
+      Importance="low"
+      Text="    %(NugetProjectPrivateMetaReferences.MetaReferenceSourceTarget): %(Identity), %(Private)"
+      Condition="@(NugetProjectPrivateMetaReferences->Count()) > 0 AND '%(MetaReferenceSourceTarget)'=='Reference'"
+    />
+  </Target>
+
+  <!--_NugetProjectReferenceToNugetReference-->
+  <Target
+    Name="_NugetProjectReferenceToNugetReference"
     BeforeTargets="RefreshTemplateExpansions">
 
+    <!--
+        NugetProjectReference -> ProjectReference -> MetaProjectReference -> 
+          BUILD -> ReferencePath (via GetAssemblyAttribute) -> NugetReference
+    -->
     <ItemGroup>
       <_NugetPackageAttributeMap Include="NugetPackageAttribute">
-        <Version>${Version}</Version>
         <Name>${Name}</Name>
+        <Version>${Version}</Version>
+        <!--HintPath-->
       </_NugetPackageAttributeMap>
     </ItemGroup>
 
     <GetAssemblyAttribute
       Assemblies="@(ReferencePath)"
       Attribute="@(_NugetPackageAttributeMap)"
-      Identity="${Name}.${Version}"
+      Identity="${Name}, Version=${Version}"
     >
-      <Output ItemName="NugetDependency" TaskParameter="Result" />
+      <Output ItemName="NugetReference" TaskParameter="Result" />
     </GetAssemblyAttribute>
 
-    <!--remove intra nuget dependencies-->
+    <!--remove intra package references-->
     <ItemGroup>
-      <NugetDependency Remove="$(NuspecId).$(NuspecVersion)"/>
+      <NugetReference Remove="$(NuspecId), Version=$(NuspecVersion)"/>
     </ItemGroup>
     
     <Message 
-      Text="  ReferencedNugetPackage: %(_ReferencedNugetPackage.Identity) -> %(NuspecId).%(NuspecVersion)"
-      Condition="@(_ReferencedNugetPackage)!=''"
+      Importance="low"
+      Text="NugetReference: %(NugetReference.Identity) -> %(HintPath)"
+      Condition="@(NugetReference)!=''"
     />
   </Target>
 </Project>

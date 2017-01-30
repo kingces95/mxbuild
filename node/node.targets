@@ -4,7 +4,6 @@
   DefaultTargets="Build" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
-  
   <!--
     
     DryRun
@@ -19,70 +18,101 @@
     </ItemGroup>
   </Target>
 
-  <!--ResolveMetaReferences-->
+  <!--GetMetaReferences-->
   <Target
-    Name="ResolveMetaReferences"
-    BeforeTargets="Proxy"
-    DependsOnTargets="$(ResolveMetaReferencesDependsOn)"
+    Name="GetMetaReferences"
+    DependsOnTargets="$(GetMetaReferencesDependsOn)"
+    Returns="@(MetaProjectReference)"
+  >
+    <!--MetaReference = MetaProjectReference + Reference-->
+    <ItemGroup>
+      <MetaReference Include="@(MetaProjectReference)"/>
+      <MetaReference Include="@(Reference)">
+        <MetaReferenceSourceTarget>Reference</MetaReferenceSourceTarget>
+      </MetaReference>
+    </ItemGroup>
+
+    <Message 
+      Importance="low" 
+      Text="%(MetaReference.MetaReferenceSourceTarget): %(Identity) /t:$(MetaBuildTarget) /+p:%(AdditionalProperties), %(Private)" 
+      Condition="@(MetaReference->Count()) > 0 AND '%(MetaReferenceSourceTarget)'!='Reference'"
+    />
+    <Message 
+      Importance="low" 
+      Text="%(MetaReference.MetaReferenceSourceTarget): %(Identity), %(Private)" 
+      Condition="@(MetaReference->Count()) > 0 AND '%(MetaReferenceSourceTarget)'=='Reference'"
+    />
+  </Target>
+
+  <!--GatherMetaProjectReferences-->
+  <Target
+    Name="GatherMetaProjectReferences"
+    DependsOnTargets="$(GatherMetaProjectReferencesDependsOn)"
   />
 
-  <!--_ResolveMetaReferences-->
+  <!--ResolveMetaProjectReferences-->
+  <Target 
+    Name="ResolveMetaProjectReferences" 
+    BeforeTargets="Proxy"
+    DependsOnTargets="
+      GatherMetaProjectReferences;
+      _ResolveMetaProjectReferences
+    "
+  />
+  
+  <!--_ResolveMetaProjectReferences-->
   <Target
-    Name="_ResolveMetaReferences"
+    Name="_ResolveMetaProjectReferences"
     Outputs="%(Configuration.Identity)"
-    Condition="@(MetaReference->Count()) > 0"
+    Condition="@(MetaProjectReference->Count()) > 0"
   >
     <PropertyGroup>
       <MetaBuildTarget Condition="'$(MetaBuildTarget)'==''">$(BuildTarget)</MetaBuildTarget>
     </PropertyGroup>
     
-    <!--input MetaReferences-->
+    <!--input MetaProjectReference-->
     <Message
       Text="$(ProjName) [$(FrameId)] references:"
       Importance="$(Verbosity)"
     />
     <Message
-      Text="  %(MetaReference.ReferenceSource): %(Identity) /t:$(MetaBuildTarget) /+p:%(AdditionalProperties)"
+      Text="  %(MetaProjectReference.MetaReferenceSourceTarget): %(Identity) /t:$(MetaBuildTarget) /+p:%(AdditionalProperties)"
       Importance="$(Verbosity)"
     />
 
-    <!--build MetaReferences-->
+    <!--build MetaProjectReference-->
     <MSBuild
-      Projects="@(MetaReference)"
+      Projects="@(MetaProjectReference)"
       Targets="$(MetaBuildTarget)"
       Properties="Configuration=%(Configuration.Identity)"
       BuildInParallel="true"
       RemoveProperties="$(FrameProperties)"
     >
-      <Output ItemName="TargetResult" TaskParameter="TargetOutputs" />
+      <Output TaskParameter="TargetOutputs" ItemName="TargetResult" />
     </MSBuild>
-    
-    <!--refresh MetaReferences-->
-    <ItemGroup>
-      <MetaReference Remove="@(MetaReference)"/>
-      <MetaReference Include="@(TargetResult)"/>
-    </ItemGroup>
 
-    <!--output MetaReferences-->
     <Message
       Text="$(ProjName) [$(FrameId)] resolutions:"
       Importance="$(Verbosity)"
     />
     <Message
-      Text="  %(ReferenceSource): %(MetaReference.Identity)"
+      Text="  %(MetaReferenceSourceTarget): %(TargetResult.Identity)"
       Importance="$(Verbosity)"
     />
-  </Target>
 
-  <!--_AugmentReferences-->
-  <Target
-    Name="_AugmentReferences"
-    AfterTargets="ResolveMetaReferences"
-    Condition="'@(MetaReference)'!=''"
-  >
-    <!--MetaReference -> Reference-->
+    <!--TargetResult trim-->
     <ItemGroup>
-      <_Reference Include="@(MetaReference->WithMetadataValue('IncludeInReferences', 'true'))" />
+      <TargetResult Remove="@(MetaReferencePath->WithMetadataValue('ExcludeFromTargetResult', 'true'))" />
+    </ItemGroup>
+
+    <!--TargetResult -> MetaReferencePath-->
+    <ItemGroup>
+      <MetaReferencePath Include="@(TargetResult)"/>
+    </ItemGroup>
+    
+    <!--MetaReferencePath -> Reference-->
+    <ItemGroup>
+      <_Reference Include="@(MetaReferencePath->WithMetadataValue('IncludeInReferences', 'true'))" />
       <Reference Include="@(_Reference->'%(Name)')" >
         <HintPath>%(Identity)</HintPath>
       </Reference>
@@ -92,17 +122,6 @@
       Condition="'@(_Reference)'!=''"
       Importance="$(Verbosity)" 
     />
-  </Target>
-
-  <!--_TrimTargetResult-->
-  <Target
-    Name="_TrimTargetResult"
-    AfterTargets="ResolveMetaReferences"
-    Condition="'@(MetaReference)'!=''"
-  >
-    <ItemGroup>
-      <TargetResult Remove="@(MetaReference->WithMetadataValue('ExcludeFromTargetResult', 'true'))" />
-    </ItemGroup>
   </Target>
 
   <!--
@@ -119,6 +138,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <_Property Include="AssemblyName" />
       <_Property Include="MetaPlatformVersion" />
       <_Property Include="MetaPlatformIdentifier" />
       <_Property Include="BuildTarget" />
@@ -143,6 +163,7 @@
       <_Property Include="AndroidApplication" />
       <_Property Include="VisualStudioVersion" />
       <_Property Include="NugetCopyLocal" />
+      <_Property Include="KeepRecursiveFrame" />
     </ItemGroup>
     <ItemGroup Condition="'$(IsPrimitivePlatform)'=='true'">
       <_Property Include="TargetPlatformIdentifier" />
@@ -159,24 +180,12 @@
 
     <Message 
       Importance="high" 
-      Text="$(Tag) [$(FrameId)]: $(AssemblyName) -> { @(MetaReference->'%(PlatformHint)', ', ') }"
+      Text="$(Tag) [$(FrameId)]: $(AssemblyName) -> { @(MetaProjectReference->'%(PlatformHint)', ', ') }"
     />
     <Message
       Importance="high"
       Text="  %(_Property.Identity) -> $(%(Identity))"
       Condition="'$(%(Identity))'!='' AND '$(%(Identity))'!='false'"
-    />
-    
-    <!--ProjectReference-->
-    <Message
-      Importance="high"
-      Text="  ProjectReferences:"
-      Condition="'@(ProjectReference)'!=''"
-    />
-    <Message
-      Importance="high"
-      Text="    ProjectReference: %(ProjectReference.Identity) -> %(FullPath)"
-      Condition="'@(ProjectReference)'!=''"
     />
 
     <!--Reference-->

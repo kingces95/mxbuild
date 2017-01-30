@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 // type conflicts with the imported type; happens when IVT is used
 #pragma warning disable 0436
 [assembly: NugetPackage("$(NuspecId)", "$(NuspecVersion)")]
-[assembly: NugetDependency("%(NugetDependency.Name)", "%(Version)")]
+[assembly: NugetDependency("%(Name)", "%(Version)")] // %(NugetReference.Identity)
 [assembly: NugetTargetFramework("$(NugetTargetFrameworkMoniker)", Version = "$(NugetTargetFrameworkVersion)")]
 
 #if NUGET_BUILD_ASSEMBLY

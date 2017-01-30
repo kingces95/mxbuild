@@ -10,6 +10,20 @@
       <HintPath/>
       <Private/>
     </Reference>
+    <MetaReference>
+      <MetaReferenceSourceTarget/>
+      <MetaBuildTarget/>
+      <AdditionalProperties/>
+      <HintPath/>
+      <Private/>
+    </MetaReference>
+    <MetaProjectReference>
+      <MetaReferenceSourceTarget/>
+      <MetaBuildTarget/>
+      <AdditionalProperties/>
+      <HintPath/>
+      <Private/>
+    </MetaProjectReference>
   </ItemDefinitionGroup>
   
   <!--Creates a clean "stack frame" for recursive calls by clearing out unwanted inherited properties-->
@@ -21,10 +35,12 @@
   <!--DependsOn-->
   <PropertyGroup>
     <DryRunDependsOn />
-    <ResolveMetaReferencesDependsOn>
+    <GetMetaReferencesDependsOn >
+      GatherMetaProjectReferences
+    </GetMetaReferencesDependsOn>
+    <GatherMetaProjectReferencesDependsOn>
       _DumpFrame;
-      _ResolveMetaReferences;
-    </ResolveMetaReferencesDependsOn>
+    </GatherMetaProjectReferencesDependsOn>
   </PropertyGroup>
 
 </Project>

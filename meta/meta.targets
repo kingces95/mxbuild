@@ -2,25 +2,25 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
   <PropertyGroup>
-    <ResolveMetaReferencesDependsOn>
+    <GatherMetaProjectReferencesDependsOn>
       _FindBadMetaPlatform;
-      _ResolveProjectReferences; <!--primitive-->
-      _ResolveSelfReferences; <!--primitive-->
-      _ResolveMetaProjectReferencePaths; <!--augmeneted-->
-      _ResolveShimPlatform; <!--proxy-->
-      _ResolveMetaPlatformGroup; <!--group-->
-      $(ResolveMetaReferencesDependsOn);
-    </ResolveMetaReferencesDependsOn>
+      _GetMetaTargetPath;
+      _ProjectReferenceToMetaProjectReference;
+      _SelfReferenceToMetaProjectReference;
+      _PlatformShimToMetaProjectReference;
+      _PlatformGroupToMetaProjectReferences;
+      $(GatherMetaProjectReferencesDependsOn);
+    </GatherMetaProjectReferencesDependsOn>
   </PropertyGroup>
 
-  <!--_ResolveMetaProjectReferencePaths-->
+  <!--_GetMetaTargetPath-->
   <Target
-    Name="_ResolveMetaProjectReferencePaths"
+    Name="_GetMetaTargetPath"
     Condition="'$(IsPrimitivePlatform)'=='true' AND '$(BuildTarget)'=='Compile'"
   >
     <Error
       Condition="'$(IsInVS)'!='true'"
-      Text="Platform 'Compile' is only supported when building in VS during intellisesne loading."
+      Text="BuildTarget 'Compile' is only supported when building in VS during intellisesne loading."
     />
 
     <PropertyGroup>
@@ -39,9 +39,9 @@
     </PropertyGroup>
   </Target>
 
-  <!--_ResolveProjectReferences-->
+  <!--_ProjectReferenceToMetaProjectReference-->
   <Target
-    Name="_ResolveProjectReferences"
+    Name="_ProjectReferenceToMetaProjectReference"
     Condition="'$(IsPrimitivePlatform)'=='true' AND '@(ProjectReference)'!=''"
     Outputs="%(ProjectReference.Identity)"
   >
@@ -50,55 +50,55 @@
       <_Platform Condition="'$(_Platform)'==''">$(LibraryPlatform)</_Platform>
     </PropertyGroup>
     
-    <!--ProjectReference -> MetaReference-->
+    <!--ProjectReference -> MetaProjectReference-->
     <ItemGroup>
-      <MetaReference Include="%(ProjectReference.Identity)">
-        <ReferenceSource>ProjectReference</ReferenceSource>
+      <MetaProjectReference Include="@(ProjectReference)">
+        <MetaReferenceSourceTarget Condition="'%(ProjectReference.MetaReferenceSourceTarget)'==''">ProjectReference</MetaReferenceSourceTarget>
         <AdditionalProperties>$(ClearRecursiveFrame)Platform=$(_Platform)</AdditionalProperties>
         <PlatformHint>$(_Platform)</PlatformHint>
         <IncludeInReferences>true</IncludeInReferences>
-        <Name>%(ProjectReference.Name)</Name>
-        <Project>%(ProjectReference.Project)</Project>
-      </MetaReference>
+      </MetaProjectReference>
+      
+      <!--Remove ProjectReferences because: ProjectReference -> MetaProjectReference -> Reference-->
       <ProjectReference Remove="%(ProjectReference.Identity)" />
     </ItemGroup>
   </Target>
 
-  <!--_ResolveSelfReferences-->
+  <!--_SelfReferenceToMetaProjectReference-->
   <Target 
-    Name="_ResolveSelfReferences"
+    Name="_SelfReferenceToMetaProjectReference"
     Condition="'$(IsPrimitivePlatform)'=='true' AND '@(SelfReference)'!=''"
   >
-    <!--SelfReference -> MetaReference-->
+    <!--SelfReference -> MetaProjectReference-->
     <ItemGroup>
-      <MetaReference Include="$(ProjFile)" >
-        <ReferenceSource>SelfReference</ReferenceSource>
+      <MetaProjectReference Include="$(ProjFile)" >
+        <MetaReferenceSourceTarget>SelfReference</MetaReferenceSourceTarget>
         <AdditionalProperties>$(ClearRecursiveFrame)Platform=%(SelfReference.Identity)</AdditionalProperties>
         <PlatformHint>%(SelfReference.Identity)</PlatformHint>
         <Name>$(AssemblyName)</Name>
         <IncludeInReferences>true</IncludeInReferences>
-      </MetaReference>
+      </MetaProjectReference>
     </ItemGroup>
   </Target>
 
-  <!--_ResolveShimPlatform-->
+  <!--_PlatformShimToMetaProjectReference-->
   <Target
-    Name="_ResolveShimPlatform"
+    Name="_PlatformShimToMetaProjectReference"
     Condition="'$(IsShimPlatform)'=='true'"
   >
     <ItemGroup>
-      <MetaReference Include="$(ProjFile)">
-        <ReferenceSource>ShimReference</ReferenceSource>
+      <MetaProjectReference Include="$(ProjFile)">
+        <MetaReferenceSourceTarget>ShimReference</MetaReferenceSourceTarget>
         <OutDirAbsolute>$(OutDirAbsolute)</OutDirAbsolute>
         <AdditionalProperties>$(KeepRecursiveFrame)_MetaPlatform=$(MetaPlatform);Platform=$(PrimitivePlatform)</AdditionalProperties>
         <PlatformHint>$(PrimitivePlatform)</PlatformHint>
-      </MetaReference>
+      </MetaProjectReference>
     </ItemGroup>
   </Target>
 
-  <!--_ResolveMetaPlatformGroup-->
+  <!--_PlatformGroupToMetaProjectReferences-->
   <Target
-    Name="_ResolveMetaPlatformGroup"
+    Name="_PlatformGroupToMetaProjectReferences"
     Condition="'@(PlatformGroup->AnyHaveMetadataValue('Identity', '$(MetaPlatform)'))'=='true'"
   >
     <!--Members -> Property-->
@@ -111,13 +111,13 @@
       <PlatformGroupMembers Include="$(PlatformGroupMembers)"/>
     </ItemGroup>
     
-    <!--Members -> MetaReference-->
+    <!--Members -> MetaProjectReference-->
     <ItemGroup>
-      <MetaReference Include="$(ProjFile)">
-        <ReferenceSource>GroupReference</ReferenceSource>
+      <MetaProjectReference Include="$(ProjFile)">
+        <MetaReferenceSourceTarget>GroupReference</MetaReferenceSourceTarget>
         <AdditionalProperties>$(KeepRecursiveFrame)_MetaPlatform=%(PlatformGroupMembers.Identity);Platform=%(PlatformGroupMembers.Identity)</AdditionalProperties>
         <PlatformHint>%(Identity)</PlatformHint>
-      </MetaReference>
+      </MetaProjectReference>
     </ItemGroup>
   </Target>
 

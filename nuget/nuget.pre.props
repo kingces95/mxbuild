@@ -5,4 +5,13 @@
     <ExtNugetDir>$(MSBuildThisFileDirectory)</ExtNugetDir>
   </PropertyGroup>
 
+  <ItemDefinitionGroup>
+    <!--Identity = %(Name), Version=%(Version)-->
+    <NugetReference>
+      <Name/>
+      <Version/>
+      <HintPath/>
+    </NugetReference>
+  </ItemDefinitionGroup>
+  
 </Project>

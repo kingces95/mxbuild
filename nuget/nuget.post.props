@@ -33,10 +33,11 @@
       <DefineConstants>$(DefineConstants)NUGET_BUILD_ASSEMBLY;</DefineConstants>
     </PropertyGroup>
     
-    <!--NugetReference -> Reference-->
+    <!--NugetDependency -> Reference-->
     <ItemGroup Condition="'@(NugetReference)'!=''">
-      <Reference Include="@(NugetReference->'%(Filename)%(Extension)')">
-        <HintPath>$([MSBuild]::MakeRelative($(ProjDir), %(NugetReference.Identity)))</HintPath>
+      <_NugetReference Include="%(NugetReference.HintPath)*.dll" />
+      <Reference Include="@(_NugetReference->'%(Filename)%(Extension)')">
+        <HintPath>$([MSBuild]::MakeRelative($(ProjDir), %(_NugetReference.Identity)))</HintPath>
         <Private>$(NugetCopyLocal)</Private>
       </Reference>
     </ItemGroup>

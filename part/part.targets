@@ -2,15 +2,15 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   
   <PropertyGroup>
-    <ResolveMetaReferencesDependsOn>
-      _ResolvePartProjectReferences;
-      $(ResolveMetaReferencesDependsOn);
-    </ResolveMetaReferencesDependsOn>
+    <GatherMetaProjectReferencesDependsOn>
+      _CompositePlatformToMetaProjectReference;
+      $(GatherMetaProjectReferencesDependsOn);
+    </GatherMetaProjectReferencesDependsOn>
   </PropertyGroup>
 
-  <!--_ResolvePartProjectReferences-->
+  <!--_CompositePlatformToMetaProjectReference-->
   <Target 
-    Name="_ResolvePartProjectReferences"
+    Name="_CompositePlatformToMetaProjectReference"
     Condition="
       '$(IsCompositePlatform)'=='true' AND
       '$(SkipPartBuild)'!='true' AND
@@ -18,17 +18,15 @@
       '$(BuildTarget)'!='GetTargetPath'
     "
   >
-    <!--MetaReference-->
+    <!--IsCompositePlatform -> MetaProjectReference-->
     <ItemGroup>
-      
-      <!--IsCompositePlatform -> MetaReference-->
-      <MetaReference Include="$(ProjFile)" >
-        <ReferenceSource>PartReference</ReferenceSource>
+      <MetaProjectReference Include="$(ProjFile)" >
+        <MetaReferenceSourceTarget>PartReference</MetaReferenceSourceTarget>
         <AdditionalProperties>$(KeepRecursiveFrame)_IsPartPlatform=true</AdditionalProperties>
         <PlatformHint>part</PlatformHint>
         <Name>$(AssemblyName)</Name>
         <ExcludeFromTargetResult>true</ExcludeFromTargetResult>
-      </MetaReference>
+      </MetaProjectReference>
     </ItemGroup>
   </Target>
   
