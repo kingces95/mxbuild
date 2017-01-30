@@ -12,6 +12,10 @@
       <Version/>
       <HintPath/>
     </NugetReference>
+    <NugetProjectReference>
+      <!--prevents VS from creating an artifact in the solution explorer-->
+      <InProject>false</InProject>
+    </NugetProjectReference>
   </ItemDefinitionGroup>
-  
+
 </Project>
