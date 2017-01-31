@@ -125,6 +125,8 @@
     <MtouchUseThumb>False</MtouchUseThumb>
     <MtouchUseSGen>False</MtouchUseSGen>
     <MtouchUseRefCounting>False</MtouchUseRefCounting>
+    <MtouchOptimizePNGs>True</MtouchOptimizePNGs>
+    <MtouchEnableGenericValueTypeSharing>True</MtouchEnableGenericValueTypeSharing>
     <MtouchI18n />
   </PropertyGroup>
   
@@ -138,6 +140,8 @@
   <PropertyGroup Condition="'$(AppPlatform)' == '$(IosUnifiedSimAppPlatformId)'">
     <MtouchLink>None</MtouchLink>
     <MtouchArch>i386, x86_64</MtouchArch>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <MtouchHttpClientHandler>HttpClientHandler</MtouchHttpClientHandler>
   </PropertyGroup>
 
   <!--ios app device-->
@@ -145,8 +149,9 @@
     <MtouchArch>ARMv7, ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey><!--iPhone Distribution-->
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchLink>SdkOnly</MtouchLink>
+    <BuildIpa>True</BuildIpa>
     <!--<CodesignProvision>Automatic:AdHoc</CodesignProvision>-->
-    <!--<BuildIpa>True</BuildIpa>-->
     <!--<CodesignProvision>Automatic:AdHoc</CodesignProvision>--><!--Automatic:AppStore-->
   </PropertyGroup>
 
