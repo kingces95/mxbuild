@@ -10,7 +10,6 @@
   <Import Project="$(ExtPartDir)part.targets" />
   <Import Project="$(ExtGenDir)gen.targets" />
   <Import Project="$(ExtNugetDir)nuget.targets" />
-  <Import Project="$(ExtXfDir)xf.targets" />
 
   <Import Project="$(MxbuildDir)empty.targets" Condition="'$(IsPrimitivePlatform)'!='true'"/>
   <Import Project="$(MxbuildDir)proxy.targets" />

@@ -79,7 +79,6 @@
     <None Include="$(MSBuildThisFileDirectory)xf\xf.lib.hierarchy.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.props" />
-    <None Include="$(MSBuildThisFileDirectory)xf\xf.targets" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)shell\doskey.txt" />
