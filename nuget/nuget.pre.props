@@ -15,6 +15,7 @@
     <NugetProjectReference>
       <!--prevents VS from creating an artifact in the solution explorer-->
       <InProject>false</InProject>
+      <Private/>
     </NugetProjectReference>
   </ItemDefinitionGroup>
 

@@ -19,6 +19,7 @@
     <ItemGroup>
       <ProjectReference Include="@(NugetProjectReference)">
         <MetaReferenceSourceTarget>NugetProjectReference</MetaReferenceSourceTarget>
+        <Private Condition="'%(Private)'==''">$(NugetCopyLocal)</Private>
       </ProjectReference>
     </ItemGroup>
     

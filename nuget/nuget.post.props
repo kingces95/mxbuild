@@ -23,9 +23,6 @@
 
   <!--_NugetPostPropsInitialTarget-->
   <Target Name="_NugetPostPropsInitialTarget">
-    <PropertyGroup Condition="'$(NugetCopyLocal)'==''">
-      <NugetCopyLocal>false</NugetCopyLocal>
-    </PropertyGroup>
 
     <!--NugetIsBuildAssembly-->
     <PropertyGroup Condition="'$(NugetIsBuildAssembly)'=='true'">
