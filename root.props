@@ -5,10 +5,10 @@
     Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"
   />
   <Import Project="tasks.props"/>
+  <Import Project="$(MxbuildDir)common.props"/>
   <Import Project="$(ExtNodeDir)node.props"/>
   <Import Project="$(ExtMetaDir)meta.props"/>
   <Import Project="$(ExtPartDir)part.props"/>
-  <Import Project="$(MxbuildDir)common.props"/>
   <Import Project="$(ExtIdDir)id.props"/>
   <Import Project="$(ExtPackDir)pack.props"/>
   <Import Project="$(ExtNugetDir)nuget.props"/>

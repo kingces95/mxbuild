@@ -90,6 +90,6 @@
 
     <!--tempDir-->
     <BuildTempSubDir>obj\</BuildTempSubDir>
-    <BuildTempDir>$(BuildBinDir.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</BuildTempDir>
+    <BuildTempDir>$(BuildDir)$(BuildTempSubDir)</BuildTempDir>
   </PropertyGroup>
 </Project>

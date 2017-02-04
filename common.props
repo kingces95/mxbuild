@@ -3,30 +3,36 @@
   ToolsVersion="12.0" 
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
+  <PropertyGroup>
+    <AssemblyName>$(ProjName)</AssemblyName>
+  </PropertyGroup>
+  
   <!--build-->
   <PropertyGroup 
     Condition="!$(Configuration.Contains(';'))">
     
     <!--buildConfigurationDir-->
     <BuildConfigurationDir>$(Configuration)\</BuildConfigurationDir>
-    <BuildBinConfigDir>$(BuildBinDir)$(BuildConfigurationDir)</BuildBinConfigDir>
-    <BuildLogDir>$(BuildBinConfigDir)</BuildLogDir>
 
-    <!--outDir-->
-    <OutBaseDir>$(BuildBinConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)$(OutRelDir)))</OutBaseDir>
+    <!--bin-->
+    <BuildBinConfigDir>$(BuildBinDir)$(BuildConfigurationDir)</BuildBinConfigDir>
+    <OutBaseDir>$(BuildBinConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)))</OutBaseDir>
     <OutDirAbsolute>$(OutBaseDir)$(OutSubDir)</OutDirAbsolute>
     <OutDir>$([MSBuild]::MakeRelative($(ProjDir), $(OutDirAbsolute)))</OutDir>
-
     <!--C# targets files say OutDir should be used over OutputPath but build fails if OutputPath is not set-->
     <OutputPath>$(OutDir)</OutputPath>
+    
+    <!--log-->
+    <BuildLogDir>$(BuildBinConfigDir)</BuildLogDir>
 
     <!--remove trainig wheels; default is true if an outDir is specified-->
     <GenerateProjectSpecificOutputFolder>false</GenerateProjectSpecificOutputFolder>
 
     <!--tempConfigurationDir-->
-    <BuildTempConfigDir>$(BuildBinConfigDir.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</BuildTempConfigDir>
-    <IntermediateOutputPath>$(OutDir.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</IntermediateOutputPath>
-    <IntermediateOutputPathAbsolute>$(OutDirAbsolute.Replace('$(BuildBinSubDir)','$(BuildTempSubDir)'))</IntermediateOutputPathAbsolute>
+    <BuildTempConfigDir>$(BuildTempDir)$(BuildConfigurationDir)</BuildTempConfigDir>
+    <IntermediateBaseDir>$(BuildTempConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)))</IntermediateBaseDir>
+    <IntermediateOutputPathAbsolute>$(IntermediateBaseDir)$(OutSubDir)</IntermediateOutputPathAbsolute>
+    <IntermediateOutputPath>$([MSBuild]::MakeRelative($(ProjDir), $(IntermediateOutputPathAbsolute)))</IntermediateOutputPath>
   </PropertyGroup>
 
   <PropertyGroup 

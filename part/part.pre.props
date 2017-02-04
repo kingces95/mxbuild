@@ -11,5 +11,9 @@
     <KeepRecursiveFrame>$(KeepRecursiveFrame)_IsPartPlatform=$(IsPartPlatform);</KeepRecursiveFrame>
     <FrameProperties>$(FrameProperties)IsPartPlatform;</FrameProperties>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(IsPartPlatform)'=='true'">
+    <OutSubDir>part\$(OutSubDir)</OutSubDir>
+  </PropertyGroup>
   
 </Project>

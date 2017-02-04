@@ -71,6 +71,7 @@
     <None Include="$(MSBuildThisFileDirectory)shim\shim.pre.props" />
     <None Include="$(MSBuildThisFileDirectory)shim\shim.proj" />
     <None Include="$(MSBuildThisFileDirectory)shim\shim.targets" />
+    <None Include="$(MSBuildThisFileDirectory)xf\xf.targets" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.netstd.hierarchy.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.dotnet.hierarchy.props" />
     <None Include="$(MSBuildThisFileDirectory)xf\xf.app.hierarchy.props" />

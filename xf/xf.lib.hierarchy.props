@@ -85,11 +85,7 @@
 
     <!--hide build output-->
     <CopyBuildOutputToOutputDirectory>false</CopyBuildOutputToOutputDirectory>
-    <!--TODO: if CopyBuildOutputToOutputDirectory why is the following necessary?-->
-    <OutDir>$(IntermediateOutputPath)portable\bin\</OutDir>
-    <OutputPath>$(OutDir)</OutputPath>
-    <AppxPackageDir>$(OutputPath)</AppxPackageDir>
-    <IntermediateOutputPath>$(IntermediateOutputPath)portable\obj\</IntermediateOutputPath>
+    <!--TODO: CopyBuildOutputToOutputDirectory failed to hide all build output; see also AppxPackageDir-->
   </PropertyGroup>
 
   <!--mobile part-->

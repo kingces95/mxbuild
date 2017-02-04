@@ -17,6 +17,5 @@
   <PropertyGroup Condition=" '$(MobilePlatform)' == '$(WindowsMobilePlatformId)' AND '$(IsLibraryPlatform)' == 'true' " >
     <AppxPriInitialPath>.</AppxPriInitialPath>
     <ProjectPriFileName>$(AssemblyName).pri</ProjectPriFileName>
-    <ProjectPriFileName>resources.pri</ProjectPriFileName>
   </PropertyGroup>
 </Project>
