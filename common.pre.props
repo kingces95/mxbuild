@@ -22,7 +22,8 @@
   <PropertyGroup>
     <StartupDir>$(MSBuildStartupDirectory)\</StartupDir>
     <ProjDir>$(MSBuildProjectDirectory)\</ProjDir>
-    <ProjName>$(MSBuildProjectName)</ProjName>
+    <ProjName>$(ProjectName)</ProjName>
+    <ProjName Condition="'$(ProjName)'==''">$(MSBuildProjectName)</ProjName>
     <ProjFullName>$(MSBuildProjectFile)</ProjFullName>
     <ProjFile>$(MSBuildProjectFullPath)</ProjFile>
     <MsbuildExe>"$(MSBuildBinPath)\msbuild.exe"</MsbuildExe>

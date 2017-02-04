@@ -4,7 +4,7 @@
   xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 >
   <PropertyGroup>
-    <AssemblyName>$(ProjName)</AssemblyName>
+    <AssemblyName Condition="'$(AssemblyName)'==''">$(ProjName)</AssemblyName>
   </PropertyGroup>
   
   <!--build-->
@@ -14,9 +14,9 @@
     <!--buildConfigurationDir-->
     <BuildConfigurationDir>$(Configuration)\</BuildConfigurationDir>
 
-    <!--bin-->
+    <!--bin; OutRelDir used by debugger projects-->
     <BuildBinConfigDir>$(BuildBinDir)$(BuildConfigurationDir)</BuildBinConfigDir>
-    <OutBaseDir>$(BuildBinConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)))</OutBaseDir>
+    <OutBaseDir>$(BuildBinConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)$(OutRelDir)))</OutBaseDir>
     <OutDirAbsolute>$(OutBaseDir)$(OutSubDir)</OutDirAbsolute>
     <OutDir>$([MSBuild]::MakeRelative($(ProjDir), $(OutDirAbsolute)))</OutDir>
     <!--C# targets files say OutDir should be used over OutputPath but build fails if OutputPath is not set-->
