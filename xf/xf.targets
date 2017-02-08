@@ -3,7 +3,7 @@
   <Target 
     Name="AdjustGeneratedXamlDest" 
     AfterTargets="Prep_ComputeProcessXamlFiles"
-    Condition="'@(GeneratedXamlDest)'!=''"
+    Condition="'@(GeneratedXamlDest)'!='' AND '$(IsAppPlatform)'!='true'"
   >
     <!-- 
       see: C:\Program Files (x86)\MSBuild\Microsoft\WindowsXaml\v14.0\8.2\Microsoft.Windows.UI.Xaml.Common.Targets
@@ -13,8 +13,8 @@
     
         makepri dump /if bin\debug\Xamarin.Forms\uap\10.0.10586.0\Xamarin.Forms.pri
     
-        bin\debug\Xamarin.Forms\uap\10.0.10586.0\winrt\PageControl.xbf -> 
-        bin\debug\Xamarin.Forms\uap\10.0.10586.0\Xamarin.Forms\winrt\PageControl.xbf
+        (actual) bin\debug\Xamarin.Forms\uap\10.0.10586.0\winrt\PageControl.xbf
+        (expected) bin\debug\Xamarin.Forms\uap\10.0.10586.0\Xamarin.Forms\winrt\PageControl.xbf
 
       Mxbuild lays out OutDir to match the nuget package (where the pri paths must resolve). 
       Why doesn't uap simply layout the bin dir to match the pri paths to begin with? 
