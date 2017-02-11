@@ -30,7 +30,7 @@
 
     <!--tempConfigurationDir-->
     <BuildTempConfigDir>$(BuildTempDir)$(BuildConfigurationDir)</BuildTempConfigDir>
-    <IntermediateBaseDir>$(BuildTempConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)))</IntermediateBaseDir>
+    <IntermediateBaseDir>$(BuildTempConfigDir)$([MSBuild]::MakeRelative($(SrcDir), $(ProjDir)$(OutRelDir)))</IntermediateBaseDir>
     <IntermediateOutputPathAbsolute>$(IntermediateBaseDir)$(OutSubDir)</IntermediateOutputPathAbsolute>
     <IntermediateOutputPath>$([MSBuild]::MakeRelative($(ProjDir), $(IntermediateOutputPathAbsolute)))</IntermediateOutputPath>
   </PropertyGroup>

@@ -80,7 +80,7 @@
   </PropertyGroup>
 
   <!--pack platform-->
-  <PropertyGroup Condition="'$(Platform)' == '$(PackPlatformId)'">
+  <PropertyGroup Condition="'$(Plat)' == '$(PackPlatformId)'">
     <TargetsFile>$(ExtPackDir)pack.targets</TargetsFile>
   </PropertyGroup>
 
