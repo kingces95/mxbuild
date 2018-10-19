@@ -49,9 +49,9 @@
     <PlatformGroup Include="$(WindowsUniversalMobileSubPlatformId)">
       <Platforms>$(WindowsUniversal32AppPlatformId)</Platforms>
     </PlatformGroup>
-    <!--uap.32 E { uap.32-10.0.10586.0 }-->
+    <!--uap.32 E { uap.32-10.0.16299.0 }-->
     <PlatformGroup Include="$(WindowsUniversal32AppPlatformId)">
-      <Platforms>$(WindowsUniversal32AppPlatformId-10_0_10586_0)</Platforms>
+      <Platforms>$(WindowsUniversal32AppPlatformId-10_0_16299_0)</Platforms>
     </PlatformGroup>
 
     <!--windows.phone E { wpa.32 }-->

@@ -11,10 +11,10 @@
       Adjust binplacement of GeneratedXaml (*.xbf, *.xr.xml) to match paths generated in .pri. For example,
       dumping the path in Xamarin.Forms.pri to PageControl.xbf shows the need for the adjustment.
     
-        makepri dump /if bin\debug\Xamarin.Forms\uap\10.0.10586.0\Xamarin.Forms.pri
+        makepri dump /if bin\debug\Xamarin.Forms\uap\10.0.16299.0\Xamarin.Forms.pri
     
-        (actual) bin\debug\Xamarin.Forms\uap\10.0.10586.0\winrt\PageControl.xbf
-        (expected) bin\debug\Xamarin.Forms\uap\10.0.10586.0\Xamarin.Forms\winrt\PageControl.xbf
+        (actual) bin\debug\Xamarin.Forms\uap\10.0.16299.0\winrt\PageControl.xbf
+        (expected) bin\debug\Xamarin.Forms\uap\10.0.16299.0\Xamarin.Forms\winrt\PageControl.xbf
 
       Mxbuild lays out OutDir to match the nuget package (where the pri paths must resolve). 
       Why doesn't uap simply layout the bin dir to match the pri paths to begin with? 

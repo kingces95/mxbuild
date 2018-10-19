@@ -39,7 +39,7 @@
 
     <!--uap-->
     <WindowsUniversalLibraryPlatformId>uap</WindowsUniversalLibraryPlatformId>
-    <WindowsUniversalLibraryPlatformId-10_0_10586_0>$(WindowsUniversalLibraryPlatformId)-10.0.10586.0</WindowsUniversalLibraryPlatformId-10_0_10586_0>
+    <WindowsUniversalLibraryPlatformId-10_0_16299_0>$(WindowsUniversalLibraryPlatformId)-10.0.16299.0</WindowsUniversalLibraryPlatformId-10_0_16299_0>
 
     <!--wpa-->
     <WindowsPhoneLibraryPlatformId>wpa</WindowsPhoneLibraryPlatformId>
@@ -84,11 +84,11 @@
 
     <!--uap-->
     <WindowsUniversal32AppPlatformId>$(WindowsUniversalLibraryPlatformId).32</WindowsUniversal32AppPlatformId>
-    <WindowsUniversal32AppPlatformId-10_0_10586_0>$(WindowsUniversal32AppPlatformId)-10.0.10586.0</WindowsUniversal32AppPlatformId-10_0_10586_0>
+    <WindowsUniversal32AppPlatformId-10_0_16299_0>$(WindowsUniversal32AppPlatformId)-10.0.16299.0</WindowsUniversal32AppPlatformId-10_0_16299_0>
     <WindowsUniversal64AppPlatformId>$(WindowsUniversalLibraryPlatformId).64</WindowsUniversal64AppPlatformId>
-    <WindowsUniversal64AppPlatformId-10_0_10586_0>$(WindowsUniversal64AppPlatformId)-10.0.10586.0</WindowsUniversal64AppPlatformId-10_0_10586_0>
+    <WindowsUniversal64AppPlatformId-10_0_16299_0>$(WindowsUniversal64AppPlatformId)-10.0.16299.0</WindowsUniversal64AppPlatformId-10_0_16299_0>
     <WindowsUniversalArmAppPlatformId>$(WindowsUniversalLibraryPlatformId).ARM</WindowsUniversalArmAppPlatformId>
-    <WindowsUniversalArmAppPlatformId-10_0_10586_0>$(WindowsUniversalArmAppPlatformId)-10.0.10586.0</WindowsUniversalArmAppPlatformId-10_0_10586_0>
+    <WindowsUniversalArmAppPlatformId-10_0_16299_0>$(WindowsUniversalArmAppPlatformId)-10.0.16299.0</WindowsUniversalArmAppPlatformId-10_0_16299_0>
 
     <!--wpa-->
     <WindowsPhone32AppPlatformId>$(WindowsPhoneLibraryPlatformId).32</WindowsPhone32AppPlatformId>

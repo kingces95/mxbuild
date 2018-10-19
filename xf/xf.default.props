@@ -65,7 +65,6 @@
   <PropertyGroup Condition="'$(LibraryPlatform)' == '$(AndroidLibraryPlatformId)'">
     <NugetTargetFrameworkVersion>4.3</NugetTargetFrameworkVersion>
     
-    <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
     <TargetFrameworkVersion>v7.0</TargetFrameworkVersion>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidSupportedAbis>armeabi,armeabi-v7a,x86</AndroidSupportedAbis>
